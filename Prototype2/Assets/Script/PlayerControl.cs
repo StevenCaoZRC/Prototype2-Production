@@ -9,7 +9,8 @@ public class PlayerControl : MonoBehaviour
     public bool m_isholdingCharge = false;
 
     public GameObject m_spear;
-    public GameObject m_chargeParticles;
+    public GameObject m_chargeReachedParticles;
+    public GameObject m_chargingParticles;
 
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
@@ -17,7 +18,8 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_chargeParticles.SetActive(false);
+        m_chargeReachedParticles.SetActive(false);
+        m_chargingParticles.SetActive(false);
 
     }
 
@@ -41,17 +43,21 @@ public class PlayerControl : MonoBehaviour
             {
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime;
+                m_chargingParticles.SetActive(true);
+
                 //If X is held more than 3 seconds, charge attack ready
                 if (m_chargeHoldTimer >= m_chargeHoldRequired)
                 {
                     m_isholdingCharge = true;
-                    m_chargeParticles.SetActive(true);
+                    m_chargeReachedParticles.SetActive(true);
                 }
             }
             else
             {
                 m_chargeHoldTimer = 0;
                 m_isCharging = false;
+                m_chargingParticles.SetActive(false);
+
             }
 
             //If charge is ready, use special attack
@@ -71,6 +77,8 @@ public class PlayerControl : MonoBehaviour
         m_chargeHoldTimer = 0;
         m_isCharging = false;
         m_isholdingCharge = false;
-        m_chargeParticles.SetActive(false);
+        m_chargeReachedParticles.SetActive(false);
+        m_chargingParticles.SetActive(false);
+
     }
 }
