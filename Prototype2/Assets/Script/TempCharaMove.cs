@@ -5,7 +5,8 @@ using UnityEngine;
 public class TempCharaMove : MonoBehaviour
 {
     public float m_speed = 10.0f;
-    public float m_backSpeed = 1.0f;
+    public float m_slowSpeed = 25.0f;
+    public float m_backSpeed = 5.0f;
     public float m_maxSpeed = 15.0f;
     public float m_rotSpeed = 100.0f;
     
@@ -22,7 +23,7 @@ public class TempCharaMove : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody>();
         m_fowardVelocity = 0;
         m_acceleration =  m_speed/2.5f;
-        m_deceleration = -m_speed / 2.5f;
+        m_deceleration = -m_slowSpeed / 1.5f;
         m_braking = -m_backSpeed / 1.0f;
     }
 
