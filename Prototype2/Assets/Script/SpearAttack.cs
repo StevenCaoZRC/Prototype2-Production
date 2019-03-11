@@ -56,16 +56,25 @@ public class SpearAttack : MonoBehaviour
         return m_isAttacking;
     }
 
-    private void OnTriggerStay(Collider other)
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.tag == "Enemy" && !m_hitSomething)
+    //    {
+    //        m_hitSomething = true;
+    //        Debug.Log("Player attacking");
+    //        other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Enemy" && !m_hitSomething)
+        if (other.gameObject.tag == "Enemy" && !m_hitSomething)
         {
             m_hitSomething = true;
             Debug.Log("Player attacking");
             other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
         }
     }
-
     //private void OnTriggerExit(Collider other)
     //{
     //    if (other.tag == "Enemy")

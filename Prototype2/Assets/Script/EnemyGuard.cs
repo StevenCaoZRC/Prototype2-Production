@@ -13,8 +13,8 @@ public class EnemyGuard : Enemy
         m_enemyType = EnemyType.GUARD;
         m_rigidBody = GetComponent<Rigidbody>();
 
-        m_attackOneDamage = 10.0f;
-        m_attackTwoDamage = 30.0f;
+        m_attackOneDamage = 20.0f;
+        m_attackTwoDamage = 50.0f;
     }
 
     // Update is called once per frame
@@ -57,8 +57,8 @@ public class EnemyGuard : Enemy
     public float GetDamage(SpearAttackType _type)
     {
         if (_type == SpearAttackType.SPECIAL)
-            return 80.0f;
+            return 50.0f;
         else
-            return 30.0f;
+            return 20.0f;
     }
 }
