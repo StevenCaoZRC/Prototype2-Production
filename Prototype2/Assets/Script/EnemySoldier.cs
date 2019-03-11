@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySoldier : Enemy
 {
     Rigidbody m_rigidBody;
-
+    
     // Start is called before the first frame update
     public override void Start()
     {
@@ -36,7 +36,7 @@ public class EnemySoldier : Enemy
 
         }
     }
-
+  
     public override void TakeDamage(GameObject _attackedFrom)
     {
         if (!m_isHit)

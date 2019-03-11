@@ -11,16 +11,14 @@ public class ShieldBlock : MonoBehaviour
 {
     bool m_blockedAttack = false;
     bool m_IsBlocking = false;
-    public Rigidbody rb;
-    public Transform m_startPos;
-    public Transform m_endPos;
+    bool m_knockBack = false;
+
     public GameObject m_whoIsHoldingShield;
     ShieldType m_shieldType;
     // Start is called before the first frame update
     void Start()
     {
         m_IsBlocking = false;
-        rb = GetComponent<Rigidbody>();
         if (m_whoIsHoldingShield.tag == "Enemy")
         {
             m_shieldType = ShieldType.ENEMYSHIELD;
@@ -34,23 +32,26 @@ public class ShieldBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void PlayerBlock()
     {
-        m_shieldType = ShieldType.PLAYERSHIELD;
-        gameObject.GetComponent<Collider>().enabled = true;
-        StartCoroutine(PlayerBlockAttack());
         m_IsBlocking = true;
+        m_shieldType = ShieldType.PLAYERSHIELD;
+        
+        StartCoroutine(PlayerBlockAttack());
+        
     }
 
 
     public void EnemyBlock()
     {
         m_shieldType = ShieldType.ENEMYSHIELD;
-        gameObject.GetComponent<Collider>().enabled = true;
+       
         m_IsBlocking = true;
+        StartCoroutine(EnemyBlockAttack());
+       // rb.AddExplosionForce(1000, this.transform.position, 500.0f, 3.0f);
     }
 
     public bool GetIsBlocking()
@@ -63,22 +64,56 @@ public class ShieldBlock : MonoBehaviour
         if (collision.gameObject.tag == "Enemy" && !m_blockedAttack)
         {
             m_blockedAttack = true;
-            rb.AddExplosionForce(10, gameObject.transform.position, 5.0f, 3.0f);
+
             Debug.Log("Player Blocking");
         }
         else if (collision.gameObject.tag == "Player" && !m_blockedAttack)
         {
             m_blockedAttack = true;
+
+            // rb.AddForce(new Vector3(1000, 0, 0));
             Debug.Log("Enemy Blocking");
         }
+      
+      
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag != "Enemy")
+        {
+            m_IsBlocking = false;
+        }
+    }
+    public void setBlocking(bool _isBlocking)
+    {
+        m_IsBlocking = _isBlocking;
+    }
+    public bool GetBlockedAttack()
+    {
+        return m_blockedAttack;
+    }
     IEnumerator PlayerBlockAttack()
     {
-        m_IsBlocking = false;
-        this.GetComponent<Collider>().enabled = false;
-        m_blockedAttack = false;
+        yield return new WaitForSeconds(0.5f);
+       
+        //this.GetComponent<Collider>().enabled = false;
+        
         Debug.Log("Played Block an Attack");
+        m_blockedAttack = false;
+        //m_IsBlocking = false;
+        yield return null;
+    }
+
+    IEnumerator EnemyBlockAttack()
+    {
+        m_knockBack = true;
+        yield return new WaitForSeconds(0.5f);
+        m_IsBlocking = false;
+        //play animation
+        m_blockedAttack = false;
+        Debug.Log("Enemy Block an Attack");
+        m_knockBack = false;
         yield return null;
     }
 
