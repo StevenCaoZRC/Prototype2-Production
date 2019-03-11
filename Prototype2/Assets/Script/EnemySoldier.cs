@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyGuard : Enemy
+public class EnemySoldier : Enemy
 {
-    private Rigidbody m_rigidBody;
-    private float m_attack1Damage = 10.0f;
+    Rigidbody m_rigidBody;
+    private float m_attack1Damage = 20.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         m_rigidBody = GetComponent<Rigidbody>();
-        m_enemyType = EnemyType.GUARD;
+        m_enemyType = EnemyType.SOLDIER;
         m_health = 100.0f;
-        m_attack1Damage = 10.0f;
-        m_takeDamageAmount = 50.0f;
+        m_attack1Damage = 20.0f;
+        m_takeDamageAmount = 20.0f;
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class EnemyGuard : Enemy
 
     public override void Attack()
     {
-        if(!m_isAttacking)
+        if (!m_isAttacking)
         {
 
         }
@@ -41,11 +41,12 @@ public class EnemyGuard : Enemy
 
     public override void TakeDamage(GameObject _attackedFrom)
     {
-        if(!m_isHit)
+        if (!m_isHit)
         {
             m_isHit = true;
             m_health -= m_takeDamageAmount;
-            Debug.Log("Guard health: " + m_health);
+            Debug.Log("Soldier health: " + m_health);
+
             m_isHit = false;
         }
     }

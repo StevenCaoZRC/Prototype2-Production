@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class SpearAttack : MonoBehaviour
 {
+    float m_spearSpeed = 0.2f;
     bool m_hitSomething = false;
     bool m_isAttacking = false;
+
+    public Transform m_startMarker;
+    public Transform m_endMarker;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_isAttacking = false;
     }
 
     // Update is called once per frame
@@ -19,25 +23,23 @@ public class SpearAttack : MonoBehaviour
         if (m_isAttacking)
         {
             this.GetComponent<Collider>().enabled = true;
-        }
-        else
-        {
-            this.GetComponent<Collider>().enabled = false;
+            StartCoroutine(TempMoveSpear());
+            m_isAttacking = false;
         }
     }
 
     public void SetAttacking(bool _attacking)
     {
-        m_isAttacking = true;
+        m_isAttacking = _attacking;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("reach?");
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && !m_hitSomething)
         {
             m_hitSomething = true;
             Debug.Log("Player attacking");
+            other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
         }
     }
 
@@ -45,10 +47,19 @@ public class SpearAttack : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            this.GetComponent<Collider>().enabled = false;
             m_hitSomething = false;
-            m_isAttacking = false;
-
             Debug.Log("Player finish attack");
+            //other.gameObject.GetComponent<Enemy>().Die();
         }
+    }
+
+    IEnumerator TempMoveSpear()
+    {
+        //this is temporary. Will check hit with animated position.
+        transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 0.5f);
+        yield return null;
     }
 }
