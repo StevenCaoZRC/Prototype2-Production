@@ -5,25 +5,23 @@ using UnityEngine;
 public class EnemySoldier : Enemy
 {
     Rigidbody m_rigidBody;
-    private float m_attack1Damage = 20.0f;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        m_rigidBody = GetComponent<Rigidbody>();
+        base.Start();
         m_enemyType = EnemyType.SOLDIER;
-        m_health = 100.0f;
-        m_attack1Damage = 20.0f;
-        m_takeDamageAmount = 20.0f;
+        m_rigidBody = GetComponent<Rigidbody>();
+
+        m_attackOneDamage = 20.0f;
+        m_attackTwoDamage = 50.0f;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        if (m_health <= 0)
-        {
-            Die();
-        }
+        base.Update();
+
     }
 
     public override void Movement()
@@ -44,7 +42,7 @@ public class EnemySoldier : Enemy
         if (!m_isHit)
         {
             m_isHit = true;
-            m_health -= m_takeDamageAmount;
+            m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Soldier health: " + m_health);
 
             m_isHit = false;
@@ -56,6 +54,14 @@ public class EnemySoldier : Enemy
         //Play dead anim
         //Spawn particles
         Destroy(gameObject);
+    }
+
+    public float GetDamage(SpearAttackType _type)
+    {
+        if (_type == SpearAttackType.SPECIAL)
+            return 50.0f;
+        else
+            return 20.0f;
     }
 
 }
