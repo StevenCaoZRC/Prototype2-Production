@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public bool m_isAttacking = false;
+    public bool m_isCharging = false;
+
     public GameObject m_spear;
+    public float m_chargeHoldTimer;
+    public float m_chargeHoldRequired;
 
     // Start is called before the first frame update
     void Start()
@@ -21,15 +25,23 @@ public class PlayerControl : MonoBehaviour
 
     public void PlayerAttack()
     {
-        if(Input.GetAxis("Spear") > 0f)
+        if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
         {
-            //lerp position forward and back
-            m_spear.GetComponent<SpearAttack>().SetAttacking(true);
-            
-        }
-        else
-        {
-            m_spear.GetComponent<SpearAttack>().SetAttacking(false);
+            if (Input.GetAxis("Spear") > 0f && !m_isCharging)
+            {
+                //lerp position forward and back
+                m_spear.GetComponent<SpearAttack>().NormalAttack();
+
+            }
+            else if(Input.GetAxis("ChargeSpear") > 0f)
+            {
+                m_isCharging = true;
+                m_chargeHoldTimer += Time.deltaTime;
+                if (m_chargeHoldTimer >= m_chargeHoldRequired)
+                {
+                    m_spear.GetComponent<SpearAttack>().ChargeAttack();
+                }
+            }
         }
     }
 

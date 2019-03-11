@@ -5,25 +5,22 @@ using UnityEngine;
 public class EnemyGuard : Enemy
 {
     private Rigidbody m_rigidBody;
-    private float m_attack1Damage = 10.0f;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        m_rigidBody = GetComponent<Rigidbody>();
+        base.Start();
         m_enemyType = EnemyType.GUARD;
-        m_health = 100.0f;
-        m_attack1Damage = 10.0f;
-        m_takeDamageAmount = 50.0f;
+        m_rigidBody = GetComponent<Rigidbody>();
+
+        m_attackOneDamage = 10.0f;
+        m_attackTwoDamage = 30.0f;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        if (m_health <= 0)
-        {
-            Die();
-        }
+        base.Update();
     }
 
     public override void Movement()
@@ -44,7 +41,7 @@ public class EnemyGuard : Enemy
         if(!m_isHit)
         {
             m_isHit = true;
-            m_health -= m_takeDamageAmount;
+            m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Guard health: " + m_health);
             m_isHit = false;
         }
@@ -57,4 +54,11 @@ public class EnemyGuard : Enemy
         Destroy(gameObject);
     }
 
+    public float GetDamage(SpearAttackType _type)
+    {
+        if (_type == SpearAttackType.SPECIAL)
+            return 50.0f;
+        else
+            return 20.0f;
+    }
 }

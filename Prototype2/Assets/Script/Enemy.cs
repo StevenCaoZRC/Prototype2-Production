@@ -2,35 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum EnemyType
+{
+    GUARD,
+    SOLDIER
+}
 
 public class Enemy : MonoBehaviour
 {
-    public enum EnemyType
-    {
-        GUARD,
-        SOLDIER
-    }
-
+    protected Transform m_target;
+    protected EnemyType m_enemyType;
 
     protected bool m_isAttacking = false;
     protected bool m_isHit = false;
-    protected Transform m_target;
-    protected EnemyType m_enemyType;
+
     protected float m_health = 100.0f;
-    protected float m_takeDamageAmount = 20.0f;
+    protected float m_attackOneDamage = 10.0f;
+    protected float m_attackTwoDamage = 30.0f;
+    protected float m_takeDamageAmount = 20.0f; //Should be taking from player not self
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        
+        m_health = 100.0f;
+        m_isAttacking = false;
+        m_isHit = false;
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
+        if (m_health <= 0)
+        {
+            Die();
+        }
 
-        
     }
 
     public EnemyType GetEnemyType()
@@ -45,6 +51,4 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDamage(GameObject _attackedFrom) {}
 
     public virtual void Die(){}
-
-    
 }
