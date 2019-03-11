@@ -26,6 +26,7 @@ public class PlayerControl : MonoBehaviour
         {
             //lerp position forward and back
             m_spear.GetComponent<SpearAttack>().SetAttacking(true);
+            
         }
     }
 }
