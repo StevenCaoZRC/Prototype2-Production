@@ -72,6 +72,5 @@ public class PlayerControl : MonoBehaviour
         m_isCharging = false;
         m_isholdingCharge = false;
         m_chargeParticles.SetActive(false);
-
     }
 }
