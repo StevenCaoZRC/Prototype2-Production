@@ -15,7 +15,6 @@ public class EnemySoldier : Enemy
 
         m_attackOneDamage = 20.0f;
         m_attackTwoDamage = 50.0f;
-        m_takeDamageAmount = 20.0f;
     }
 
     // Update is called once per frame
@@ -43,7 +42,7 @@ public class EnemySoldier : Enemy
         if (!m_isHit)
         {
             m_isHit = true;
-            m_health -= m_takeDamageAmount;
+            m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Soldier health: " + m_health);
 
             m_isHit = false;
@@ -55,6 +54,14 @@ public class EnemySoldier : Enemy
         //Play dead anim
         //Spawn particles
         Destroy(gameObject);
+    }
+
+    public float GetDamage(SpearAttackType _type)
+    {
+        if (_type == SpearAttackType.SPECIAL)
+            return 50.0f;
+        else
+            return 20.0f;
     }
 
 }

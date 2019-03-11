@@ -65,25 +65,27 @@ public class SpearAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            this.GetComponent<Collider>().enabled = false;
-            m_hitSomething = false;
-            Debug.Log("Player finish attack");
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.tag == "Enemy")
+    //    {
+    //        this.GetComponent<Collider>().enabled = false;
+    //        m_hitSomething = false;
+    //        Debug.Log("Player finish attack");
+    //    }
+    //}
 
     IEnumerator TempMoveSpear()
     {
         //this is temporary. Will check hit with animated position.
-        transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 0.5f);
+        transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
         yield return new WaitForSeconds(0.5f);
-        transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 0.5f);
+        transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
-
+        this.GetComponent<Collider>().enabled = false;
+        m_hitSomething = false;
+        Debug.Log("Player finish attack");
         yield return null;
     }
 

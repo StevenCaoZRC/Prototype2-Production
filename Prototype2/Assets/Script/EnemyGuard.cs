@@ -57,8 +57,8 @@ public class EnemyGuard : Enemy
     public float GetDamage(SpearAttackType _type)
     {
         if (_type == SpearAttackType.SPECIAL)
-            return 50.0f;
+            return 80.0f;
         else
-            return 20.0f;
+            return 30.0f;
     }
 }
