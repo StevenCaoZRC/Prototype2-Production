@@ -21,6 +21,10 @@ public class Enemy : MonoBehaviour
     protected float m_attackTwoDamage = 30.0f;
     protected float m_takeDamageAmount = 20.0f; //Should be taking from player not self
 
+    //Wander code
+    protected bool m_inCombat = false;
+
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -36,7 +40,7 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-
+        Movement();
     }
 
     public EnemyType GetEnemyType()
@@ -44,7 +48,27 @@ public class Enemy : MonoBehaviour
         return m_enemyType;
     }
 
-    public virtual void Movement(){}
+    public virtual void Movement()
+    {
+        if(!m_inCombat)
+        {
+            //if(m_wanderTime > 0.0f)
+            //{
+            //    transform.Translate(Vector3.forward * m_movementSpeed);
+            //    m_wanderTime -= Time.deltaTime;
+            //}
+            //else
+            //{
+            //    m_wanderTime = Random.Range(5.0f, 15.0f);
+            //    Patrol();
+            //}
+        }
+    }
+
+    public void Patrol()
+    {
+        transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+    }
 
     public virtual void Attack(){}
 

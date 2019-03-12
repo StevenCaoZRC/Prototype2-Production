@@ -25,7 +25,7 @@ public class EnemyGuard : Enemy
 
     public override void Movement()
     {
-
+        base.Movement();
     }
 
     public override void Attack()
@@ -44,6 +44,9 @@ public class EnemyGuard : Enemy
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Guard health: " + m_health);
             m_isHit = false;
+
+            var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
+            m_rigidBody.AddForce(moveDirection.normalized * 500f);
         }
     }
 

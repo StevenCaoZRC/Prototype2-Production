@@ -46,6 +46,8 @@ public class EnemySoldier : Enemy
             Debug.Log("Soldier health: " + m_health);
 
             m_isHit = false;
+            var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
+            m_rigidBody.AddForce(moveDirection.normalized * 500f);
         }
     }
 
