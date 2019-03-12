@@ -43,10 +43,10 @@ public class EnemyGuard : Enemy
     }
     public void EnemyBlock()
     {
-        if(m_enemyShield.GetComponent<ShieldBlock>().GetBlockedAttack())
+        if(!m_enemyShield.GetComponent<ShieldBlock>().GetIsBlocking())
         {
             m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
-            if (m_enemyShield.GetComponent<ShieldBlock>().GetIsBlocking())
+            if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
             {
 
                 m_playerRigidBody.AddForce(-transform.forward * 10000);

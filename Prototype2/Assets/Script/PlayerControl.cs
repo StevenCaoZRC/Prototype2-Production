@@ -31,6 +31,7 @@ public class PlayerControl : MonoBehaviour
         PlayerAttack();
 
         PlayerBlock();
+       
     }
 
     public void PlayerAttack()
@@ -78,18 +79,22 @@ public class PlayerControl : MonoBehaviour
         {
             if (GameManager.GetAxisOnce(ref m_isBlocking, "Shield"))
             {
-                Debug.Log("pressed");
+               
                 m_shield.GetComponent<ShieldBlock>().PlayerBlock();
-                if (m_shield.GetComponent<ShieldBlock>().GetIsBlocking())// && m_shield.GetComponent<ShieldBlock>().GetBlockedAttack())
+            //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
+                if (m_shield.GetComponent<ShieldBlock>().CheckCol())// &&m_shield.GetComponent<ShieldBlock>().GetBlockedAttack())
                 {
-                    rb.AddForce(-transform.forward * 10000);
+                    Debug.Log("PUSHED");
+                   // rb.velocity = Vector3.zero;
+                    rb.AddForce(-transform.forward * 100, ForceMode.Impulse);
+                    
                 }
-            }
-           
+             }
         }
+           
+        
     }
 
-   
 
     void ChargeAttack()
     {

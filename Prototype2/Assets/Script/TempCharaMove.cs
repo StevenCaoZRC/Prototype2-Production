@@ -9,7 +9,7 @@ public class TempCharaMove : MonoBehaviour
     public float m_backSpeed = 5.0f;
     public float m_maxSpeed = 15.0f;
     public float m_rotSpeed = 100.0f;
-    
+    public GameObject shield;
     float m_fowardVelocity;
     float m_acceleration;
     float m_deceleration;
@@ -31,11 +31,12 @@ public class TempCharaMove : MonoBehaviour
     void FixedUpdate()
     {
         Movecharacter();
+       
     }
 
     void Movecharacter()
     {
-
+        
         // Debug.Log(m_speed);
 
         //var ver = Input.GetAxis("Vertical") * m_speed * Time.deltaTime;

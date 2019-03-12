@@ -68,6 +68,7 @@ public class SpearAttack : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Enemy" && !m_hitSomething)
         {
             m_hitSomething = true;
