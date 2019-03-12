@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
-    bool m_patrolWaiting = true; //Stop on each node?
-    float m_totalWaitTime = 3.0f;
+    public bool m_patrolWaiting = true; //Stop on each node?
+    public float m_totalWaitTime = 3.0f;
     float m_directionProb = 0.2f;
     public List<WayPoint> m_patrolPoints;
 
@@ -17,6 +17,10 @@ public class Patrol : MonoBehaviour
     bool m_waiting;
     bool m_patrolForward;
     float m_waitTimer;
+
+    //[SerializeField]
+    public bool m_targetingPlayer = false;
+    Transform m_playerTarget = null;
 
     // Start is called before the first frame update
     void Start()
@@ -47,18 +51,26 @@ public class Patrol : MonoBehaviour
         if(m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
         {
             m_travelling = false;
-
-            //If we're going to wait, then wait
-            if(m_patrolWaiting)
+            if (!m_targetingPlayer)
             {
-                m_waiting = true;
-                m_waitTimer = 0.0f;
+                //If we're going to wait, then wait
+                if (m_patrolWaiting)
+                {
+                    m_waiting = true;
+                    m_waitTimer = 0.0f;
+                }
+                else
+                {
+                    ChangePatrolPoint();
+                    SetDestination();
+                }
             }
             else
             {
-                ChangePatrolPoint();
-                SetDestination();
+                //If targeting player
+
             }
+            
         }
 
         if(m_waiting)
@@ -97,11 +109,23 @@ public class Patrol : MonoBehaviour
 
     private void SetDestination()
     {
-        if (m_patrolPoints != null)
+        if(!m_targetingPlayer)
         {
-            Vector3 target = m_patrolPoints[m_currentPoint].transform.position;
-            m_navMeshAgent.SetDestination(target);
-            m_travelling = true;
+            if (m_patrolPoints != null)
+            {
+                Vector3 target = m_patrolPoints[m_currentPoint].transform.position;
+                m_navMeshAgent.SetDestination(target);
+                m_travelling = true;
+            }
+        }
+        else
+        {
+            if(m_playerTarget != null)
+            {
+                Vector3 target = m_playerTarget.position;
+                m_navMeshAgent.SetDestination(target);
+                m_travelling = true;
+            }
         }
     }
 }
