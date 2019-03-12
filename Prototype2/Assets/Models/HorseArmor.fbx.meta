@@ -1,14 +1,46 @@
 fileFormatVersion: 2
-guid: 0ee2a58f07be6c34cb5d94cd124724dc
+guid: 4b40b63e97d909b4c9c35aedb91b2b66
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
+    100000: HArmor1
+    100002: HArmor2
+    100004: HArmor3
+    100006: HArmor4
+    100008: HArmor5
+    100010: HArmor6
+    100012: HArmor7
+    100014: //RootNode
+    400000: HArmor1
+    400002: HArmor2
+    400004: HArmor3
+    400006: HArmor4
+    400008: HArmor5
+    400010: HArmor6
+    400012: HArmor7
+    400014: //RootNode
     2100000: lambert1
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: WoodenHorse
+    2300000: HArmor1
+    2300002: HArmor2
+    2300004: HArmor3
+    2300006: HArmor4
+    2300008: HArmor5
+    2300010: HArmor6
+    2300012: HArmor7
+    3300000: HArmor1
+    3300002: HArmor2
+    3300004: HArmor3
+    3300006: HArmor4
+    3300008: HArmor5
+    3300010: HArmor6
+    3300012: HArmor7
+    4300000: HArmor1
+    4300002: HArmor2
+    4300004: HArmor3
+    4300006: HArmor4
+    4300008: HArmor5
+    4300010: HArmor6
+    4300012: HArmor7
   externalObjects: {}
   materials:
     importMaterials: 1

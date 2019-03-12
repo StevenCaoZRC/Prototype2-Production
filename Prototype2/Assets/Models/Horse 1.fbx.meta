@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ee2a58f07be6c34cb5d94cd124724dc
+guid: 2283bbdf7c5e5d54bb796bb949d8dcda
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: lambert1
     2300000: //RootNode
     3300000: //RootNode
-    4300000: WoodenHorse
+    4300000: Horse
   externalObjects: {}
   materials:
     importMaterials: 1
