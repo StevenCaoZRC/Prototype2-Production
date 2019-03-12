@@ -32,7 +32,10 @@ public class ShieldBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (PlayerBlockAttack() == null)
+        {
+            m_IsBlocking = false;
+        }
     }
 
     public void PlayerBlock()
@@ -104,6 +107,7 @@ public class ShieldBlock : MonoBehaviour
         //m_IsBlocking = false;
         yield return null;
     }
+   
 
     IEnumerator EnemyBlockAttack()
     {
