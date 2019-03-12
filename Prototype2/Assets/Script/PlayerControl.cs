@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public bool m_isAttacking = false;
+    public bool m_isBlocking = false;
     public bool m_isCharging = false;
     public bool m_isholdingCharge = false;
 
     public GameObject m_spear;
+    public GameObject m_shield;
     public GameObject m_chargeReachedParticles;
     public GameObject m_chargingParticles;
-
+    Rigidbody rb;
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
 
@@ -20,18 +22,21 @@ public class PlayerControl : MonoBehaviour
     {
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         PlayerAttack();
+
+        PlayerBlock();
+       
     }
 
     public void PlayerAttack()
     {
-        if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
+        if (!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
         {
             if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging)
             {
@@ -39,7 +44,7 @@ public class PlayerControl : MonoBehaviour
                 m_spear.GetComponent<SpearAttack>().NormalAttack();
 
             }
-            else if(Input.GetAxis("ChargeSpear") > 0f)
+            else if (Input.GetAxis("ChargeSpear") > 0f)
             {
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime;
@@ -66,7 +71,30 @@ public class PlayerControl : MonoBehaviour
                 ChargeAttack();
             }
         }
+       
     }
+    public void PlayerBlock()
+    {
+        if (!m_shield.GetComponent<ShieldBlock>().GetIsBlocking())
+        {
+            if (GameManager.GetAxisOnce(ref m_isBlocking, "Shield"))
+            {
+               
+                m_shield.GetComponent<ShieldBlock>().PlayerBlock();
+            //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
+                if (m_shield.GetComponent<ShieldBlock>().CheckCol())// &&m_shield.GetComponent<ShieldBlock>().GetBlockedAttack())
+                {
+                    Debug.Log("PUSHED");
+                   // rb.velocity = Vector3.zero;
+                    rb.AddForce(-transform.forward * 100, ForceMode.Impulse);
+                    
+                }
+             }
+        }
+           
+        
+    }
+
 
     void ChargeAttack()
     {

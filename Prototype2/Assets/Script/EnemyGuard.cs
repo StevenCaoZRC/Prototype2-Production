@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyGuard : Enemy
 {
     private Rigidbody m_rigidBody;
-
+    public Rigidbody m_playerRigidBody;
+    public GameObject m_enemyShield;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -21,6 +22,11 @@ public class EnemyGuard : Enemy
     public override void Update()
     {
         base.Update();
+      
+    }
+    public void FixedUpdate()
+    {
+        EnemyBlock();
     }
 
     public override void Movement()
@@ -34,6 +40,21 @@ public class EnemyGuard : Enemy
         {
 
         }
+    }
+    public void EnemyBlock()
+    {
+        if(!m_enemyShield.GetComponent<ShieldBlock>().GetIsBlocking())
+        {
+            m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
+            if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
+            {
+
+                m_playerRigidBody.AddForce(-transform.forward * 10000);
+
+            }
+        }
+      //  
+        
     }
 
     public override void TakeDamage(GameObject _attackedFrom)

@@ -2,55 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ShieldType
-{
-    ENEMYSHIELD,
-    PLAYERSHIELD
-}
+
 public class ShieldBlock : MonoBehaviour
 {
     bool m_blockedAttack = false;
     bool m_IsBlocking = false;
-    public Rigidbody rb;
-    public Transform m_startPos;
-    public Transform m_endPos;
-    public GameObject m_whoIsHoldingShield;
-    ShieldType m_shieldType;
+    bool m_colliding = false;
+    public Rigidbody Player;
+   
     // Start is called before the first frame update
     void Start()
     {
         m_IsBlocking = false;
-        rb = GetComponent<Rigidbody>();
-        if (m_whoIsHoldingShield.tag == "Enemy")
-        {
-            m_shieldType = ShieldType.ENEMYSHIELD;
-        }
-        else if (m_whoIsHoldingShield.tag == "Player")
-        {
-            m_shieldType = ShieldType.PLAYERSHIELD;
-        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+    }
+    public bool GetIsColliding()
+    {
+        return m_colliding;
     }
 
     public void PlayerBlock()
     {
-        m_shieldType = ShieldType.PLAYERSHIELD;
-        gameObject.GetComponent<Collider>().enabled = true;
-        StartCoroutine(PlayerBlockAttack());
         m_IsBlocking = true;
+        StartCoroutine(PlayerBlockAttack());
     }
 
 
     public void EnemyBlock()
     {
-        m_shieldType = ShieldType.ENEMYSHIELD;
-        gameObject.GetComponent<Collider>().enabled = true;
         m_IsBlocking = true;
+        StartCoroutine(EnemyBlockAttack());
+       // rb.AddExplosionForce(1000, this.transform.position, 500.0f, 3.0f);
     }
 
     public bool GetIsBlocking()
@@ -58,37 +44,74 @@ public class ShieldBlock : MonoBehaviour
         return m_IsBlocking;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy" && !m_blockedAttack)
+        Debug.Log(other.tag);
+        if (m_IsBlocking)
         {
-            m_blockedAttack = true;
-            rb.AddExplosionForce(10, gameObject.transform.position, 5.0f, 3.0f);
-            Debug.Log("Player Blocking");
-        }
-        else if (collision.gameObject.tag == "Player" && !m_blockedAttack)
-        {
-            m_blockedAttack = true;
-            Debug.Log("Enemy Blocking");
+            if (other.name == "Mace" )
+            {
+                m_blockedAttack = true;
+                m_IsBlocking = false;
+                m_colliding = true;
+                //Player.velocity = Vector3.zero;
+                Debug.Log("Player Blocking");
+                
+
+            }
+            else if (other.tag == "Spear" )
+            {
+                m_blockedAttack = true;
+                //m_IsBlocking = true;
+                m_IsBlocking = false;
+                m_colliding = true;
+                // rb.AddForce(new Vector3(1000, 0, 0));
+                Debug.Log("Enemy Blocking");
+            }
+            else {
+                m_colliding = false;
+                m_IsBlocking = false;
+            }
         }
     }
-
+    public bool CheckCol()
+    {
+        return m_colliding;
+    }
+  
+    public bool GetBlockedAttack()
+    {
+        return m_blockedAttack;
+    }
+    
     IEnumerator PlayerBlockAttack()
     {
-        m_IsBlocking = false;
-        this.GetComponent<Collider>().enabled = false;
-        m_blockedAttack = false;
+        //yield return new WaitForSeconds(2.0f);
+       
+        yield return new WaitForSeconds(0.5f);
+    
+        //this.GetComponent<Collider>().enabled = false;
+       
         Debug.Log("Played Block an Attack");
+        m_blockedAttack = false;
+        //m_IsBlocking = false;
+
+        //m_colliding = false;
+        yield return null;
+        
+    }
+
+    IEnumerator EnemyBlockAttack()
+    {
+        
+        yield return new WaitForSeconds(0.5f);
+        
+        //play animation
+        m_blockedAttack = false;
+        Debug.Log("Enemy Block an Attack");
+       
         yield return null;
     }
 
-    public ShieldType GetShieldType()
-    {
-        return m_shieldType;
-    }
-
-    public void SetBlockType(ShieldType _shieldType)
-    {
-        m_shieldType = _shieldType;
-    }
+   
 }
