@@ -80,15 +80,19 @@ public class TempCharaMove : MonoBehaviour
                 m_fowardVelocity = Mathf.Max(m_fowardVelocity, -m_backSpeed);
                 m_rigidBody.velocity = transform.forward * m_fowardVelocity;
             }
-            else if (m_rigidBody.velocity != Vector3.zero)
+            else if (m_rigidBody.velocity != Vector3.zero && !shield.GetComponent<ShieldBlock>().CheckCol())
             {
                 //Debug.Log("Slowing Down");
                 m_fowardVelocity += m_braking * Time.deltaTime;
                 m_fowardVelocity = Mathf.Max(m_fowardVelocity, 0);
                 m_rigidBody.velocity = transform.forward * m_fowardVelocity;
             }
-            //Debug.Log(m_rigidBody.velocity);
-            transform.Rotate(0, hor, 0);
+            else if(!shield.GetComponent<ShieldBlock>().CheckCol())
+            {
+                m_rigidBody.velocity = Vector3.zero;
+            }
+        //Debug.Log(m_rigidBody.velocity);
+        transform.Rotate(0, hor, 0);
         //}
     }
 }

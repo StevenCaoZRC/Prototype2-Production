@@ -122,13 +122,6 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    IEnumerator ApplyForce()
-    {
-
-       
-       
-        yield return null;
-    }
     void ChargeAttack()
     {
         m_spear.GetComponent<SpearAttack>().ChargeAttack();

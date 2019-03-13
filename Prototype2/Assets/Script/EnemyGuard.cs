@@ -48,8 +48,9 @@ public class EnemyGuard : Enemy
             m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
             if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
             {
-
-                m_playerRigidBody.AddForce(-transform.forward * 10000);
+                
+                Debug.Log("Enemy Pushing Player");
+                m_playerRigidBody.AddForce(transform.forward * 10000);
 
             }
         }
