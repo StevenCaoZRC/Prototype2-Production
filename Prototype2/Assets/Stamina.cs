@@ -8,7 +8,7 @@ public class Stamina : MonoBehaviour
     public float m_maxStamina;
     [HideInInspector]
     public float m_currentStamina;
-    public Image m_staminaOrb;
+    public Image m_staminaBar;
 
     public float m_rechargeStamina;
     // Start is called before the first frame update
@@ -22,11 +22,11 @@ public class Stamina : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_staminaOrb.fillAmount = m_currentStamina / m_maxStamina;
+        m_staminaBar.fillAmount = m_currentStamina / m_maxStamina;
         if (m_currentStamina < m_maxStamina)
         {
             m_currentStamina += Time.deltaTime * m_rechargeStamina;
-            Debug.Log(m_currentStamina);
+            //Debug.Log(m_currentStamina);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TempCharaMove : MonoBehaviour
 {
     public float m_speed = 10.0f;
-    public float m_slowSpeed = 25.0f;
+    public float m_slowSpeed = 15.0f;
     public float m_backSpeed = 25.0f;
     public float m_maxSpeed = 15.0f;
     public float m_rotSpeed = 100.0f;
@@ -15,7 +15,7 @@ public class TempCharaMove : MonoBehaviour
     float m_deceleration;
     float m_braking;
     Quaternion m_targetRotation;
-    Rigidbody m_rigidBody;
+    public Rigidbody m_rigidBody;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,31 +66,39 @@ public class TempCharaMove : MonoBehaviour
         //if (GetComponent<PlayerControl>().m_disabledInput == false)
         //{
            
-            float hor = Input.GetAxis("Horizontal") * m_rotSpeed * Time.deltaTime;
-            if (Input.GetAxis("Vertical") > 0.1)
-            {
-                m_fowardVelocity += m_acceleration * Time.deltaTime;
-                m_fowardVelocity = Mathf.Min(m_fowardVelocity, m_maxSpeed);
-                m_rigidBody.velocity = transform.forward * m_fowardVelocity;
-            }
-            else if (Input.GetAxis("Vertical") < -0.1)
-            {
-                // Debug.Log("Backwards");
-                m_fowardVelocity += m_deceleration * Time.deltaTime;
-                m_fowardVelocity = Mathf.Max(m_fowardVelocity, -m_backSpeed);
-                m_rigidBody.velocity = transform.forward * m_fowardVelocity;
-            }
-            else if (m_rigidBody.velocity != Vector3.zero && !shield.GetComponent<ShieldBlock>().CheckCol())
-            {
-                //Debug.Log("Slowing Down");
-                m_fowardVelocity += m_braking * Time.deltaTime;
-                m_fowardVelocity = Mathf.Max(m_fowardVelocity, 0);
-                m_rigidBody.velocity = transform.forward * m_fowardVelocity;
-            }
-            else if(!shield.GetComponent<ShieldBlock>().CheckCol() && Input.GetAxis("Vertical") == 0)
-            {
-                m_rigidBody.velocity = Vector3.zero;
-            }
+        float hor = Input.GetAxis("Horizontal") * m_rotSpeed * Time.deltaTime;
+        if (Input.GetAxis("Vertical") > 0.1)
+        {
+            m_fowardVelocity += m_acceleration * Time.deltaTime;
+            m_fowardVelocity = Mathf.Min(m_fowardVelocity, m_maxSpeed);
+            m_rigidBody.velocity = transform.forward * m_fowardVelocity;
+        }
+        else if (Input.GetAxis("Vertical") < -0.1)
+        {
+            
+            m_fowardVelocity += m_deceleration * Time.deltaTime;
+            m_fowardVelocity = Mathf.Max(m_fowardVelocity, -m_backSpeed);
+            m_rigidBody.velocity = transform.forward * m_fowardVelocity;
+            // m_rigidBody.AddForce(transform.forward.normalized * m_fowardVelocity);
+            
+        }
+        else if (m_rigidBody.velocity != Vector3.zero
+        && !GetComponent<PlayerControl>().m_pushedBack
+       )
+        {
+            //Debug.Log("Slowing Down");
+            m_fowardVelocity += m_braking * Time.deltaTime;
+            m_fowardVelocity = Mathf.Max(m_fowardVelocity, 0);
+            m_rigidBody.velocity = transform.forward * m_fowardVelocity;
+        }
+        else if (GetComponent<PlayerControl>().m_pushedBack)
+        {
+            m_rigidBody.velocity = Vector3.zero;
+           // Input.ResetInputAxes();
+
+        }
+              
+        
         //Debug.Log(m_rigidBody.velocity);
         transform.Rotate(0, hor, 0);
         //}

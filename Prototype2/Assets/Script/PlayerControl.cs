@@ -8,6 +8,8 @@ public class PlayerControl : MonoBehaviour
     public bool m_isCharging = false;
     public bool m_isholdingCharge = false;
     public bool m_isBlocking = false;
+    public bool m_pushedBack = false;
+
 
     public GameObject m_spear;
     public GameObject m_shield;
@@ -15,7 +17,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject m_chargingParticles;
     public Animator m_playerAnimator;
     public bool m_disabledInput = false;
-    Rigidbody rb;
+    public Rigidbody rb;
     public Health m_playerHealth;
     public Stamina m_playerStamina;
 
@@ -47,6 +49,11 @@ public class PlayerControl : MonoBehaviour
         if (m_playerHealth.m_currentHealth > m_playerHealth.m_maxHealth)
         {
             m_playerHealth.m_currentHealth = m_playerHealth.m_maxHealth;
+        }
+
+        if (m_pushedBack)
+        {
+            m_shield.GetComponent<ShieldBlock>().SetCol(false);
         }
     }
 
@@ -98,27 +105,44 @@ public class PlayerControl : MonoBehaviour
 
     public void PlayerBlock()
     {
-        if (!m_shield.GetComponent<ShieldBlock>().GetIsBlocking() && m_playerStamina.m_currentStamina >= 20.0f)
+        
+        if (GameManager.GetAxisOnce(ref m_isBlocking, "Shield"))
         {
-            if (GameManager.GetAxisOnce(ref m_isBlocking, "Shield"))
+            if (m_playerStamina.m_currentStamina >= 20.0f)
+            { m_playerStamina.m_currentStamina -= 20.0f;     }
+            if (!m_shield.GetComponent<ShieldBlock>().GetIsBlocking() && m_playerStamina.m_currentStamina >= 20.0f)
             {
+                
 
-                m_playerStamina.m_currentStamina -= 20.0f;
                 m_shield.GetComponent<ShieldBlock>().PlayerBlock();
                 //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
                 if (m_shield.GetComponent<ShieldBlock>().CheckCol())// &&m_shield.GetComponent<ShieldBlock>().GetBlockedAttack())
                 {
                     Debug.Log("PUSHED");
+                    StartCoroutine(PushBackPlayer());
 
-                    Debug.Log(m_disabledInput);
-                    rb.AddForce(-transform.forward * 1000, ForceMode.Impulse);
-                    m_disabledInput = true;
-                    // Debug.Log(currrentVelocity);
-                    Debug.Log(rb.velocity);
+                }
+                else
+                {
+                    m_pushedBack = false;
                 }
 
             }
         }
+      
+    }
+    
+
+    IEnumerator PushBackPlayer()
+    {
+        //wait for animation 
+        
+
+        rb.AddForce(-transform.forward.normalized * 500.0f, ForceMode.Impulse);
+        m_pushedBack = true;
+
+        yield return new WaitForSeconds(0.5f);
+        yield return null;
     }
     void ChargeAttack()
     {

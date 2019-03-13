@@ -8,7 +8,7 @@ public class ShieldBlock : MonoBehaviour
     bool m_blockedAttack = false;
     bool m_IsBlocking = false;
     bool m_colliding = false;
-    public Rigidbody Player;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,11 +45,12 @@ public class ShieldBlock : MonoBehaviour
         return m_IsBlocking;
     }
 
-    void OnCollisionEnter(Collision other)
+   private void OnCollisionEnter(Collision other)
     {
+        Debug.Log(other.gameObject.transform.GetChild(1).tag);
         if (m_IsBlocking)
         {
-            if (other.gameObject.name == "EnemyGuard")
+            if (other.gameObject.transform.GetChild(1).tag == "GuardSword" )
             {
                 m_blockedAttack = true;
                 m_IsBlocking = false;
@@ -63,33 +64,41 @@ public class ShieldBlock : MonoBehaviour
                 m_blockedAttack = false;
             }
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.name);
-        if (m_IsBlocking)
+        else
         {
-            if (other.name == "Spear")
-            {
-                m_blockedAttack = true;
-                m_IsBlocking = false;
-                m_colliding = true;
-                Debug.Log("Enemy Blocking");
-            }
-            else
-            {
-                m_colliding = false;
-                m_IsBlocking = false;
-                m_blockedAttack = false;
-            }
+            m_colliding = false;
+            m_IsBlocking = false;
         }
     }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log(other.tag);
+    //    if (m_IsBlocking)
+    //    {
+    //        if (other.tag == "Spear" && !m_blockedAttack)
+    //        {
+    //            m_blockedAttack = true;
+    //            m_IsBlocking = false;
+    //            m_colliding = true;
+    //            Debug.Log("Enemy Blocking");
+    //        }
+    //        else
+    //        {
+    //            m_colliding = false;
+    //            m_IsBlocking = false;
+    //            m_blockedAttack = false;
+    //        }
+    //    }
+    //}
 
     public bool CheckCol()
     {
         return m_colliding;
     }
-  
+    public void SetCol(bool _colliding)
+    {
+        m_colliding = _colliding;
+    }
     public bool GetBlockedAttack()
     {
         return m_blockedAttack;
@@ -98,29 +107,21 @@ public class ShieldBlock : MonoBehaviour
     IEnumerator PlayerBlockAttack()
     {
         //yield return new WaitForSeconds(2.0f);
-       
-        yield return new WaitForSeconds(0.5f);
-    
-        //this.GetComponent<Collider>().enabled = false;
-       
+        //yield return new WaitForSeconds(0.5f);
         Debug.Log("Played Block an Attack");
         m_blockedAttack = false;
+        //yield return new WaitForSeconds(1.0f);
         //m_IsBlocking = false;
-
-        //m_colliding = false;
+     
         yield return null;
-        
     }
 
     IEnumerator EnemyBlockAttack()
     {
-        
         yield return new WaitForSeconds(0.5f);
-        
         //play animation
         m_blockedAttack = false;
         Debug.Log("Enemy Block an Attack");
-       
         yield return null;
     }
 
