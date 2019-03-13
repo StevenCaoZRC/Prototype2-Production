@@ -16,7 +16,7 @@ public class Stamina : MonoBehaviour
     {
         m_maxStamina = 100.0f;
         m_currentStamina = m_maxStamina;
-        m_rechargeStamina = 10.0f;
+        m_rechargeStamina = 5.0f;
     }
 
     // Update is called once per frame

@@ -11,14 +11,22 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject m_spear;
     public GameObject m_shield;
+
+    //Particles
     public GameObject m_chargeReachedParticles;
     public GameObject m_chargingParticles;
+
     public Animator m_playerAnimator;
     public bool m_disabledInput = false;
     Rigidbody rb;
+
+    //Helath and Stamina
     public Health m_playerHealth;
     public Stamina m_playerStamina;
+    public float m_normalAttackCost = 10.0f;
+    public float m_SpecialAttackCost = 40.0f;
 
+    //Charge timer
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
 
@@ -28,7 +36,6 @@ public class PlayerControl : MonoBehaviour
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
         rb = GetComponent<Rigidbody>();
-        
     }
 
     // Update is called once per frame
@@ -54,30 +61,28 @@ public class PlayerControl : MonoBehaviour
     {
         if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
         {
-            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging)
+            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging && m_playerStamina.m_currentStamina >= m_normalAttackCost)
             {
-                //lerp position forward and back
-                m_playerAnimator.GetComponent<Animator>().SetTrigger("NormalAttack");
-
-                m_spear.GetComponent<SpearAttack>().NormalAttack();
+                m_playerAnimator.GetComponent<Animator>().SetTrigger("NormalAttack"); //Start attack anim
+                m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
+                m_playerStamina.m_currentStamina -= 20.0f;
 
             }
-            else if(Input.GetAxis("ChargeSpear") > 0f)
+            else if(Input.GetAxis("ChargeSpear") > 0f && m_playerStamina.m_currentStamina >= m_SpecialAttackCost) //If player is charging
             {
                 m_isCharging = true;
-                m_chargeHoldTimer += Time.deltaTime;
-                m_chargingParticles.SetActive(true);
+                m_chargeHoldTimer += Time.deltaTime; //Increase charge timer
+                m_chargingParticles.SetActive(true); //Activate charging particles
                 if(m_playerAnimator.GetBool("ChargeSpear") == false)
                 {
                     m_playerAnimator.SetBool("ChargeSpear", true);
                 }
+
                 //If X is held more than 3 seconds, charge attack ready
                 if (m_chargeHoldTimer >= m_chargeHoldRequired)
                 {
                     m_isholdingCharge = true;
                     m_chargeReachedParticles.SetActive(true);
-                    //m_playerAnimator.SetBool("IsCharging", true);
-
                 }
             }
             else
@@ -86,13 +91,14 @@ public class PlayerControl : MonoBehaviour
                 m_isCharging = false;
                 m_chargingParticles.SetActive(false);
                 m_playerAnimator.SetBool("ChargeSpear", false);
-                //Debug.Log("Let go");
             }
 
             //If charge is ready, use special attack
             if (Input.GetAxis("ChargeSpear") == 0f && m_isholdingCharge)
             {
                 m_playerAnimator.GetComponent<Animator>().SetTrigger("SpecialAttack");
+                m_playerStamina.m_currentStamina -= 60.0f;
+
                 ChargeAttack();
             }
         }
@@ -133,6 +139,5 @@ public class PlayerControl : MonoBehaviour
         m_isholdingCharge = false;
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
-
     }
 }
