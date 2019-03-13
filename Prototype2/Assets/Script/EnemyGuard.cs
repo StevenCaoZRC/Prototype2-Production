@@ -50,12 +50,20 @@ public class EnemyGuard : Enemy
             {
                 
                 Debug.Log("Enemy Pushing Player");
-                m_playerRigidBody.AddForce(transform.forward * 10000);
+                StartCoroutine(PushBack());
 
             }
         }
       //  
         
+    }
+    IEnumerator PushBack()
+    {
+        //wait for animation 
+        yield return new WaitForSeconds(1.0f);
+
+        m_playerRigidBody.AddForce(transform.forward.normalized * 1000f, ForceMode.Impulse);
+        yield return null;
     }
 
     public override void TakeDamage(GameObject _attackedFrom)

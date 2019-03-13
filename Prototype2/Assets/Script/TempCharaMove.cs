@@ -87,7 +87,7 @@ public class TempCharaMove : MonoBehaviour
                 m_fowardVelocity = Mathf.Max(m_fowardVelocity, 0);
                 m_rigidBody.velocity = transform.forward * m_fowardVelocity;
             }
-            else if(!shield.GetComponent<ShieldBlock>().CheckCol())
+            else if(!shield.GetComponent<ShieldBlock>().CheckCol() && Input.GetAxis("Vertical") == 0)
             {
                 m_rigidBody.velocity = Vector3.zero;
             }
