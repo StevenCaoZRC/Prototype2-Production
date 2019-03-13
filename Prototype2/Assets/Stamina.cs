@@ -26,7 +26,7 @@ public class Stamina : MonoBehaviour
         if (m_currentStamina < m_maxStamina)
         {
             m_currentStamina += Time.deltaTime * m_rechargeStamina;
-            Debug.Log(m_currentStamina);
+            //Debug.Log(m_currentStamina);
         }
     }
 }

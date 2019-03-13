@@ -57,7 +57,9 @@ public class PlayerControl : MonoBehaviour
             if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging)
             {
                 //lerp position forward and back
-                m_spear.GetComponent<SpearAttack>().NormalAttack(m_playerAnimator);
+                m_playerAnimator.GetComponent<Animator>().SetTrigger("NormalAttack");
+
+                m_spear.GetComponent<SpearAttack>().NormalAttack();
 
             }
             else if(Input.GetAxis("ChargeSpear") > 0f)
@@ -65,7 +67,6 @@ public class PlayerControl : MonoBehaviour
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime;
                 m_chargingParticles.SetActive(true);
-                Debug.Log("uh oh");
                 if(m_playerAnimator.GetBool("ChargeSpear") == false)
                 {
                     m_playerAnimator.SetBool("ChargeSpear", true);
@@ -91,6 +92,7 @@ public class PlayerControl : MonoBehaviour
             //If charge is ready, use special attack
             if (Input.GetAxis("ChargeSpear") == 0f && m_isholdingCharge)
             {
+                m_playerAnimator.GetComponent<Animator>().SetTrigger("SpecialAttack");
                 ChargeAttack();
             }
         }

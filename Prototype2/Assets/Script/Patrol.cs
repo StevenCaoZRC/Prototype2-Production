@@ -48,41 +48,48 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
+        if(m_navMeshAgent != null)
         {
-            m_travelling = false;
-            if (!m_targetingPlayer)
+            if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
             {
-                //If we're going to wait, then wait
-                if (m_patrolWaiting)
+                m_travelling = false;
+                if (!m_targetingPlayer)
                 {
-                    m_waiting = true;
-                    m_waitTimer = 0.0f;
+                    //If we're going to wait, then wait
+                    if (m_patrolWaiting)
+                    {
+                        m_waiting = true;
+                        m_waitTimer = 0.0f;
+                    }
+                    else
+                    {
+                        ChangePatrolPoint();
+                        SetDestination();
+                    }
                 }
                 else
                 {
+                    //If targeting player
+
+                }
+
+            }
+
+            if (m_waiting)
+            {
+                m_waitTimer += Time.deltaTime;
+                if (m_waitTimer >= m_totalWaitTime)
+                {
+                    m_waiting = false;
+
                     ChangePatrolPoint();
                     SetDestination();
                 }
             }
-            else
-            {
-                //If targeting player
-
-            }
-            
         }
-
-        if(m_waiting)
+        else
         {
-            m_waitTimer += Time.deltaTime;
-            if (m_waitTimer >= m_totalWaitTime)
-            {
-                m_waiting = false;
-
-                ChangePatrolPoint();
-                SetDestination();
-            }
+            Debug.Log("You don't exist????");
         }
     }
 

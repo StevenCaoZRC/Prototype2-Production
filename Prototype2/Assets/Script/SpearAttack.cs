@@ -35,22 +35,18 @@ public class SpearAttack : MonoBehaviour
         
     }
 
-    public void NormalAttack(Animator _playerAnim)
+    public void NormalAttack()
     {
-        _playerAnim.GetComponent<Animator>().SetTrigger("NormalAttack");
 
         m_spearAttack = SpearAttackType.NORMAL;
-        this.GetComponent<Collider>().enabled = true;
-        StartCoroutine(TempMoveSpear(_playerAnim));
+        //this.GetComponent<Collider>().enabled = true;
+        StartCoroutine(TempMoveSpear());
         m_isAttacking = true;
     }
     public void ChargeAttack(Animator _playerAnim)
     {
-        _playerAnim.GetComponent<Animator>().SetTrigger("SpecialAttack");
-
         m_spearAttack = SpearAttackType.SPECIAL;
-        this.GetComponent<Collider>().enabled = true;
-        StartCoroutine(TempMoveSpear(_playerAnim));
+        StartCoroutine(TempMoveSpear());
 
         m_isAttacking = true;
     }
@@ -82,19 +78,24 @@ public class SpearAttack : MonoBehaviour
     //    }
     //}
 
-    IEnumerator TempMoveSpear(Animator _playerAnim)
+    IEnumerator TempMoveSpear()
     {
+
         //this is temporary. Will check hit with animated position.
 
         //transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
         yield return new WaitForSeconds(0.5f);
+        this.GetComponent<Collider>().enabled = true;
 
         //transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
+
+        yield return new WaitForSeconds(0.5f);
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
-        this.GetComponent<Collider>().enabled = false;
         m_hitSomething = false;
         Debug.Log("Player finish attack");
+        this.GetComponent<Collider>().enabled = false;
+
         yield return null;
     }
 
