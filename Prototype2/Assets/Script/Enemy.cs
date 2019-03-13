@@ -2,47 +2,77 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    GUARD,
+    SOLDIER
+}
+
 public class Enemy : MonoBehaviour
 {
-    public bool m_isAttacking = false;
-    public bool m_isHit = false;
-    public bool m_isAlive = false;
+    protected Transform m_target;
+    protected EnemyType m_enemyType;
 
-    public float m_health;
+    protected bool m_isAttacking = false;
+    protected bool m_isHit = false;
 
-    Transform m_target;
+    protected float m_health = 100.0f;
+    protected float m_attackOneDamage = 10.0f;
+    protected float m_attackTwoDamage = 30.0f;
+    protected float m_takeDamageAmount = 20.0f; //Should be taking from player not self
+
+    //Wander code
+    protected bool m_inCombat = false;
+
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        
+        m_health = 100.0f;
+        m_isAttacking = false;
+        m_isHit = false;
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        
+        if (m_health <= 0)
+        {
+            Die();
+        }
+        Movement();
+    }
+
+    public EnemyType GetEnemyType()
+    {
+        return m_enemyType;
     }
 
     public virtual void Movement()
     {
-        
+        if(!m_inCombat)
+        {
+            //if(m_wanderTime > 0.0f)
+            //{
+            //    transform.Translate(Vector3.forward * m_movementSpeed);
+            //    m_wanderTime -= Time.deltaTime;
+            //}
+            //else
+            //{
+            //    m_wanderTime = Random.Range(5.0f, 15.0f);
+            //    Patrol();
+            //}
+        }
     }
 
-    public virtual void Attack()
+    public void Patrol()
     {
-
+        transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
     }
 
-    public virtual void TakeDamage()
-    {
+    public virtual void Attack(){}
 
-    }
+    public virtual void TakeDamage(GameObject _attackedFrom) {}
 
-    public virtual void Die()
-    {
-        Destroy(this);
-    }
-
-    
+    public virtual void Die(){}
 }
