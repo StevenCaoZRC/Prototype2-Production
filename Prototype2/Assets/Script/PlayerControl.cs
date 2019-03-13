@@ -5,65 +5,58 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public bool m_isAttacking = false;
-    public bool m_isBlocking = false;
     public bool m_isCharging = false;
     public bool m_isholdingCharge = false;
-    public bool m_disabledInput = false;
+
     public GameObject m_spear;
-    public GameObject m_shield;
     public GameObject m_chargeReachedParticles;
     public GameObject m_chargingParticles;
-    Rigidbody rb;
+    public Animator m_playerAnimator;
+
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
-    Vector3 currrentVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
-        rb = GetComponent<Rigidbody>();
-        currrentVelocity = rb.velocity;
-       
+
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         PlayerAttack();
-       // Debug.Log(rb.velocity.magnitude);
-        PlayerBlock();
-        if (!m_shield.GetComponent<ShieldBlock>().CheckCol())
-        {
-
-            //GetComponent<Rigidbody>().velocity = Vector3.zero;
-           // Debug.Log(rb.velocity.magnitude);
-            m_disabledInput = false;
-           // Debug.Log(m_disabledInput);
-        }
     }
 
     public void PlayerAttack()
     {
-        if (!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
+        if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
         {
             if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging)
             {
                 //lerp position forward and back
-                m_spear.GetComponent<SpearAttack>().NormalAttack();
+                m_spear.GetComponent<SpearAttack>().NormalAttack(m_playerAnimator);
 
             }
-            else if (Input.GetAxis("ChargeSpear") > 0f)
+            else if(Input.GetAxis("ChargeSpear") > 0f)
             {
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime;
                 m_chargingParticles.SetActive(true);
-
+                Debug.Log("uh oh");
+                if(m_playerAnimator.GetBool("ChargeSpear") == false)
+                {
+                    m_playerAnimator.SetBool("ChargeSpear", true);
+                }
                 //If X is held more than 3 seconds, charge attack ready
                 if (m_chargeHoldTimer >= m_chargeHoldRequired)
                 {
                     m_isholdingCharge = true;
                     m_chargeReachedParticles.SetActive(true);
+                    //m_playerAnimator.SetBool("IsCharging", true);
+
                 }
             }
             else
@@ -71,7 +64,8 @@ public class PlayerControl : MonoBehaviour
                 m_chargeHoldTimer = 0;
                 m_isCharging = false;
                 m_chargingParticles.SetActive(false);
-
+                m_playerAnimator.SetBool("ChargeSpear", false);
+                Debug.Log("Let go");
             }
 
             //If charge is ready, use special attack
@@ -80,51 +74,11 @@ public class PlayerControl : MonoBehaviour
                 ChargeAttack();
             }
         }
-       
-    }
-    public void PlayerBlock()
-    {
-        if (!m_shield.GetComponent<ShieldBlock>().GetIsBlocking())
-        {
-            if (GameManager.GetAxisOnce(ref m_isBlocking, "Shield"))
-            {
-              
-              
-                m_shield.GetComponent<ShieldBlock>().PlayerBlock();
-                //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
-                if (m_shield.GetComponent<ShieldBlock>().CheckCol())// &&m_shield.GetComponent<ShieldBlock>().GetBlockedAttack())
-                {
-                    Debug.Log("PUSHED");
-
-                    Debug.Log(m_disabledInput);
-                    rb.AddForce(-transform.forward * 1000, ForceMode.Impulse);
-                    m_disabledInput = true;
-                    // Debug.Log(currrentVelocity);
-                    Debug.Log(rb.velocity);
-
-
-                    //yield return new WaitForSeconds(1.0f);
-                    // yield return new WaitUntil(() => Vector3.Distance(rb.velocity, currrentVelocity) < 5);
-                    //if (Vector3.Distance(rb.velocity, currrentVelocity) <= 100)
-                    //{
-                    //    GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    //    GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-                    //    Debug.Log(GetComponent<Rigidbody>().velocity);
-                    //    GetComponent<Rigidbody>().isKinematic = true;
-                    //    GetComponent<Rigidbody>().isKinematic = false;
-
-                    //}
-                }
-              
-            }
-        }
-        //else { m_disabledInput = false; }
-
     }
 
     void ChargeAttack()
     {
-        m_spear.GetComponent<SpearAttack>().ChargeAttack();
+        m_spear.GetComponent<SpearAttack>().ChargeAttack(m_playerAnimator);
         Debug.Log("suPERSAIYAN");
 
         //Reset timer values
@@ -133,6 +87,6 @@ public class PlayerControl : MonoBehaviour
         m_isholdingCharge = false;
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
-        
+
     }
 }
