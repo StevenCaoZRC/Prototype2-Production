@@ -56,26 +56,17 @@ public class SpearAttack : MonoBehaviour
         return m_isAttacking;
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag == "Enemy" && !m_hitSomething)
-    //    {
-    //        m_hitSomething = true;
-    //        Debug.Log("Player attacking");
-    //        other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
-    //    }
-    //}
-
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Enemy" && !m_hitSomething)
+        if (other.tag == "Enemy" && !m_hitSomething)
         {
             m_hitSomething = true;
             Debug.Log("Player attacking");
             other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            
         }
     }
+
     //private void OnTriggerExit(Collider other)
     //{
     //    if (other.tag == "Enemy")
@@ -106,10 +97,7 @@ public class SpearAttack : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
         yield return new WaitForSeconds(0.2f);
         transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
-        yield return new WaitForSeconds(0.2f);
-        transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
-        yield return new WaitForSeconds(0.2f);
-        transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
+        
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
         this.GetComponent<Collider>().enabled = false;
