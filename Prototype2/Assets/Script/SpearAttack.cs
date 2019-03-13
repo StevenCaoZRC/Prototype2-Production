@@ -35,18 +35,22 @@ public class SpearAttack : MonoBehaviour
         
     }
 
-    public void NormalAttack()
+    public void NormalAttack(Animator _playerAnim)
     {
+        _playerAnim.GetComponent<Animator>().SetTrigger("NormalAttack");
+
         m_spearAttack = SpearAttackType.NORMAL;
         this.GetComponent<Collider>().enabled = true;
-        StartCoroutine(TempMoveSpear());
+        StartCoroutine(TempMoveSpear(_playerAnim));
         m_isAttacking = true;
     }
-    public void ChargeAttack()
+    public void ChargeAttack(Animator _playerAnim)
     {
+        _playerAnim.GetComponent<Animator>().SetTrigger("SpecialAttack");
+
         m_spearAttack = SpearAttackType.SPECIAL;
         this.GetComponent<Collider>().enabled = true;
-        StartCoroutine(TempMoveSpear());
+        StartCoroutine(TempMoveSpear(_playerAnim));
 
         m_isAttacking = true;
     }
@@ -63,8 +67,9 @@ public class SpearAttack : MonoBehaviour
             m_hitSomething = true;
             Debug.Log("Player attacking");
             other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
-            
+
         }
+        
     }
 
     //private void OnTriggerExit(Collider other)
@@ -77,12 +82,14 @@ public class SpearAttack : MonoBehaviour
     //    }
     //}
 
-    IEnumerator TempMoveSpear()
+    IEnumerator TempMoveSpear(Animator _playerAnim)
     {
         //this is temporary. Will check hit with animated position.
-        transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
+
+        //transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
         yield return new WaitForSeconds(0.5f);
-        transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
+
+        //transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
         this.GetComponent<Collider>().enabled = false;

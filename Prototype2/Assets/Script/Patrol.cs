@@ -48,7 +48,7 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
+        if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
         {
             m_travelling = false;
             if (!m_targetingPlayer)

@@ -49,7 +49,7 @@ public class EnemyGuard : Enemy
             m_rigidBody.AddForce(moveDirection.normalized * 500f);
         }
     }
-
+    
     public override void Die()
     {
         //Play dead anim

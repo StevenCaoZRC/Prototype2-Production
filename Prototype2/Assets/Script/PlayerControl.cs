@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject m_spear;
     public GameObject m_chargeReachedParticles;
     public GameObject m_chargingParticles;
+    public Animator m_playerAnimator;
 
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
@@ -36,7 +37,7 @@ public class PlayerControl : MonoBehaviour
             if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging)
             {
                 //lerp position forward and back
-                m_spear.GetComponent<SpearAttack>().NormalAttack();
+                m_spear.GetComponent<SpearAttack>().NormalAttack(m_playerAnimator);
 
             }
             else if(Input.GetAxis("ChargeSpear") > 0f)
@@ -44,12 +45,18 @@ public class PlayerControl : MonoBehaviour
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime;
                 m_chargingParticles.SetActive(true);
-
+                Debug.Log("uh oh");
+                if(m_playerAnimator.GetBool("ChargeSpear") == false)
+                {
+                    m_playerAnimator.SetBool("ChargeSpear", true);
+                }
                 //If X is held more than 3 seconds, charge attack ready
                 if (m_chargeHoldTimer >= m_chargeHoldRequired)
                 {
                     m_isholdingCharge = true;
                     m_chargeReachedParticles.SetActive(true);
+                    //m_playerAnimator.SetBool("IsCharging", true);
+
                 }
             }
             else
@@ -57,7 +64,8 @@ public class PlayerControl : MonoBehaviour
                 m_chargeHoldTimer = 0;
                 m_isCharging = false;
                 m_chargingParticles.SetActive(false);
-
+                m_playerAnimator.SetBool("ChargeSpear", false);
+                Debug.Log("Let go");
             }
 
             //If charge is ready, use special attack
@@ -70,7 +78,7 @@ public class PlayerControl : MonoBehaviour
 
     void ChargeAttack()
     {
-        m_spear.GetComponent<SpearAttack>().ChargeAttack();
+        m_spear.GetComponent<SpearAttack>().ChargeAttack(m_playerAnimator);
         Debug.Log("suPERSAIYAN");
 
         //Reset timer values
