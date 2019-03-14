@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TempCharaMove : MonoBehaviour
 {
+    //Please remain hidden
     [HideInInspector]
     public float m_speed = 10.0f;
     [HideInInspector]
@@ -17,15 +18,14 @@ public class TempCharaMove : MonoBehaviour
     [HideInInspector]
     public bool m_canMove = true;
 
-    public GameObject shield;
 
-    float m_fowardVelocity;
-    float m_acceleration;
-    float m_deceleration;
-    float m_braking;
+    float m_fowardVelocity; //the forward velocity, this is the multipler I use to add on to the velocity
+    float m_acceleration;   //acceleration for when the player is moving forward
+    float m_deceleration;   //Used when player is moving backwards
+    float m_braking;        //This is used for when the player is giving zero input and is gradually slowing down 
 
     Quaternion m_targetRotation;
-    public Rigidbody m_rigidBody;
+    public Rigidbody m_rigidBody; 
     // Start is called before the first frame update
     void Start()
     {

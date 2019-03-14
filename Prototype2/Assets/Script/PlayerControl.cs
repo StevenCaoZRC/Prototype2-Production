@@ -17,9 +17,9 @@ public class PlayerControl : MonoBehaviour
 
     bool finished = false;
 
-    public GameObject m_spear;
-    public GameObject m_shield;
-    public GameObject m_chargeReachedParticles;
+    public GameObject m_spear;  //reference to the spear object
+    public GameObject m_shield; //reference to the player shield object
+    public GameObject m_chargeReachedParticles; 
     public GameObject m_chargingParticles;
     public Animator m_playerAnimator;
     public bool m_disabledInput = false;
