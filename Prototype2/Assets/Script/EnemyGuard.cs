@@ -13,7 +13,7 @@ public class EnemyGuard : Enemy
         base.Start();
         m_enemyType = EnemyType.GUARD;
         m_rigidBody = GetComponent<Rigidbody>();
-
+       
         m_attackOneDamage = 20.0f;
         m_attackTwoDamage = 50.0f;
     }
@@ -26,7 +26,7 @@ public class EnemyGuard : Enemy
     }
     public void FixedUpdate()
     {
-        EnemyBlock();
+        EnemyBlocking();
     }
 
     public override void Movement()
@@ -41,12 +41,12 @@ public class EnemyGuard : Enemy
 
         }
     }
-    public void EnemyBlock()
+    public void EnemyBlocking()
     {
-        if(!m_enemyShield.GetComponent<ShieldBlock>().GetIsBlocking())
+        if(!m_enemyShield.GetComponent<EnemyShield>().GetIsBlocking())
         {
-            m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
-            if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
+            m_enemyShield.GetComponent<EnemyShield>().EnemyBlock();
+            if (m_enemyShield.GetComponent<EnemyShield>().CheckCol())
             {
                 
                 Debug.Log("Enemy Pushing Player");
@@ -63,6 +63,7 @@ public class EnemyGuard : Enemy
         yield return new WaitForSeconds(1.0f);
 
         m_playerRigidBody.AddForce(transform.forward.normalized * 1000f, ForceMode.Impulse);
+        m_enemyShield.GetComponent<EnemyShield>().m_knockedBack = false;
         yield return null;
     }
 
