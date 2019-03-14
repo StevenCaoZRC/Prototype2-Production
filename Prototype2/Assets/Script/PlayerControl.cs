@@ -136,8 +136,8 @@ public class PlayerControl : MonoBehaviour
     IEnumerator PushBackPlayer()
     {
         //wait for animation 
-        
 
+        rb.velocity = Vector3.zero;
         rb.AddForce(-transform.forward.normalized * 500.0f, ForceMode.Impulse);
         m_pushedBack = true;
 
