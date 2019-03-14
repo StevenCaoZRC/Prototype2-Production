@@ -1,0 +1,161 @@
+fileFormatVersion: 2
+guid: 11281a87d48f62e48b164daa76e22e7b
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: HorseFrontRLegFrontHoof
+    100002: HorseFrontRLegHumerus
+    100004: HorseFrontRLegMetacarpus
+    100006: HorseFrontRLegPhalangesManus
+    100008: HorseFrontRLegRadius
+    100010: HorseFrontRLegScapula
+    100012: HorseJaw
+    100014: //RootNode
+    100016: HorseLFemur
+    100018: HorseLFrontHoof
+    100020: HorseLHumerus
+    100022: HorseLLargeCannon
+    100024: HorseLMetacarpus
+    100026: HorseLPhalangesManus
+    100028: HorseLPhalanxPrima
+    100030: HorseLRadius
+    100032: HorseLRearHoof
+    100034: HorseLScapula
+    100036: HorseLTibia
+    100038: HorseNeck1
+    100040: HorseNeck2
+    100042: HorsePelvis
+    100044: HorseRFemur
+    100046: HorseRibcage
+    100048: HorseRLargeCannon
+    100050: HorseRPhalanxPrima
+    100052: HorseRRearHoof
+    100054: HorseRTibia
+    100056: HorseScull
+    100058: HorseSpine1
+    100060: HorseSpine2
+    100062: HorseTail1
+    100064: HorseTail2
+    100066: HorseTail3
+    400000: HorseFrontRLegFrontHoof
+    400002: HorseFrontRLegHumerus
+    400004: HorseFrontRLegMetacarpus
+    400006: HorseFrontRLegPhalangesManus
+    400008: HorseFrontRLegRadius
+    400010: HorseFrontRLegScapula
+    400012: HorseJaw
+    400014: //RootNode
+    400016: HorseLFemur
+    400018: HorseLFrontHoof
+    400020: HorseLHumerus
+    400022: HorseLLargeCannon
+    400024: HorseLMetacarpus
+    400026: HorseLPhalangesManus
+    400028: HorseLPhalanxPrima
+    400030: HorseLRadius
+    400032: HorseLRearHoof
+    400034: HorseLScapula
+    400036: HorseLTibia
+    400038: HorseNeck1
+    400040: HorseNeck2
+    400042: HorsePelvis
+    400044: HorseRFemur
+    400046: HorseRibcage
+    400048: HorseRLargeCannon
+    400050: HorseRPhalanxPrima
+    400052: HorseRRearHoof
+    400054: HorseRTibia
+    400056: HorseScull
+    400058: HorseSpine1
+    400060: HorseSpine2
+    400062: HorseTail1
+    400064: HorseTail2
+    400066: HorseTail3
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
