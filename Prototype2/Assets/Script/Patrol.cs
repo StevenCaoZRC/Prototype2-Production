@@ -17,6 +17,7 @@ public class Patrol : MonoBehaviour
     bool m_waiting;
     bool m_patrolForward;
     float m_waitTimer;
+    
 
     //[SerializeField]
     public bool m_targetingPlayer = false;
@@ -50,11 +51,11 @@ public class Patrol : MonoBehaviour
     {
         if(m_navMeshAgent != null)
         {
-            if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
+            if (!m_targetingPlayer)
             {
-                m_travelling = false;
-                if (!m_targetingPlayer)
+                if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
                 {
+                    m_travelling = false;
                     //If we're going to wait, then wait
                     if (m_patrolWaiting)
                     {
@@ -66,25 +67,24 @@ public class Patrol : MonoBehaviour
                         ChangePatrolPoint();
                         SetDestination();
                     }
+
                 }
-                else
+
+                if (m_waiting)
                 {
-                    //If targeting player
+                    m_waitTimer += Time.deltaTime;
+                    if (m_waitTimer >= m_totalWaitTime)
+                    {
+                        m_waiting = false;
 
+                        ChangePatrolPoint();
+                        SetDestination();
+                    }
                 }
-
             }
-
-            if (m_waiting)
+            else
             {
-                m_waitTimer += Time.deltaTime;
-                if (m_waitTimer >= m_totalWaitTime)
-                {
-                    m_waiting = false;
 
-                    ChangePatrolPoint();
-                    SetDestination();
-                }
             }
         }
         else
@@ -134,5 +134,12 @@ public class Patrol : MonoBehaviour
                 m_travelling = true;
             }
         }
+    }
+
+    private void SpotPlayer()
+    {
+        //if()
+
+        m_waitTimer = 0.0f;
     }
 }

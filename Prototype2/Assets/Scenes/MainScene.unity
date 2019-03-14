@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -380,25 +380,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b885f742fe4d45c42907fce8552735a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1030680546 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6188095559593878932, guid: d6b70b7ec5514ae40a749ecb1e98f7ab,
+--- !u!4 &697970690 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 268314766662467131, guid: d6b70b7ec5514ae40a749ecb1e98f7ab,
     type: 3}
   m_PrefabInstance: {fileID: 268314765312653261}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1030680551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030680546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f94f21e6b8224df499f2342fef98cd89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 2037270332}
 --- !u!114 &1459934934 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8435858787182542200, guid: 0ea7a58376e5aeb468776c57d59afa82,
@@ -411,6 +398,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf405e9c7d47f9d468c0594aefa5af26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1490242697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1490242698}
+  - component: {fileID: 1490242701}
+  - component: {fileID: 1490242700}
+  - component: {fileID: 1490242699}
+  m_Layer: 0
+  m_Name: EnemyScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1490242698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490242697}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.52, z: 4.14}
+  m_LocalScale: {x: 2.7692273, y: 1.715498, z: 5.994401}
+  m_Children: []
+  m_Father: {fileID: 697970690}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1490242699
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490242697}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1490242700
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490242697}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1490242701
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490242697}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1490291352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -618,11 +696,10 @@ PrefabInstance:
       propertyPath: m_playerRigidBody
       value: 
       objectReference: {fileID: 2037270332}
-    - target: {fileID: 268314766662467130, guid: d6b70b7ec5514ae40a749ecb1e98f7ab,
-        type: 3}
-      propertyPath: m_enemyShield
+    - target: {fileID: 1030680551, guid: d6b70b7ec5514ae40a749ecb1e98f7ab, type: 3}
+      propertyPath: Player
       value: 
-      objectReference: {fileID: 1030680546}
+      objectReference: {fileID: 2037270332}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6b70b7ec5514ae40a749ecb1e98f7ab, type: 3}
 --- !u!1001 &3712826064115556823
@@ -702,6 +779,11 @@ PrefabInstance:
       propertyPath: m_playerStamina
       value: 
       objectReference: {fileID: 684391209}
+    - target: {fileID: 3712826063370058261, guid: b2995f5c3a5a45c43ace2be28972d1d7,
+        type: 3}
+      propertyPath: m_speed
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2995f5c3a5a45c43ace2be28972d1d7, type: 3}
 --- !u!1001 &6102801586904045529
@@ -845,31 +927,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4893372466532846926, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_TagString
-      value: WayPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 5202513942128249861, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_TagString
-      value: WayPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 5202513942057806960, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_TagString
-      value: WayPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 5202513941121173881, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_TagString
-      value: WayPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 5202513943067836849, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_TagString
-      value: WayPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b361770dc7ddd49be0fa0341145d32, type: 3}
