@@ -6,18 +6,18 @@ using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
-    public bool m_patrolWaiting = true; //Stop on each node?
-    public float m_totalWaitTime = 3.0f;
-    float m_directionProb = 0.2f;
-    public List<WayPoint> m_patrolPoints;
+    public bool m_patrolWaiting = true;     //Stop on each node?
+    public float m_totalWaitTime = 3.0f;    //Amount of time the enemy should stay on each spot
+    public List<WayPoint> m_patrolPoints;   //All patrol points
 
-    NavMeshAgent m_navMeshAgent;
-    int m_currentPoint;
-    bool m_travelling;
-    bool m_waiting;
-    bool m_patrolForward;
-    float m_waitTimer;
-    FieldOfView m_fov;
+    private FieldOfView m_fov;              //field of view class which detects whether the player is within the enemies current fov 
+    private NavMeshAgent m_navMeshAgent;    //NavMeshAgent
+    private int m_currentPoint;             //current target point
+    private bool m_travelling;              //Check for whether player is in the middle of moving or not.
+    private bool m_waiting;                 //Check if player is currently in the middle of waiting
+    private bool m_patrolForward;           //Check for whether the player is patrolling forwards or backwards (waypoint order)
+    private float m_waitTimer;              //Current time waited if waiting
+    private float m_directionProb = 0.2f;   //Probability of going back or forwards
 
     //[SerializeField]
     public bool m_targetingPlayer = false;

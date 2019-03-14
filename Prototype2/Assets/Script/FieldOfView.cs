@@ -13,14 +13,17 @@ public class FieldOfView : MonoBehaviour
 
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
-    GameObject m_target;
+    [HideInInspector]
+    public GameObject m_target;
+
+    bool m_targetWithinRadius = false;
+    bool m_targetWithinFOV = false;
+
 
     private void Start()
     {
-        StartCoroutine(FindTargetsWithDelay(0.5f));
-
+        StartCoroutine(FindTargetsWithDelay(1.0f));
     }
-
 
     IEnumerator FindTargetsWithDelay(float _delay)
     {
@@ -31,6 +34,7 @@ public class FieldOfView : MonoBehaviour
         }
     }
 
+    //finds all targets and draws line gizmo if within view
     void FindVisibleTargets()
     {
         visibleTargets.Clear();
@@ -55,22 +59,36 @@ public class FieldOfView : MonoBehaviour
     void FindPlayerTarget()
     {
         m_target = null;
-        Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, m_viewRadius, targetMask);
-        for (int i = 0; i < targetsInViewRadius.Length; i++)
-        {
-            GameObject target = targetsInViewRadius[i].gameObject;
 
-            if (target.tag == "Player")//change to player
+        Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, m_viewRadius, targetMask);
+        //for (int i = 0; i < targetsInViewRadius.Length; i++)
+        //{
+        //    GameObject target = targetsInViewRadius[i].gameObject;
+        if(targetsInViewRadius.Length > 0)
+        {
+            if (targetsInViewRadius[0].tag == "Player")
             {
-                Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
+                m_targetWithinRadius = true;
+                //Get the direction towards the target from the enemy position
+                Vector3 dirToTarget = (targetsInViewRadius[0].transform.position - transform.position).normalized;
+                
+                //Checking if the enemy is within the view angle
                 if (Vector3.Angle(transform.forward, dirToTarget) < m_viewAngle / 2)
                 {
-                    float distToTarget = Vector3.Distance(transform.position, target.transform.position);
+                    //Calculate the distance towards the target
+                    float distToTarget = Vector3.Distance(transform.position, targetsInViewRadius[0].transform.position);
+
+                    //Raycast from enemy to target while ignoring obstacles
                     if (Physics.Raycast(transform.position, dirToTarget, distToTarget, targetMask))
                     {
-                        m_target = target;
+                        m_targetWithinFOV = true;
+                        m_target = targetsInViewRadius[0].gameObject;
                     }
                 }
+            }
+            else
+            {
+                Debug.Log("There is something else on the player layer in the scene?");
             }
         }
     }
@@ -87,5 +105,15 @@ public class FieldOfView : MonoBehaviour
     public GameObject GetTarget()
     {
         return m_target;
+    }
+
+    public bool GetIsTargetWithinRadius()
+    {
+        return m_targetWithinRadius;
+    }
+
+    public bool GetIsTargetWithinFOV()
+    {
+        return m_targetWithinFOV;
     }
 }
