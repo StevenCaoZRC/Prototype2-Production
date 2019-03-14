@@ -191,6 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6222205552258282941}
+  - component: {fileID: 3277429664758443508}
   - component: {fileID: 6222205552258282940}
   - component: {fileID: 2021115892}
   - component: {fileID: 2021115893}
@@ -222,6 +223,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3277429664758443508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222205552258282937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c809b568d001a4caa220c703e26f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_viewRadius: 0
+  m_viewAngle: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  visibleTargets: []
 --- !u!114 &6222205552258282940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f471ce5faf6685949b4760472d494dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerRigidBody: {fileID: 0}
+  m_enemyShield: {fileID: 0}
 --- !u!114 &2021115892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +278,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_targetingPlayer: 0
 --- !u!195 &2021115893
 NavMeshAgent:
   m_ObjectHideFlags: 0

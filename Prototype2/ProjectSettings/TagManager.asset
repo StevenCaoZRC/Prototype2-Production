@@ -8,6 +8,7 @@ TagManager:
   - PlayerSpear
   - Enemy
   - WayPoint
+  - WindParticles
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - PostProcessing
   - EnemyWeapons
   - Player
-  - 
-  - 
+  - Enemy
+  - Obstacle
   - 
   - 
   - 

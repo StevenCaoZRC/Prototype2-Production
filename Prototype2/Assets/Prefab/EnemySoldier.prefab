@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_targetingPlayer: 0
 --- !u!195 &1726308682
 NavMeshAgent:
   m_ObjectHideFlags: 0

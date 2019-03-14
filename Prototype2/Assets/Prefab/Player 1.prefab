@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 3712826063370058262}
   - component: {fileID: 3712826063370058263}
   - component: {fileID: 3712826063370058344}
+  - component: {fileID: 8601378410958138166}
   - component: {fileID: 3712826063370058345}
   - component: {fileID: 3712826063370058346}
   - component: {fileID: 3712826063370058261}
@@ -223,6 +224,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &8601378410958138166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3712826063370058347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c809b568d001a4caa220c703e26f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_viewRadius: 20
+  m_viewAngle: 0
 --- !u!136 &3712826063370058345
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -295,6 +310,8 @@ MonoBehaviour:
   m_disabledInput: 0
   m_playerHealth: {fileID: 0}
   m_playerStamina: {fileID: 0}
+  m_normalAttackCost: 10
+  m_SpecialAttackCost: 40
 --- !u!136 &2116566167
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -573,14 +590,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3712826063370058262}
     m_Modifications:
-    - target: {fileID: 100000, guid: cb2ee92195f96014eb2ce701011057d8, type: 3}
-      propertyPath: m_Name
-      value: Horse
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: cb2ee92195f96014eb2ce701011057d8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cb2ee92195f96014eb2ce701011057d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -636,6 +645,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: cb2ee92195f96014eb2ce701011057d8, type: 3}
       propertyPath: m_LocalScale.z
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: cb2ee92195f96014eb2ce701011057d8, type: 3}
+      propertyPath: m_Name
+      value: Horse
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: cb2ee92195f96014eb2ce701011057d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: cb2ee92195f96014eb2ce701011057d8, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -800,6 +817,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3712826063370058262}
     m_Modifications:
+    - target: {fileID: 9500000, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6ce7e69103de3314489722357f32e619, type: 2}
     - target: {fileID: 100024, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
       propertyPath: m_Name
       value: Baldy
@@ -860,10 +881,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6ce7e69103de3314489722357f32e619, type: 2}
     - target: {fileID: 400022, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.104

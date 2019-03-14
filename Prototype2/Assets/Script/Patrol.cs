@@ -17,7 +17,7 @@ public class Patrol : MonoBehaviour
     bool m_waiting;
     bool m_patrolForward;
     float m_waitTimer;
-    
+    FieldOfView m_fov;
 
     //[SerializeField]
     public bool m_targetingPlayer = false;
@@ -26,6 +26,7 @@ public class Patrol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_fov = this.gameObject.GetComponent<FieldOfView>();
         m_navMeshAgent = this.GetComponent<NavMeshAgent>();
 
         if (m_navMeshAgent == null)
@@ -49,7 +50,8 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_navMeshAgent != null)
+        SpotPlayer();
+        if (m_navMeshAgent != null)
         {
             if (!m_targetingPlayer)
             {
@@ -84,6 +86,9 @@ public class Patrol : MonoBehaviour
             }
             else
             {
+                Debug.Log("im here?");
+
+                SetDestination();
 
             }
         }
@@ -138,8 +143,18 @@ public class Patrol : MonoBehaviour
 
     private void SpotPlayer()
     {
-        //if()
+        Debug.Log("Fov: " + m_fov);
+        if(m_fov != null)
+        {
+            Debug.Log("heyyy");
 
-        m_waitTimer = 0.0f;
+            if(m_fov.GetTarget() != null)
+            {
+                m_playerTarget = m_fov.GetTarget().transform;
+                m_waitTimer = 0.0f;
+                m_targetingPlayer = true;
+            }
+
+        }
     }
 }
