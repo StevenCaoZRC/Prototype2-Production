@@ -35,7 +35,7 @@ public class EnemyShield : Shield
         Debug.Log(other.tag);
         if (m_isBlocking)
         {
-            if (other.tag == "Spear" && !m_blockedAttack)
+            if (other.tag == "PlayerSpear" && !m_blockedAttack)
             {
                 m_blockedAttack = true;
                 m_isBlocking = false;

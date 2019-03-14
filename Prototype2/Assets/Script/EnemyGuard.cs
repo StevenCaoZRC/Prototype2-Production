@@ -60,10 +60,11 @@ public class EnemyGuard : Enemy
     IEnumerator PushBack()
     {
         //wait for animation 
-        yield return new WaitForSeconds(1.0f);
+       yield return new WaitForSeconds(0.35f);
 
-        m_playerRigidBody.AddForce(transform.forward.normalized * 1000f, ForceMode.Impulse);
+        m_playerRigidBody.AddForce(transform.forward.normalized * 10f, ForceMode.Impulse);
         m_enemyShield.GetComponent<EnemyShield>().m_knockedBack = false;
+        m_playerRigidBody.velocity = Vector3.zero;
         yield return null;
     }
 
@@ -77,7 +78,7 @@ public class EnemyGuard : Enemy
             m_isHit = false;
 
             var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
-            m_rigidBody.AddForce(moveDirection.normalized * 500f);
+            m_rigidBody.AddForce(moveDirection.normalized * 20f);
         }
     }
     

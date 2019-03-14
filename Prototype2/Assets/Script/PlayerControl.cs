@@ -43,6 +43,10 @@ public class PlayerControl : MonoBehaviour
     {
         PlayerAttack();
         PlayerBlock();
+    }
+    private void Update()
+    {
+        KnockbackListener();
         if (Input.GetKeyDown(KeyCode.Z))
         {
             m_playerHealth.m_currentHealth -= 10.0f;
@@ -55,14 +59,6 @@ public class PlayerControl : MonoBehaviour
         {
             m_playerHealth.m_currentHealth = m_playerHealth.m_maxHealth;
         }
-        
-
-
-
-    }
-    private void Update()
-    {
-        KnockbackListener();
     }
 
     public void PlayerAttack()
@@ -152,15 +148,20 @@ public class PlayerControl : MonoBehaviour
     {
         finished = true;
         m_shield.GetComponent<PlayerShield>().m_knockedBack = true;
-        rb.AddForce(-transform.forward.normalized * 500.0f, ForceMode.Impulse);
+        rb.AddForce(-transform.forward.normalized * 10.0f, ForceMode.Impulse);
         yield return new WaitForSeconds(1.0f);
         
        
         Debug.Log("Success");
         m_shield.GetComponent<PlayerShield>().m_knockedBack = false;
+      
+        GetComponent<TempCharaMove>().m_canMove = true;
         Input.ResetInputAxes();
         rb.velocity = Vector3.zero;
-        GetComponent<TempCharaMove>().m_canMove = true;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = true;
+        rb.isKinematic = false;
+       
 
         yield return null;
     }

@@ -51,33 +51,37 @@ public class TempCharaMove : MonoBehaviour
         {
             //Rotating the player
             float hor = Input.GetAxis("Horizontal") * m_rotSpeed * Time.deltaTime;
-            //float ver = Input.GetAxis("Vertical") * m_speed * Time.deltaTime;
-            //transform.Translate(0, 0, ver);
+            float ver = Input.GetAxis("Vertical") * m_speed * Time.deltaTime;
+            transform.Translate(0, 0, ver);
             //Movement 
             //Moving forwards and backwards
-            if (Input.GetAxis("Vertical") > 0.1)
-            {
+            //if (Input.GetAxis("Vertical") > 0.1)
+            //{
 
-                m_fowardVelocity += m_acceleration * Time.deltaTime;
-                m_fowardVelocity = Mathf.Min(m_fowardVelocity, m_maxSpeed);
-                m_rigidBody.velocity = transform.forward * m_fowardVelocity;
-            }
-            else if (Input.GetAxis("Vertical") < -0.1)
-            {
+            //    m_fowardVelocity += m_acceleration * Time.deltaTime;
+            //    m_fowardVelocity = Mathf.Min(m_fowardVelocity, m_maxSpeed);
+            //    m_rigidBody.velocity = transform.forward * m_fowardVelocity;
+            //}
+            //else if (Input.GetAxis("Vertical") < -0.1)
+            //{
 
-                m_fowardVelocity += m_deceleration * Time.deltaTime;
-                m_fowardVelocity = Mathf.Max(m_fowardVelocity, -m_backSpeed);
-                m_rigidBody.velocity = transform.forward * m_fowardVelocity;
-                // m_rigidBody.AddForce(transform.forward.normalized * m_fowardVelocity);
+            //    m_fowardVelocity += m_deceleration * Time.deltaTime;
+            //    m_fowardVelocity = Mathf.Max(m_fowardVelocity, -m_backSpeed);
+            //    m_rigidBody.velocity = transform.forward * m_fowardVelocity;
+            //    // m_rigidBody.AddForce(transform.forward.normalized * m_fowardVelocity);
 
-            }
-            else 
-            {
-                //Debug.Log("Slowing Down");
-                m_fowardVelocity += m_rigidBody.velocity.x * Time.deltaTime;
-                m_fowardVelocity = Mathf.Max(m_fowardVelocity, 0);
-                m_rigidBody.velocity = transform.forward * m_fowardVelocity;
-            }
+            //}
+            //else if (m_rigidBody.velocity != Vector3.zero)
+            //{
+            //    //Debug.Log("Slowing Down");
+            //    m_fowardVelocity += m_rigidBody.velocity.x * Time.deltaTime;
+            //    m_fowardVelocity = Mathf.Max(m_fowardVelocity, 0);
+            //    m_rigidBody.velocity = transform.forward * m_fowardVelocity;
+            //}
+            //else
+            //{
+            //    m_rigidBody.velocity = Vector3.zero;
+            //}
             transform.Rotate(0, hor, 0);
         }
     }
