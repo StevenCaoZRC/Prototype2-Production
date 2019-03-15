@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: 2283bbdf7c5e5d54bb796bb949d8dcda
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Horse_Low
+    100004: HorseFrontRLegFrontHoof
+    100006: HorseFrontRLegHumerus
+    100008: HorseFrontRLegMetacarpus
+    100010: HorseFrontRLegPhalangesManus
+    100012: HorseFrontRLegRadius
+    100014: HorseFrontRLegScapula
+    100016: HorseJaw
+    100018: HorseLFemur
+    100020: HorseLFrontHoof
+    100022: HorseLHumerus
+    100024: HorseLLargeCannon
+    100026: HorseLMetacarpus
+    100028: HorseLPhalangesManus
+    100030: HorseLPhalanxPrima
+    100032: HorseLRadius
+    100034: HorseLRearHoof
+    100036: HorseLScapula
+    100038: HorseLTibia
+    100040: HorseNeck1
+    100042: HorseNeck2
+    100044: HorsePelvis
+    100046: HorseRFemur
+    100048: HorseRibcage
+    100050: HorseRLargeCannon
+    100052: HorseRPhalanxPrima
+    100054: HorseRRearHoof
+    100056: HorseRTibia
+    100058: HorseScull
+    100060: HorseSpine1
+    100062: HorseSpine2
+    100064: HorseTail1
+    100066: HorseTail2
+    100068: HorseTail3
+    100070: Horse_Low1
+    400000: //RootNode
+    400002: Horse_Low
+    400004: HorseFrontRLegFrontHoof
+    400006: HorseFrontRLegHumerus
+    400008: HorseFrontRLegMetacarpus
+    400010: HorseFrontRLegPhalangesManus
+    400012: HorseFrontRLegRadius
+    400014: HorseFrontRLegScapula
+    400016: HorseJaw
+    400018: HorseLFemur
+    400020: HorseLFrontHoof
+    400022: HorseLHumerus
+    400024: HorseLLargeCannon
+    400026: HorseLMetacarpus
+    400028: HorseLPhalangesManus
+    400030: HorseLPhalanxPrima
+    400032: HorseLRadius
+    400034: HorseLRearHoof
+    400036: HorseLScapula
+    400038: HorseLTibia
+    400040: HorseNeck1
+    400042: HorseNeck2
+    400044: HorsePelvis
+    400046: HorseRFemur
+    400048: HorseRibcage
+    400050: HorseRLargeCannon
+    400052: HorseRPhalanxPrima
+    400054: HorseRRearHoof
+    400056: HorseRTibia
+    400058: HorseScull
+    400060: HorseSpine1
+    400062: HorseSpine2
+    400064: HorseTail1
+    400066: HorseTail2
+    400068: HorseTail3
+    400070: Horse_Low1
+    2100000: lambert1
+    2100002: lambert3
+    2100004: lambert4
+    2300000: //RootNode
+    2300002: Horse_Low
+    2300004: Horse_Low1
+    3300000: //RootNode
+    3300002: Horse_Low
+    3300004: Horse_Low1
+    4300000: Horse
+    4300002: Horse_Low
+    4300004: Horse_Low1
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Horse_Low1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

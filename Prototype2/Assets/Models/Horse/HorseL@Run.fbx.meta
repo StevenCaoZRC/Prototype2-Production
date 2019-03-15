@@ -1,14 +1,78 @@
 fileFormatVersion: 2
-guid: 2283bbdf7c5e5d54bb796bb949d8dcda
+guid: 3208577d194e68f4e8e3d5d557b57cac
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: lambert1
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Horse
+    100000: HorseFrontRLegFrontHoof
+    100002: HorseFrontRLegHumerus
+    100004: HorseFrontRLegMetacarpus
+    100006: HorseFrontRLegPhalangesManus
+    100008: HorseFrontRLegRadius
+    100010: HorseFrontRLegScapula
+    100012: HorseJaw
+    100014: //RootNode
+    100016: HorseLFemur
+    100018: HorseLFrontHoof
+    100020: HorseLHumerus
+    100022: HorseLLargeCannon
+    100024: HorseLMetacarpus
+    100026: HorseLPhalangesManus
+    100028: HorseLPhalanxPrima
+    100030: HorseLRadius
+    100032: HorseLRearHoof
+    100034: HorseLScapula
+    100036: HorseLTibia
+    100038: HorseNeck1
+    100040: HorseNeck2
+    100042: HorsePelvis
+    100044: HorseRFemur
+    100046: HorseRibcage
+    100048: HorseRLargeCannon
+    100050: HorseRPhalanxPrima
+    100052: HorseRRearHoof
+    100054: HorseRTibia
+    100056: HorseScull
+    100058: HorseSpine1
+    100060: HorseSpine2
+    100062: HorseTail1
+    100064: HorseTail2
+    100066: HorseTail3
+    400000: HorseFrontRLegFrontHoof
+    400002: HorseFrontRLegHumerus
+    400004: HorseFrontRLegMetacarpus
+    400006: HorseFrontRLegPhalangesManus
+    400008: HorseFrontRLegRadius
+    400010: HorseFrontRLegScapula
+    400012: HorseJaw
+    400014: //RootNode
+    400016: HorseLFemur
+    400018: HorseLFrontHoof
+    400020: HorseLHumerus
+    400022: HorseLLargeCannon
+    400024: HorseLMetacarpus
+    400026: HorseLPhalangesManus
+    400028: HorseLPhalanxPrima
+    400030: HorseLRadius
+    400032: HorseLRearHoof
+    400034: HorseLScapula
+    400036: HorseLTibia
+    400038: HorseNeck1
+    400040: HorseNeck2
+    400042: HorsePelvis
+    400044: HorseRFemur
+    400046: HorseRibcage
+    400048: HorseRLargeCannon
+    400050: HorseRPhalanxPrima
+    400052: HorseRRearHoof
+    400054: HorseRTibia
+    400056: HorseScull
+    400058: HorseSpine1
+    400060: HorseSpine2
+    400062: HorseTail1
+    400064: HorseTail2
+    400066: HorseTail3
+    7400000: Take 001
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -61,8 +125,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -89,7 +153,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
