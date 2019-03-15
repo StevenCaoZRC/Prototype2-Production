@@ -9,7 +9,7 @@ public class ShieldBlock : MonoBehaviour
     bool m_IsBlocking = false;
     bool m_colliding = false;
     public Rigidbody Player;
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,7 @@ public class ShieldBlock : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
     }
     public bool GetIsColliding()
     {
@@ -36,7 +37,7 @@ public class ShieldBlock : MonoBehaviour
     {
         m_IsBlocking = true;
         StartCoroutine(EnemyBlockAttack());
-       // rb.AddExplosionForce(1000, this.transform.position, 500.0f, 3.0f);
+       
     }
 
     public bool GetIsBlocking()
@@ -44,36 +45,46 @@ public class ShieldBlock : MonoBehaviour
         return m_IsBlocking;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.tag);
         if (m_IsBlocking)
         {
-            if (other.name == "Mace" )
+            if (other.gameObject.name == "EnemyGuard")
             {
                 m_blockedAttack = true;
                 m_IsBlocking = false;
                 m_colliding = true;
-                //Player.velocity = Vector3.zero;
                 Debug.Log("Player Blocking");
-                
-
             }
-            else if (other.tag == "Spear" )
+            else
             {
-                m_blockedAttack = true;
-                //m_IsBlocking = true;
-                m_IsBlocking = false;
-                m_colliding = true;
-                // rb.AddForce(new Vector3(1000, 0, 0));
-                Debug.Log("Enemy Blocking");
-            }
-            else {
                 m_colliding = false;
                 m_IsBlocking = false;
+                m_blockedAttack = false;
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name);
+        if (m_IsBlocking)
+        {
+            if (other.name == "Spear")
+            {
+                m_blockedAttack = true;
+                m_IsBlocking = false;
+                m_colliding = true;
+                Debug.Log("Enemy Blocking");
+            }
+            else
+            {
+                m_colliding = false;
+                m_IsBlocking = false;
+                m_blockedAttack = false;
+            }
+        }
+    }
+
     public bool CheckCol()
     {
         return m_colliding;

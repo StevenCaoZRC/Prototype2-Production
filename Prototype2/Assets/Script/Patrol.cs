@@ -6,21 +6,27 @@ using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
-    bool m_patrolWaiting = true; //Stop on each node?
-    float m_totalWaitTime = 3.0f;
-    float m_directionProb = 0.2f;
-    public List<WayPoint> m_patrolPoints;
+    public bool m_patrolWaiting = true;     //Stop on each node?
+    public float m_totalWaitTime = 3.0f;    //Amount of time the enemy should stay on each spot
+    public List<WayPoint> m_patrolPoints;   //All patrol points
 
-    NavMeshAgent m_navMeshAgent;
-    int m_currentPoint;
-    bool m_travelling;
-    bool m_waiting;
-    bool m_patrolForward;
-    float m_waitTimer;
+    private FieldOfView m_fov;              //field of view class which detects whether the player is within the enemies current fov 
+    private NavMeshAgent m_navMeshAgent;    //NavMeshAgent
+    private int m_currentPoint;             //current target point
+    private bool m_travelling;              //Check for whether player is in the middle of moving or not.
+    private bool m_waiting;                 //Check if player is currently in the middle of waiting
+    private bool m_patrolForward;           //Check for whether the player is patrolling forwards or backwards (waypoint order)
+    private float m_waitTimer;              //Current time waited if waiting
+    private float m_directionProb = 0.2f;   //Probability of going back or forwards
+
+    //[SerializeField]
+    public bool m_targetingPlayer = false;
+    Transform m_playerTarget = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_fov = this.gameObject.GetComponent<FieldOfView>();
         m_navMeshAgent = this.GetComponent<NavMeshAgent>();
 
         if (m_navMeshAgent == null)
@@ -44,33 +50,55 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
+        SpotPlayer();
+        if (m_navMeshAgent != null)
         {
-            m_travelling = false;
-
-            //If we're going to wait, then wait
-            if(m_patrolWaiting)
+            if (!m_targetingPlayer)
             {
-                m_waiting = true;
-                m_waitTimer = 0.0f;
+                if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
+                {
+                    m_travelling = false;
+
+                    //If we're going to wait, then wait
+                    if (m_patrolWaiting)
+                    {
+                        m_waiting = true;
+                        m_waitTimer = 0.0f;
+                    }
+                    else
+                    {
+                        ChangePatrolPoint();
+                        SetDestination();
+                    }
+                }
+
+                if (m_waiting)
+                {
+                    m_waitTimer += Time.deltaTime;
+                    if (m_waitTimer >= m_totalWaitTime)
+                    {
+                        m_waiting = false;
+
+                        ChangePatrolPoint();
+                        SetDestination();
+                    }
+                }
             }
             else
             {
-                ChangePatrolPoint();
+                if (m_fov.GetTarget() == null && m_targetingPlayer
+                    && !m_fov.GetIsTargetWithinRadius() && !m_fov.GetIsTargetWithinFOV())
+                {
+                    m_targetingPlayer = false;
+                    m_playerTarget = null;
+                    m_currentPoint = UnityEngine.Random.Range(0, m_patrolPoints.Count - 1);
+                }
                 SetDestination();
             }
         }
-
-        if(m_waiting)
+        else
         {
-            m_waitTimer += Time.deltaTime;
-            if (m_waitTimer >= m_totalWaitTime)
-            {
-                m_waiting = false;
-
-                ChangePatrolPoint();
-                SetDestination();
-            }
+            Debug.Log("You don't exist????");
         }
     }
 
@@ -97,11 +125,51 @@ public class Patrol : MonoBehaviour
 
     private void SetDestination()
     {
-        if (m_patrolPoints != null)
+        if(!m_targetingPlayer)
         {
-            Vector3 target = m_patrolPoints[m_currentPoint].transform.position;
-            m_navMeshAgent.SetDestination(target);
+            if (m_patrolPoints != null)
+            {
+                m_navMeshAgent.SetDestination(m_patrolPoints[m_currentPoint].transform.position);
+                m_travelling = true;
+            }
+        }
+        else
+        {
+            m_navMeshAgent.SetDestination(m_playerTarget.position);
             m_travelling = true;
+        }
+    }
+
+    private void SpotPlayer()
+    {
+        if(m_fov != null)
+        {
+            //if(m_fov.GetTarget()!=null)
+            //    Debug.Log("GetTarget: " + m_fov.GetTarget().name);
+            //Debug.Log("m_targetingPlayer: " + m_targetingPlayer);
+            //Debug.Log("IsTargetWithinFOV: " + m_fov.GetIsTargetWithinFOV());
+            //Debug.Log("IsTargetWithinRadius: " + m_fov.GetIsTargetWithinRadius());
+
+           
+            if (m_fov.GetTarget() != null && !m_targetingPlayer && m_fov.GetIsTargetWithinFOV())
+            {
+                if(!m_fov.GetTarget().GetComponent<PlayerControl>().GetIsDead())
+                {
+                    m_playerTarget = m_fov.GetTarget().transform;
+                    m_waitTimer = 0.0f;
+                    m_targetingPlayer = true;
+                }
+            }
+            else if (m_fov.GetTarget() != null && m_targetingPlayer && m_fov.GetIsTargetWithinRadius())
+            {
+                if (!m_fov.GetTarget().GetComponent<PlayerControl>().GetIsDead())
+                {
+                    //Dont change target
+                    //m_playerTarget = m_fov.GetTarget().transform;
+                    m_waitTimer = 0.0f;
+                    m_targetingPlayer = true;
+                }
+            }
         }
     }
 }

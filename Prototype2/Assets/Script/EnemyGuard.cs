@@ -48,13 +48,23 @@ public class EnemyGuard : Enemy
             m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
             if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
             {
-
-                m_playerRigidBody.AddForce(-transform.forward * 10000);
+                
+                Debug.Log("Enemy Pushing Player");
+                StartCoroutine(PushBack());
 
             }
         }
       //  
         
+    }
+
+    IEnumerator PushBack()
+    {
+        //wait for animation 
+        yield return new WaitForSeconds(1.0f);
+
+        m_playerRigidBody.AddForce(transform.forward.normalized * 1000f, ForceMode.Impulse);
+        yield return null;
     }
 
     public override void TakeDamage(GameObject _attackedFrom)
@@ -70,7 +80,7 @@ public class EnemyGuard : Enemy
             m_rigidBody.AddForce(moveDirection.normalized * 500f);
         }
     }
-
+    
     public override void Die()
     {
         //Play dead anim
