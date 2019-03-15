@@ -78,6 +78,14 @@ public class TempCharaMove : MonoBehaviour
             //    m_fowardVelocity = Mathf.Max(m_fowardVelocity, 0);
             //    m_rigidBody.velocity = transform.forward * m_fowardVelocity;
             //}
+            //else if (m_rigidBody.velocity.x > m_maxSpeed)
+            //{
+            //    m_rigidBody.velocity = new Vector3 (m_maxSpeed, m_rigidBody.velocity.y, m_rigidBody.velocity.z);
+            //}
+            //else if (m_rigidBody.velocity.z > m_maxSpeed)
+            //{
+            //    m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x , m_rigidBody.velocity.y, m_maxSpeed);
+            //}
             //else
             //{
             //    m_rigidBody.velocity = Vector3.zero;
