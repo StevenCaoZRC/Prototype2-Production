@@ -58,6 +58,7 @@ public class Patrol : MonoBehaviour
                 if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
                 {
                     m_travelling = false;
+
                     //If we're going to wait, then wait
                     if (m_patrolWaiting)
                     {
@@ -69,7 +70,6 @@ public class Patrol : MonoBehaviour
                         ChangePatrolPoint();
                         SetDestination();
                     }
-
                 }
 
                 if (m_waiting)
@@ -86,10 +86,14 @@ public class Patrol : MonoBehaviour
             }
             else
             {
-                Debug.Log("im here?");
-
+                if (m_fov.GetTarget() == null && m_targetingPlayer
+                    && !m_fov.GetIsTargetWithinRadius() && !m_fov.GetIsTargetWithinFOV())
+                {
+                    m_targetingPlayer = false;
+                    m_playerTarget = null;
+                    m_currentPoint = UnityEngine.Random.Range(0, m_patrolPoints.Count - 1);
+                }
                 SetDestination();
-
             }
         }
         else
@@ -125,36 +129,47 @@ public class Patrol : MonoBehaviour
         {
             if (m_patrolPoints != null)
             {
-                Vector3 target = m_patrolPoints[m_currentPoint].transform.position;
-                m_navMeshAgent.SetDestination(target);
+                m_navMeshAgent.SetDestination(m_patrolPoints[m_currentPoint].transform.position);
                 m_travelling = true;
             }
         }
         else
         {
-            if(m_playerTarget != null)
-            {
-                Vector3 target = m_playerTarget.position;
-                m_navMeshAgent.SetDestination(target);
-                m_travelling = true;
-            }
+            m_navMeshAgent.SetDestination(m_playerTarget.position);
+            m_travelling = true;
         }
     }
 
     private void SpotPlayer()
     {
-        Debug.Log("Fov: " + m_fov);
         if(m_fov != null)
         {
-            Debug.Log("heyyy");
+            //if(m_fov.GetTarget()!=null)
+            //    Debug.Log("GetTarget: " + m_fov.GetTarget().name);
+            //Debug.Log("m_targetingPlayer: " + m_targetingPlayer);
+            //Debug.Log("IsTargetWithinFOV: " + m_fov.GetIsTargetWithinFOV());
+            //Debug.Log("IsTargetWithinRadius: " + m_fov.GetIsTargetWithinRadius());
 
-            if(m_fov.GetTarget() != null)
+           
+            if (m_fov.GetTarget() != null && !m_targetingPlayer && m_fov.GetIsTargetWithinFOV())
             {
-                m_playerTarget = m_fov.GetTarget().transform;
-                m_waitTimer = 0.0f;
-                m_targetingPlayer = true;
+                if(!m_fov.GetTarget().GetComponent<PlayerControl>().GetIsDead())
+                {
+                    m_playerTarget = m_fov.GetTarget().transform;
+                    m_waitTimer = 0.0f;
+                    m_targetingPlayer = true;
+                }
             }
-
+            else if (m_fov.GetTarget() != null && m_targetingPlayer && m_fov.GetIsTargetWithinRadius())
+            {
+                if (!m_fov.GetTarget().GetComponent<PlayerControl>().GetIsDead())
+                {
+                    //Dont change target
+                    //m_playerTarget = m_fov.GetTarget().transform;
+                    m_waitTimer = 0.0f;
+                    m_targetingPlayer = true;
+                }
+            }
         }
     }
 }

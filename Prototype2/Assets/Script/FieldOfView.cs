@@ -22,7 +22,7 @@ public class FieldOfView : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FindTargetsWithDelay(1.0f));
+        StartCoroutine(FindTargetsWithDelay(0.3f));
     }
 
     IEnumerator FindTargetsWithDelay(float _delay)
@@ -59,6 +59,7 @@ public class FieldOfView : MonoBehaviour
     void FindPlayerTarget()
     {
         m_target = null;
+        m_targetWithinFOV = false;
 
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, m_viewRadius, targetMask);
         //for (int i = 0; i < targetsInViewRadius.Length; i++)
@@ -84,12 +85,22 @@ public class FieldOfView : MonoBehaviour
                         m_targetWithinFOV = true;
                         m_target = targetsInViewRadius[0].gameObject;
                     }
+                    else
+                    {
+                        m_targetWithinFOV = false;
+                    }
                 }
             }
             else
             {
                 Debug.Log("There is something else on the player layer in the scene?");
             }
+        }
+        else
+        {
+            m_targetWithinRadius = false;
+            m_targetWithinFOV = false;
+
         }
     }
 

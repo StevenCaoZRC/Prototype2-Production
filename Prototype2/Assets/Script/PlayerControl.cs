@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     public bool m_isCharging = false;
     public bool m_isholdingCharge = false;
     public bool m_isBlocking = false;
+    private bool m_isDead = false;
 
     public GameObject m_spear;
     public GameObject m_shield;
@@ -36,6 +37,7 @@ public class PlayerControl : MonoBehaviour
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        m_isDead = false;
     }
 
     // Update is called once per frame
@@ -139,5 +141,10 @@ public class PlayerControl : MonoBehaviour
         m_isholdingCharge = false;
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
+    }
+
+    public bool GetIsDead()
+    {
+        return m_isDead;
     }
 }
