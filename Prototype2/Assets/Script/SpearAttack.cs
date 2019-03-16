@@ -13,7 +13,7 @@ public class SpearAttack : MonoBehaviour
     float m_spearSpeed = 0.2f;
     bool m_hitSomething = false;
     bool m_isAttacking = false;
-    public GameObject m_chargeAttackParticles;
+    public GameObject m_windStreakParticles;
 
     //float m_normalAttackAmount = 20.0f;
     //float m_specialAttackAmount = 50.0f;
@@ -26,7 +26,7 @@ public class SpearAttack : MonoBehaviour
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
         this.GetComponent<Collider>().enabled = false;
-        m_chargeAttackParticles.SetActive(false);
+        m_windStreakParticles.SetActive(false);
 
     }
 
@@ -68,7 +68,7 @@ public class SpearAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); //Prepare attack anim
         this.GetComponent<Collider>().enabled = true;
-        m_chargeAttackParticles.SetActive(true);
+        m_windStreakParticles.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
         m_spearAttack = SpearAttackType.NORMAL;
@@ -76,18 +76,18 @@ public class SpearAttack : MonoBehaviour
         m_hitSomething = false;
         Debug.Log("Player finish attack");
         this.GetComponent<Collider>().enabled = false;
-        m_chargeAttackParticles.SetActive(false);
+        m_windStreakParticles.SetActive(false);
 
         yield return null;
     }
 
     IEnumerator TempSpecialSpear()
     {
-        m_chargeAttackParticles.SetActive(true);
+        m_windStreakParticles.SetActive(true);
         this.GetComponent<Collider>().enabled = true;
 
         yield return new WaitForSeconds(0.3f); //Prepare attack anim
-        m_chargeAttackParticles.SetActive(false);
+        m_windStreakParticles.SetActive(false);
 
         //Special spear has different timing as it plays instantly 
         //  compared to the normal attack which plays out the full anim sequence

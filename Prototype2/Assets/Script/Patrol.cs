@@ -8,6 +8,8 @@ public class Patrol : MonoBehaviour
 {
     public bool m_patrolWaiting = true;     //Stop on each node?
     public float m_totalWaitTime = 3.0f;    //Amount of time the enemy should stay on each spot
+    public float m_distFromPlayer = 2.0f;    //Distance from player to stop
+
     public List<WayPoint> m_patrolPoints;   //All patrol points
 
     private FieldOfView m_fov;              //field of view class which detects whether the player is within the enemies current fov 
@@ -21,11 +23,13 @@ public class Patrol : MonoBehaviour
 
     //[SerializeField]
     public bool m_targetingPlayer = false;
-    Transform m_playerTarget = null;
+    Transform m_targetPos = null;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        m_distFromPlayer = 2.0f;
         m_fov = this.gameObject.GetComponent<FieldOfView>();
         m_navMeshAgent = this.GetComponent<NavMeshAgent>();
 
@@ -90,8 +94,8 @@ public class Patrol : MonoBehaviour
                     && !m_fov.GetIsTargetWithinRadius() && !m_fov.GetIsTargetWithinFOV())
                 {
                     m_targetingPlayer = false;
-                    m_playerTarget = null;
                     m_currentPoint = UnityEngine.Random.Range(0, m_patrolPoints.Count - 1);
+                    m_targetPos = m_patrolPoints[m_currentPoint].transform;
                 }
                 SetDestination();
             }
@@ -100,6 +104,15 @@ public class Patrol : MonoBehaviour
         {
             Debug.Log("You don't exist????");
         }
+        FacePosition(m_targetPos.position);
+
+    }
+
+    private void LateUpdate()
+    {
+
+
+        
     }
 
     private void ChangePatrolPoint()
@@ -129,14 +142,35 @@ public class Patrol : MonoBehaviour
         {
             if (m_patrolPoints != null)
             {
-                m_navMeshAgent.SetDestination(m_patrolPoints[m_currentPoint].transform.position);
+
+                m_navMeshAgent.stoppingDistance = 0.0f;
+                m_navMeshAgent.autoBraking = true;
+                m_targetPos = m_patrolPoints[m_currentPoint].transform;
                 m_travelling = true;
             }
         }
         else
         {
-            m_navMeshAgent.SetDestination(m_playerTarget.position);
+            m_navMeshAgent.stoppingDistance = m_distFromPlayer;
+            m_navMeshAgent.autoBraking = false;
+
+
             m_travelling = true;
+        }
+        m_navMeshAgent.SetDestination(m_targetPos.position);
+    }
+
+    //Location to make the player face
+    void FacePosition(Vector3 _pos)
+    {
+        Vector3 dir = (_pos - transform.position).normalized;
+        dir.y = 0.0f; //Dont rotate y axis
+
+        if (dir != Vector3.zero || _pos == transform.position)
+        {
+            Quaternion lookRot = Quaternion.LookRotation(dir);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * m_navMeshAgent.speed);
         }
     }
 
@@ -155,7 +189,7 @@ public class Patrol : MonoBehaviour
             {
                 if(!m_fov.GetTarget().GetComponent<PlayerControl>().GetIsDead())
                 {
-                    m_playerTarget = m_fov.GetTarget().transform;
+                    m_targetPos = m_fov.GetTarget().transform;
                     m_waitTimer = 0.0f;
                     m_targetingPlayer = true;
                 }
