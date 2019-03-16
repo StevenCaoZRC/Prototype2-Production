@@ -64,7 +64,7 @@ public class FieldOfView : MonoBehaviour
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, m_viewRadius, targetMask);
         //for (int i = 0; i < targetsInViewRadius.Length; i++)
         //{
-        //    GameObject target = targetsInViewRadius[i].gameObject;
+        //    GameObject target = targetsInViewRadius[i].gameObject;    
         if(targetsInViewRadius.Length > 0)
         {
             if (targetsInViewRadius[0].tag == "Player")
