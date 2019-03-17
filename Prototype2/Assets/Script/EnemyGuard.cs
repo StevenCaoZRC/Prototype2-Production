@@ -13,7 +13,7 @@ public class EnemyGuard : Enemy
         base.Start();
         m_enemyType = EnemyType.GUARD;
         m_rigidBody = GetComponent<Rigidbody>();
-
+       
         m_attackOneDamage = 20.0f;
         m_attackTwoDamage = 50.0f;
     }
@@ -26,7 +26,7 @@ public class EnemyGuard : Enemy
     }
     public void FixedUpdate()
     {
-        EnemyBlock();
+        EnemyBlocking();
     }
 
     public override void Movement()
@@ -41,12 +41,12 @@ public class EnemyGuard : Enemy
 
         }
     }
-    public void EnemyBlock()
+    public void EnemyBlocking()
     {
-        if(!m_enemyShield.GetComponent<ShieldBlock>().GetIsBlocking())
+        if(!m_enemyShield.GetComponent<EnemyShield>().GetIsBlocking())
         {
-            m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
-            if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
+            m_enemyShield.GetComponent<EnemyShield>().EnemyBlock();
+            if (m_enemyShield.GetComponent<EnemyShield>().CheckCol())
             {
                 
                 Debug.Log("Enemy Pushing Player");
@@ -61,9 +61,11 @@ public class EnemyGuard : Enemy
     IEnumerator PushBack()
     {
         //wait for animation 
-        yield return new WaitForSeconds(1.0f);
+       yield return new WaitForSeconds(0.35f);
 
-        m_playerRigidBody.AddForce(transform.forward.normalized * 1000f, ForceMode.Impulse);
+        m_playerRigidBody.AddForce(transform.forward.normalized * 10f, ForceMode.Impulse);
+        m_enemyShield.GetComponent<EnemyShield>().m_knockedBack = false;
+        m_playerRigidBody.velocity = Vector3.zero;
         yield return null;
     }
 
@@ -77,7 +79,7 @@ public class EnemyGuard : Enemy
             m_isHit = false;
 
             var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
-            m_rigidBody.AddForce(moveDirection.normalized * 500f);
+            m_rigidBody.AddForce(moveDirection.normalized * 20f);
         }
     }
     

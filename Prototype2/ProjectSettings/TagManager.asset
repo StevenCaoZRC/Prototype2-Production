@@ -7,9 +7,7 @@ TagManager:
   - GuardSword
   - PlayerSpear
   - Enemy
-  - WayPoint
-  - WindParticles
-  - EnemyCollider
+  - EnemyShield
   layers:
   - Default
   - TransparentFX
@@ -21,9 +19,9 @@ TagManager:
   - 
   - PostProcessing
   - EnemyWeapons
-  - Player
-  - Enemy
-  - Obstacle
+  - 
+  - 
+  - 
   - 
   - 
   - 

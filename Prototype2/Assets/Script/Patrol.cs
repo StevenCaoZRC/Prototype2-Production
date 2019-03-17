@@ -25,6 +25,8 @@ public class Patrol : MonoBehaviour
     public bool m_targetingPlayer = false;
     Transform m_targetPos = null;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,14 +107,6 @@ public class Patrol : MonoBehaviour
             Debug.Log("You don't exist????");
         }
         FacePosition(m_targetPos.position);
-
-    }
-
-    private void LateUpdate()
-    {
-
-
-        
     }
 
     private void ChangePatrolPoint()

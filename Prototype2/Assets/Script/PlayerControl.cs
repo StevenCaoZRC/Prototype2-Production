@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    [HideInInspector]
     public bool m_isAttacking = false;
+    [HideInInspector]
     public bool m_isCharging = false;
+    [HideInInspector]
     public bool m_isholdingCharge = false;
     public bool m_isBlocking = false;
     private bool m_isDead = false;
@@ -15,13 +18,19 @@ public class PlayerControl : MonoBehaviour
 
     //Particles
     public GameObject m_chargeReachedParticles;
+    [HideInInspector]
+    public bool m_blocked = false;
+    [HideInInspector]
+    public bool m_pushedBack = false;
+
+    bool finished = false;
     public GameObject m_chargingParticles;
 
     public Animator m_playerAnimator;
     public bool m_disabledInput = false;
     Rigidbody rb;
 
-    //Helath and Stamina
+    //Health and Stamina
     public Health m_playerHealth;
     public Stamina m_playerStamina;
     public float m_normalAttackCost = 10.0f;
@@ -41,10 +50,14 @@ public class PlayerControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         PlayerAttack();
         PlayerBlock();
+    }
+    private void Update()
+    {
+        KnockbackListener();
         if (Input.GetKeyDown(KeyCode.Z))
         {
             m_playerHealth.m_currentHealth -= 10.0f;
@@ -108,27 +121,59 @@ public class PlayerControl : MonoBehaviour
 
     public void PlayerBlock()
     {
-        if (!m_shield.GetComponent<ShieldBlock>().GetIsBlocking() && m_playerStamina.m_currentStamina >= 20.0f)
+        
+        if (GameManager.GetAxisOnce(ref m_blocked, "Shield"))
         {
-            if (GameManager.GetAxisOnce(ref m_isBlocking, "Shield"))
+            if (m_playerStamina.m_currentStamina >= 20.0f)
+            { m_playerStamina.m_currentStamina -= 20.0f;     }
+            if (!m_shield.GetComponent<PlayerShield>().GetIsBlocking() && m_playerStamina.m_currentStamina >= 20.0f)
             {
-
-                m_playerStamina.m_currentStamina -= 20.0f;
-                m_shield.GetComponent<ShieldBlock>().PlayerBlock();
+                m_shield.GetComponent<PlayerShield>().PlayerBlock();
                 //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
-                if (m_shield.GetComponent<ShieldBlock>().CheckCol())// &&m_shield.GetComponent<ShieldBlock>().GetBlockedAttack())
+                if (m_shield.GetComponent<PlayerShield>().CheckCol())
                 {
                     Debug.Log("PUSHED");
+                    StartCoroutine(PushBackPlayer());
 
-                    Debug.Log(m_disabledInput);
-                    rb.AddForce(-transform.forward * 1000, ForceMode.Impulse);
-                    m_disabledInput = true;
-                    // Debug.Log(currrentVelocity);
-                    Debug.Log(rb.velocity);
                 }
-
+                
             }
         }
+      
+    }
+    void KnockbackListener()
+    {
+        if (m_shield.GetComponent<PlayerShield>().m_knockedBack)
+        {
+            GetComponent<TempCharaMove>().m_canMove = false;
+        }
+        else if (m_shield.GetComponent<PlayerShield>().m_knockedBack && !finished)
+        {
+            //Input.ResetInputAxes();
+            Debug.Log("Success");
+            GetComponent<TempCharaMove>().m_canMove = true;
+            m_shield.GetComponent<PlayerShield>().m_knockedBack = false;
+        }
+    }
+
+    IEnumerator PushBackPlayer()
+    {
+        finished = true;
+        m_shield.GetComponent<PlayerShield>().m_knockedBack = true;
+        rb.AddForce(-transform.forward.normalized * 10.0f, ForceMode.Impulse);
+        yield return new WaitForSeconds(1.0f);
+        
+       
+        Debug.Log("Success");
+        m_shield.GetComponent<PlayerShield>().m_knockedBack = false;
+      
+        GetComponent<TempCharaMove>().m_canMove = true;
+        Input.ResetInputAxes();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+       
+
+        yield return null;
     }
     void ChargeAttack()
     {
