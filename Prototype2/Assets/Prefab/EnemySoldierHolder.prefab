@@ -44,7 +44,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6600668250609823111}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EnemySoldierHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,6 +509,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6600668250609823111}
     m_Modifications:
+    - target: {fileID: 3052565693590913858, guid: f691718c978eef04b90508a819eb264a,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySoldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052565693590913858, guid: f691718c978eef04b90508a819eb264a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3052565693590913853, guid: f691718c978eef04b90508a819eb264a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -564,10 +574,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3052565693590913858, guid: f691718c978eef04b90508a819eb264a,
+    - target: {fileID: 3052565693590913853, guid: f691718c978eef04b90508a819eb264a,
         type: 3}
-      propertyPath: m_Name
-      value: EnemySoldier
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052565693590913853, guid: f691718c978eef04b90508a819eb264a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052565693590913853, guid: f691718c978eef04b90508a819eb264a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052565693590913859, guid: f691718c978eef04b90508a819eb264a,
+        type: 3}
+      propertyPath: m_Drag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052565693590913859, guid: f691718c978eef04b90508a819eb264a,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1726308676, guid: f691718c978eef04b90508a819eb264a, type: 3}
       propertyPath: m_patrolPoints.Array.data[0]
@@ -589,11 +619,6 @@ PrefabInstance:
       propertyPath: m_patrolPoints.Array.data[4]
       value: 
       objectReference: {fileID: 3295059291669866414}
-    - target: {fileID: 3052565693590913859, guid: f691718c978eef04b90508a819eb264a,
-        type: 3}
-      propertyPath: m_Drag
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f691718c978eef04b90508a819eb264a, type: 3}
 --- !u!4 &6600668250571478299 stripped

@@ -807,6 +807,16 @@ PrefabInstance:
       propertyPath: m_playerStamina
       value: 
       objectReference: {fileID: 684391209}
+    - target: {fileID: 3712826063370058261, guid: b2995f5c3a5a45c43ace2be28972d1d7,
+        type: 3}
+      propertyPath: m_speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712826063370058261, guid: b2995f5c3a5a45c43ace2be28972d1d7,
+        type: 3}
+      propertyPath: m_slowSpeed
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2995f5c3a5a45c43ace2be28972d1d7, type: 3}
 --- !u!1001 &6102801586904045529
@@ -896,11 +906,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySoldierHolder
       objectReference: {fileID: 0}
-    - target: {fileID: 6600668250609823110, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 6600668250609823111, guid: 63b361770dc7ddd49be0fa0341145d32,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -955,31 +960,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600668250571478372, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600668250571478299, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600668250571478299, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600668250571478299, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600668250571478373, guid: 63b361770dc7ddd49be0fa0341145d32,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b361770dc7ddd49be0fa0341145d32, type: 3}
