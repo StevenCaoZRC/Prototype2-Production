@@ -70,6 +70,8 @@ public class FieldOfView : MonoBehaviour
             if (targetsInViewRadius[0].tag == "Player")
             {
                 m_targetWithinRadius = true;
+                m_target = targetsInViewRadius[0].gameObject;
+
                 //Get the direction towards the target from the enemy position
                 Vector3 dirToTarget = (targetsInViewRadius[0].transform.position - transform.position).normalized;
                 
@@ -83,7 +85,6 @@ public class FieldOfView : MonoBehaviour
                     if (Physics.Raycast(transform.position, dirToTarget, distToTarget, targetMask))
                     {
                         m_targetWithinFOV = true;
-                        m_target = targetsInViewRadius[0].gameObject;
                     }
                     else
                     {

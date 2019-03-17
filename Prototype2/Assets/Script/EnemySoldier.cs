@@ -39,15 +39,22 @@ public class EnemySoldier : Enemy
   
     public override void TakeDamage(GameObject _attackedFrom)
     {
-        if (!m_isHit)
+        if (!m_isHit && m_health > 0)
         {
+            //m_enemyAnim.SetTrigger("IsHit");
+            m_enemyAnim.SetTrigger("IsHit");
+
             m_isHit = true;
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Soldier health: " + m_health);
 
-            m_isHit = false;
             var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
             m_rigidBody.AddForce(moveDirection.normalized * 500f);
+            StartCoroutine(ResetHit());
+            if (m_health <= 0)
+            {
+                Die();
+            }
         }
     }
     
@@ -55,7 +62,7 @@ public class EnemySoldier : Enemy
     {
         //Play dead anim
         //Spawn particles
-        Destroy(gameObject);
+        StartCoroutine(DeathAnimation());
     }
 
     public float GetDamage(SpearAttackType _type)

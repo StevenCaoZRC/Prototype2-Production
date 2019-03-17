@@ -64,23 +64,28 @@ public class EnemyGuard : Enemy
         //wait for animation 
         yield return new WaitForSeconds(1.0f);
 
-        m_playerRigidBody.AddForce(transform.forward.normalized * 1000f, ForceMode.Impulse);
+        m_playerRigidBody.AddForce(transform.forward.normalized * 5f, ForceMode.Impulse);
         yield return null;
     }
 
     public override void TakeDamage(GameObject _attackedFrom)
     {
-        if(!m_isHit)
+        if(!m_isHit && !m_isDead)
         {
-            m_enemyAnim.SetTrigger("Block");
+            m_enemyAnim.SetTrigger("IsHit");
 
             m_isHit = true;
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Guard health: " + m_health);
-            m_isHit = false;
 
             var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
             m_rigidBody.AddForce(moveDirection.normalized * 500f);
+            StartCoroutine(ResetHit());
+
+            if (m_health <= 0)
+            {
+                Die();
+            }
         }
     }
     
@@ -88,7 +93,7 @@ public class EnemyGuard : Enemy
     {
         //Play dead anim
         //Spawn particles
-        Destroy(gameObject);
+        StartCoroutine(DeathAnimation());
     }
 
     public float GetDamage(SpearAttackType _type)

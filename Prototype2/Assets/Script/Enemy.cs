@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     protected bool m_isAttacking = false;
     protected bool m_isHit = false;
+    protected bool m_isDead = false;
 
     protected float m_health = 100.0f;
     protected float m_attackOneDamage = 10.0f;
@@ -32,15 +33,20 @@ public class Enemy : MonoBehaviour
         m_health = 100.0f;
         m_isAttacking = false;
         m_isHit = false;
+        m_isDead = false;
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        if (m_health <= 0)
-        {
-            Die();
-        }
+        
+    }
+
+    protected IEnumerator ResetHit()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        m_isHit = false;
     }
 
     public EnemyType GetEnemyType()
@@ -48,9 +54,38 @@ public class Enemy : MonoBehaviour
         return m_enemyType;
     }
 
+    public bool GetIsDead()
+    {
+        return m_isDead;
+    }
+
+    public bool GetIsHit()
+    {
+        return m_isHit;
+    }
+
+    protected IEnumerator DeathAnimation()
+    {
+        m_isDead = true;
+        if (m_enemyAnim != null)
+        {
+            m_enemyAnim.SetTrigger("IsDead");
+        }
+        yield return new WaitForSeconds(2.0f);
+        Destroy(transform.parent.gameObject);
+        yield return null;
+    }
+
     public virtual void MovementAnimation(bool _walk)
     {
-        m_enemyAnim.SetBool("Walk", _walk);
+        if(m_enemyAnim != null)
+        {
+            m_enemyAnim.SetBool("Walk", _walk);
+        }
+        else
+        {
+            Debug.Log("Non-existing Animator");
+        }
     }
 
     public void Patrol()
