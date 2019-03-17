@@ -8,7 +8,7 @@ public class Patrol : MonoBehaviour
 {
     public bool m_patrolWaiting = true;     //Stop on each node?
     public float m_totalWaitTime = 3.0f;    //Amount of time the enemy should stay on each spot
-    public float m_distFromPlayer = 2.0f;    //Distance from player to stop
+    public float m_distFromPlayer = 3.0f;    //Distance from player to stop
 
     public List<WayPoint> m_patrolPoints;   //All patrol points
 
@@ -29,7 +29,7 @@ public class Patrol : MonoBehaviour
     void Start()
     {
 
-        m_distFromPlayer = 2.0f;
+        //m_distFromPlayer = 3.0f;
         m_fov = this.gameObject.GetComponent<FieldOfView>();
         m_navMeshAgent = this.GetComponent<NavMeshAgent>();
 

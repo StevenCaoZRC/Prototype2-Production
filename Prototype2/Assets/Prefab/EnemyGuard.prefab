@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_patrolWaiting: 1
   m_totalWaitTime: 3
-  m_distFromPlayer: 2
+  m_distFromPlayer: 3
   m_patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
