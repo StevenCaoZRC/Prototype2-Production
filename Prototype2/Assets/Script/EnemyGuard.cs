@@ -7,13 +7,14 @@ public class EnemyGuard : Enemy
     private Rigidbody m_rigidBody;
     public Rigidbody m_playerRigidBody;
     public GameObject m_enemyShield;
+
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
         m_enemyType = EnemyType.GUARD;
         m_rigidBody = GetComponent<Rigidbody>();
-       
+
         m_attackOneDamage = 20.0f;
         m_attackTwoDamage = 50.0f;
     }
@@ -26,12 +27,12 @@ public class EnemyGuard : Enemy
     }
     public void FixedUpdate()
     {
-        EnemyBlocking();
+        EnemyBlock();
     }
 
-    public override void Movement()
+    public override void MovementAnimation(bool _walk)
     {
-        base.Movement();
+        base.MovementAnimation(_walk);
     }
 
     public override void Attack()
@@ -41,14 +42,14 @@ public class EnemyGuard : Enemy
 
         }
     }
-    public void EnemyBlocking()
+    public void EnemyBlock()
     {
-        if(!m_enemyShield.GetComponent<EnemyShield>().GetIsBlocking())
+        if(!m_enemyShield.GetComponent<ShieldBlock>().GetIsBlocking())
         {
-            m_enemyShield.GetComponent<EnemyShield>().EnemyBlock();
-            if (m_enemyShield.GetComponent<EnemyShield>().CheckCol())
+            m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
+            if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
             {
-                
+                m_enemyAnim.SetTrigger("Block");
                 Debug.Log("Enemy Pushing Player");
                 StartCoroutine(PushBack());
 
@@ -57,28 +58,34 @@ public class EnemyGuard : Enemy
       //  
         
     }
+
     IEnumerator PushBack()
     {
         //wait for animation 
-       yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(1.0f);
 
-        m_playerRigidBody.AddForce(transform.forward.normalized * 10.0f, ForceMode.Impulse);
-        m_enemyShield.GetComponent<EnemyShield>().m_knockedBack = false;
-        m_playerRigidBody.velocity = Vector3.zero;
+        m_playerRigidBody.AddForce(transform.forward.normalized * 5f, ForceMode.Impulse);
         yield return null;
     }
 
     public override void TakeDamage(GameObject _attackedFrom)
     {
-        if(!m_isHit)
+        if(!m_isHit && !m_isDead)
         {
+            m_enemyAnim.SetTrigger("IsHit");
+
             m_isHit = true;
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Guard health: " + m_health);
-            m_isHit = false;
 
             var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
-            m_rigidBody.AddForce(moveDirection.normalized * 20f);
+            m_rigidBody.AddForce(moveDirection.normalized * 500f);
+            StartCoroutine(ResetHit());
+
+            if (m_health <= 0)
+            {
+                Die();
+            }
         }
     }
     
@@ -86,7 +93,7 @@ public class EnemyGuard : Enemy
     {
         //Play dead anim
         //Spawn particles
-        Destroy(gameObject);
+        StartCoroutine(DeathAnimation());
     }
 
     public float GetDamage(SpearAttackType _type)

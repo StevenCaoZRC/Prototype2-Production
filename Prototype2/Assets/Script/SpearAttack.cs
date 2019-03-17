@@ -13,12 +13,10 @@ public class SpearAttack : MonoBehaviour
     float m_spearSpeed = 0.2f;
     bool m_hitSomething = false;
     bool m_isAttacking = false;
+    public GameObject m_windStreakParticles;
 
     //float m_normalAttackAmount = 20.0f;
     //float m_specialAttackAmount = 50.0f;
-
-    public Transform m_startMarker;
-    public Transform m_endMarker;
 
     SpearAttackType m_spearAttack;
 
@@ -27,6 +25,9 @@ public class SpearAttack : MonoBehaviour
     {
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
+        this.GetComponent<Collider>().enabled = false;
+        m_windStreakParticles.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -35,23 +36,16 @@ public class SpearAttack : MonoBehaviour
         
     }
 
-    public void NormalAttack(Animator _playerAnim)
+    public void NormalAttack()
     {
-        _playerAnim.GetComponent<Animator>().SetTrigger("NormalAttack");
-
         m_spearAttack = SpearAttackType.NORMAL;
-        this.GetComponent<Collider>().enabled = true;
-        StartCoroutine(TempMoveSpear(_playerAnim));
+        StartCoroutine(TempMoveSpear());
         m_isAttacking = true;
     }
     public void ChargeAttack(Animator _playerAnim)
     {
-        _playerAnim.GetComponent<Animator>().SetTrigger("SpecialAttack");
-
         m_spearAttack = SpearAttackType.SPECIAL;
-        this.GetComponent<Collider>().enabled = true;
-        StartCoroutine(TempMoveSpear(_playerAnim));
-
+        StartCoroutine(TempSpecialSpear());
         m_isAttacking = true;
     }
 
@@ -67,49 +61,44 @@ public class SpearAttack : MonoBehaviour
             m_hitSomething = true;
             Debug.Log("Player attacking");
             other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
-
         }
-        
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Enemy")
-    //    {
-    //        this.GetComponent<Collider>().enabled = false;
-    //        m_hitSomething = false;
-    //        Debug.Log("Player finish attack");
-    //    }
-    //}
-
-    IEnumerator TempMoveSpear(Animator _playerAnim)
+    IEnumerator TempMoveSpear()
     {
-        //this is temporary. Will check hit with animated position.
+        yield return new WaitForSeconds(0.5f); //Prepare attack anim
+        this.GetComponent<Collider>().enabled = true;
+        m_windStreakParticles.SetActive(true);
 
-        //transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
         yield return new WaitForSeconds(0.5f);
-
-        //transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
-        this.GetComponent<Collider>().enabled = false;
         m_hitSomething = false;
         Debug.Log("Player finish attack");
+        this.GetComponent<Collider>().enabled = false;
+        m_windStreakParticles.SetActive(false);
+
         yield return null;
     }
 
     IEnumerator TempSpecialSpear()
     {
-        //this is temporary. Will check hit with animated position.
-        transform.position = Vector3.MoveTowards(transform.position, m_endMarker.position, 100.0f);
-        yield return new WaitForSeconds(0.2f);
-        transform.position = Vector3.MoveTowards(transform.position, m_startMarker.position, 100.0f);
-        
+        m_windStreakParticles.SetActive(true);
+        this.GetComponent<Collider>().enabled = true;
+
+        yield return new WaitForSeconds(0.3f); //Prepare attack anim
+        m_windStreakParticles.SetActive(false);
+
+        //Special spear has different timing as it plays instantly 
+        //  compared to the normal attack which plays out the full anim sequence
+
+        yield return new WaitForSeconds(0.2f); //Prepare attack anim
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
-        this.GetComponent<Collider>().enabled = false;
         m_hitSomething = false;
-        Debug.Log("Player finish attack");
+        Debug.Log("Player finish CHARGE attack");
+        this.GetComponent<Collider>().enabled = false;
+
         yield return null;
     }
 

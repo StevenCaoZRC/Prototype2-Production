@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    [HideInInspector]
     public bool m_isAttacking = false;
-    [HideInInspector]
     public bool m_isCharging = false;
-    [HideInInspector]
     public bool m_isholdingCharge = false;
-    [HideInInspector]
-    public bool m_blocked = false;
-    [HideInInspector]
-    public bool m_pushedBack = false;
+    public bool m_isBlocking = false;
+    private bool m_isDead = false;
 
-    bool finished = false;
-   
-    public GameObject m_spear;  //reference to the spear object
-    public GameObject m_shield; //reference to the player shield object
-    public GameObject m_chargeReachedParticles; 
+    public GameObject m_spear;
+    public GameObject m_shield;
+
+    //Particles
+    public GameObject m_chargeReachedParticles;
     public GameObject m_chargingParticles;
+
     public Animator m_playerAnimator;
     public bool m_disabledInput = false;
-    public Rigidbody rb;
+    Rigidbody rb;
+
+    //Helath and Stamina
     public Health m_playerHealth;
     public Stamina m_playerStamina;
+    public float m_normalAttackCost = 10.0f;
+    public float m_SpecialAttackCost = 40.0f;
 
-    private TempCharaMove m_playerMove;
-    private float m_normalSpeed = 5.0f;
-    private float m_boostSpeed = 10.0f;
-    private float m_rotSpeed = 2.0f;
-    Vector3 _velocity = Vector3.zero;
+    //Charge timer
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
 
@@ -41,21 +37,14 @@ public class PlayerControl : MonoBehaviour
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
         rb = GetComponent<Rigidbody>();
-        m_playerMove = GetComponent<TempCharaMove>();
+        m_isDead = false;
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    void Update()
     {
         PlayerAttack();
         PlayerBlock();
-    }
-
-    private void Update()
-    {
-        PlayerMove();
-
-        KnockbackListener();
         if (Input.GetKeyDown(KeyCode.Z))
         {
             m_playerHealth.m_currentHealth -= 10.0f;
@@ -74,29 +63,28 @@ public class PlayerControl : MonoBehaviour
     {
         if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
         {
-            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging)
+            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging && m_playerStamina.m_currentStamina >= m_normalAttackCost)
             {
-                //lerp position forward and back
-                m_spear.GetComponent<SpearAttack>().NormalAttack(m_playerAnimator);
+                m_playerAnimator.GetComponent<Animator>().SetTrigger("NormalAttack"); //Start attack anim
+                m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
+                m_playerStamina.m_currentStamina -= 20.0f;
 
             }
-            else if(Input.GetAxis("ChargeSpear") > 0f)
+            else if(Input.GetAxis("ChargeSpear") > 0f && m_playerStamina.m_currentStamina >= m_SpecialAttackCost) //If player is charging
             {
                 m_isCharging = true;
-                m_chargeHoldTimer += Time.deltaTime;
-                m_chargingParticles.SetActive(true);
-                Debug.Log("uh oh");
+                m_chargeHoldTimer += Time.deltaTime; //Increase charge timer
+                m_chargingParticles.SetActive(true); //Activate charging particles
                 if(m_playerAnimator.GetBool("ChargeSpear") == false)
                 {
                     m_playerAnimator.SetBool("ChargeSpear", true);
                 }
+
                 //If X is held more than 3 seconds, charge attack ready
                 if (m_chargeHoldTimer >= m_chargeHoldRequired)
                 {
                     m_isholdingCharge = true;
                     m_chargeReachedParticles.SetActive(true);
-                    //m_playerAnimator.SetBool("IsCharging", true);
-
                 }
             }
             else
@@ -105,12 +93,14 @@ public class PlayerControl : MonoBehaviour
                 m_isCharging = false;
                 m_chargingParticles.SetActive(false);
                 m_playerAnimator.SetBool("ChargeSpear", false);
-                //Debug.Log("Let go");
             }
 
             //If charge is ready, use special attack
             if (Input.GetAxis("ChargeSpear") == 0f && m_isholdingCharge)
             {
+                m_playerAnimator.GetComponent<Animator>().SetTrigger("SpecialAttack");
+                m_playerStamina.m_currentStamina -= 60.0f;
+
                 ChargeAttack();
             }
         }
@@ -118,93 +108,28 @@ public class PlayerControl : MonoBehaviour
 
     public void PlayerBlock()
     {
-        
-        if (GameManager.GetAxisOnce(ref m_blocked, "Shield"))
+        if (!m_shield.GetComponent<ShieldBlock>().GetIsBlocking() && m_playerStamina.m_currentStamina >= 20.0f)
         {
-            if (m_playerStamina.m_currentStamina >= 20.0f)
-            { m_playerStamina.m_currentStamina -= 20.0f;     }
-            if (!m_shield.GetComponent<PlayerShield>().GetIsBlocking() && m_playerStamina.m_currentStamina >= 20.0f)
+            if (GameManager.GetAxisOnce(ref m_isBlocking, "Shield"))
             {
-                m_shield.GetComponent<PlayerShield>().PlayerBlock();
+
+                m_playerStamina.m_currentStamina -= 20.0f;
+                m_shield.GetComponent<ShieldBlock>().PlayerBlock();
                 //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
-                if (m_shield.GetComponent<PlayerShield>().CheckCol())
+                if (m_shield.GetComponent<ShieldBlock>().CheckCol())// &&m_shield.GetComponent<ShieldBlock>().GetBlockedAttack())
                 {
                     Debug.Log("PUSHED");
-                    StartCoroutine(PushBackPlayer());
 
+                    Debug.Log(m_disabledInput);
+                    rb.AddForce(-transform.forward * 1000, ForceMode.Impulse);
+                    m_disabledInput = true;
+                    // Debug.Log(currrentVelocity);
+                    Debug.Log(rb.velocity);
                 }
-                
+
             }
         }
-      
     }
-
-    public void PlayerMove()
-    {
-        float _x = Input.GetAxisRaw("Horizontal");
-        float _z = Input.GetAxisRaw("Vertical");
-
-        Vector3 _moveX = transform.right * _x;
-        Vector3 _moveZ = transform.forward * _z;
-      
-        //Calculating Player movement
-        if (Input.GetAxisRaw("Boost") > 0)
-        {
-            _velocity = (_moveX + _moveZ).normalized * m_boostSpeed ;
-        }
-        else
-        {
-            _velocity = (_moveX + _moveZ).normalized * m_normalSpeed  ;
-        }
-        //Apply Movement
-        m_playerMove.GetMovement(_velocity);
-
-        //Calculating Player Rotation
-        float _y = Input.GetAxisRaw("Horizontal");
-        Vector3 _rotation = new Vector3(0, _y, 0) * m_rotSpeed;
-
-        //Apply Rotation of Player
-        m_playerMove.GetRotation(_rotation);
-
-       
-    }
-
-  
-    void KnockbackListener()
-    {
-        if (m_shield.GetComponent<PlayerShield>().m_knockedBack)
-        {
-            GetComponent<TempCharaMove>().m_canMove = false;
-        }
-        else if (m_shield.GetComponent<PlayerShield>().m_knockedBack && !finished)
-        {
-            //Input.ResetInputAxes();
-            Debug.Log("Success");
-            GetComponent<TempCharaMove>().m_canMove = true;
-            m_shield.GetComponent<PlayerShield>().m_knockedBack = false;
-        }
-    }
-
-    IEnumerator PushBackPlayer()
-    {
-        finished = true;
-        m_shield.GetComponent<PlayerShield>().m_knockedBack = true;
-        rb.AddForce(-transform.forward.normalized * 20.0f, ForceMode.Impulse);
-        yield return new WaitForSeconds(1.0f);
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-
-        Debug.Log("Success");
-        m_shield.GetComponent<PlayerShield>().m_knockedBack = false;
-      
-        GetComponent<TempCharaMove>().m_canMove = true;
-        Input.ResetInputAxes();
-       
-       
-
-        yield return null;
-    }
-
     void ChargeAttack()
     {
         m_spear.GetComponent<SpearAttack>().ChargeAttack(m_playerAnimator);
@@ -216,6 +141,10 @@ public class PlayerControl : MonoBehaviour
         m_isholdingCharge = false;
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
+    }
 
+    public bool GetIsDead()
+    {
+        return m_isDead;
     }
 }

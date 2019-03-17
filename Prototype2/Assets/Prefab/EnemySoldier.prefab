@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3052565693590913853}
+  - component: {fileID: 2610306352347925585}
   - component: {fileID: 3052565693590913852}
   - component: {fileID: 1726308676}
   - component: {fileID: 1726308682}
@@ -38,6 +39,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2610306352347925585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052565693590913858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c809b568d001a4caa220c703e26f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_viewRadius: 10
+  m_viewAngle: 90
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  visibleTargets: []
+  m_target: {fileID: 0}
 --- !u!114 &3052565693590913852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2201a44d1aa5049a95893056a603bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_enemyAnim: {fileID: 0}
 --- !u!114 &1726308676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,12 +88,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_patrolWaiting: 1
   m_totalWaitTime: 3
+  m_distFromPlayer: 3
   m_patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_targetingPlayer: 0
 --- !u!195 &1726308682
 NavMeshAgent:
   m_ObjectHideFlags: 0

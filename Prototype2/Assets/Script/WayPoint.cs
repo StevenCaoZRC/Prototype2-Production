@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WayPoint : MonoBehaviour
 {
-    [SerializeField]
-    private float m_radius = 1.0f;
+    //[SerializeField]
+    private float m_radius = 0.5f;
 
     private void OnDrawGizmos()
     {
