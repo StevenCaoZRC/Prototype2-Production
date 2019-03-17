@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
     public Transform m_lookAt;
     public Transform m_camTransform;
     public GameObject m_resetCamPos;
-    private const float Y_MIN_ANGLE = -25.0f;
+    private const float Y_MIN_ANGLE = -50.0f;
     private const float Y_MAX_ANGLE = 25.0f;
 
     private Camera m_cam;
@@ -24,7 +24,8 @@ public class CameraMovement : MonoBehaviour
     {
         m_camTransform = transform;
         m_cam = Camera.main;
-        m_camStartPos = new Vector3(0, 3, -10);
+        m_camStartPos = new Vector3(0, 5f, -3);
+        rotation = Quaternion.Euler(10, 0, 0);
         m_startingRotation = m_camTransform.rotation;
     }
 
