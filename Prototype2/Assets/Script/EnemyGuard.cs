@@ -62,7 +62,7 @@ public class EnemyGuard : Enemy
         //wait for animation 
        yield return new WaitForSeconds(0.35f);
 
-        m_playerRigidBody.AddForce(transform.forward.normalized * 10f, ForceMode.Impulse);
+        m_playerRigidBody.AddForce(transform.forward.normalized * 10.0f, ForceMode.Impulse);
         m_enemyShield.GetComponent<EnemyShield>().m_knockedBack = false;
         m_playerRigidBody.velocity = Vector3.zero;
         yield return null;

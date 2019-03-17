@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     public bool m_pushedBack = false;
 
     bool finished = false;
-
+   
     public GameObject m_spear;  //reference to the spear object
     public GameObject m_shield; //reference to the player shield object
     public GameObject m_chargeReachedParticles; 
@@ -27,6 +27,11 @@ public class PlayerControl : MonoBehaviour
     public Health m_playerHealth;
     public Stamina m_playerStamina;
 
+    private TempCharaMove m_playerMove;
+    private float m_normalSpeed = 5.0f;
+    private float m_boostSpeed = 10.0f;
+    private float m_rotSpeed = 2.0f;
+    Vector3 _velocity = Vector3.zero;
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
 
@@ -36,16 +41,20 @@ public class PlayerControl : MonoBehaviour
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        m_playerMove = GetComponent<TempCharaMove>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         PlayerAttack();
         PlayerBlock();
     }
+
     private void Update()
     {
+        PlayerMove();
+
         KnockbackListener();
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -129,6 +138,38 @@ public class PlayerControl : MonoBehaviour
         }
       
     }
+
+    public void PlayerMove()
+    {
+        float _x = Input.GetAxisRaw("Horizontal");
+        float _z = Input.GetAxisRaw("Vertical");
+
+        Vector3 _moveX = transform.right * _x;
+        Vector3 _moveZ = transform.forward * _z;
+      
+        //Calculating Player movement
+        if (Input.GetAxisRaw("Boost") > 0)
+        {
+            _velocity = (_moveX + _moveZ).normalized * m_boostSpeed ;
+        }
+        else
+        {
+            _velocity = (_moveX + _moveZ).normalized * m_normalSpeed  ;
+        }
+        //Apply Movement
+        m_playerMove.GetMovement(_velocity);
+
+        //Calculating Player Rotation
+        float _y = Input.GetAxisRaw("Horizontal");
+        Vector3 _rotation = new Vector3(0, _y, 0) * m_rotSpeed;
+
+        //Apply Rotation of Player
+        m_playerMove.GetRotation(_rotation);
+
+       
+    }
+
+  
     void KnockbackListener()
     {
         if (m_shield.GetComponent<PlayerShield>().m_knockedBack)
@@ -148,21 +189,22 @@ public class PlayerControl : MonoBehaviour
     {
         finished = true;
         m_shield.GetComponent<PlayerShield>().m_knockedBack = true;
-        rb.AddForce(-transform.forward.normalized * 10.0f, ForceMode.Impulse);
+        rb.AddForce(-transform.forward.normalized * 20.0f, ForceMode.Impulse);
         yield return new WaitForSeconds(1.0f);
-        
-       
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
         Debug.Log("Success");
         m_shield.GetComponent<PlayerShield>().m_knockedBack = false;
       
         GetComponent<TempCharaMove>().m_canMove = true;
         Input.ResetInputAxes();
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+       
        
 
         yield return null;
     }
+
     void ChargeAttack()
     {
         m_spear.GetComponent<SpearAttack>().ChargeAttack(m_playerAnimator);
