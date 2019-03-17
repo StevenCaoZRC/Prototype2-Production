@@ -57,8 +57,20 @@ public class Patrol : MonoBehaviour
         SpotPlayer();
         if (m_navMeshAgent != null)
         {
+            Debug.Log("Remaining: " + m_navMeshAgent.remainingDistance + "Stopping: " + m_navMeshAgent.stoppingDistance);
+            if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance + 0.1f)
+            {
+                GetComponent<Enemy>().MovementAnimation(false);
+
+            }
+            else
+            {
+                GetComponent<Enemy>().MovementAnimation(true);
+
+            }
             if (!m_targetingPlayer)
             {
+
                 if (m_travelling && m_navMeshAgent.remainingDistance <= 2.0f)
                 {
                     m_travelling = false;
@@ -68,6 +80,7 @@ public class Patrol : MonoBehaviour
                     {
                         m_waiting = true;
                         m_waitTimer = 0.0f;
+
                     }
                     else
                     {
@@ -78,7 +91,9 @@ public class Patrol : MonoBehaviour
 
                 if (m_waiting)
                 {
+                    
                     m_waitTimer += Time.deltaTime;
+
                     if (m_waitTimer >= m_totalWaitTime)
                     {
                         m_waiting = false;
@@ -90,14 +105,29 @@ public class Patrol : MonoBehaviour
             }
             else
             {
-                if (m_fov.GetTarget() == null && m_targetingPlayer
-                    && !m_fov.GetIsTargetWithinRadius() && !m_fov.GetIsTargetWithinFOV())
+                if (m_travelling && m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
                 {
-                    m_targetingPlayer = false;
-                    m_currentPoint = UnityEngine.Random.Range(0, m_patrolPoints.Count - 1);
-                    m_targetPos = m_patrolPoints[m_currentPoint].transform;
+                    m_travelling = false;
+
+                    //Begin attack 
                 }
-                SetDestination();
+                else
+                {
+                    //If target is not in radius AND fov, 
+                    if (m_fov.GetTarget() == null && m_targetingPlayer
+                        && !m_fov.GetIsTargetWithinRadius() && !m_fov.GetIsTargetWithinFOV())
+                    {
+                        m_targetingPlayer = false;
+                        m_currentPoint = UnityEngine.Random.Range(0, m_patrolPoints.Count - 1);
+                        m_targetPos = m_patrolPoints[m_currentPoint].transform;
+                    }
+                    SetDestination();
+
+                }
+                //GetComponent<Enemy>().MovementAnimation(true);
+
+
+
             }
         }
         else
@@ -119,7 +149,7 @@ public class Patrol : MonoBehaviour
     {
         if(UnityEngine.Random.Range(0.0f, 1.0f) <= m_directionProb)
         {
-            m_patrolForward = !m_patrolForward;
+            m_patrolForward = !m_patrolForward;   
         }
 
         if(m_patrolForward)
@@ -147,6 +177,7 @@ public class Patrol : MonoBehaviour
                 m_navMeshAgent.autoBraking = true;
                 m_targetPos = m_patrolPoints[m_currentPoint].transform;
                 m_travelling = true;
+
             }
         }
         else
@@ -158,6 +189,7 @@ public class Patrol : MonoBehaviour
             m_travelling = true;
         }
         m_navMeshAgent.SetDestination(m_targetPos.position);
+
     }
 
     //Location to make the player face

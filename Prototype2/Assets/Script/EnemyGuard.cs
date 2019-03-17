@@ -7,6 +7,7 @@ public class EnemyGuard : Enemy
     private Rigidbody m_rigidBody;
     public Rigidbody m_playerRigidBody;
     public GameObject m_enemyShield;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -29,9 +30,9 @@ public class EnemyGuard : Enemy
         EnemyBlock();
     }
 
-    public override void Movement()
+    public override void MovementAnimation(bool _walk)
     {
-        base.Movement();
+        base.MovementAnimation(_walk);
     }
 
     public override void Attack()
@@ -48,7 +49,7 @@ public class EnemyGuard : Enemy
             m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
             if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
             {
-                
+                m_enemyAnim.SetTrigger("Block");
                 Debug.Log("Enemy Pushing Player");
                 StartCoroutine(PushBack());
 
@@ -71,6 +72,8 @@ public class EnemyGuard : Enemy
     {
         if(!m_isHit)
         {
+            m_enemyAnim.SetTrigger("Block");
+
             m_isHit = true;
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Guard health: " + m_health);

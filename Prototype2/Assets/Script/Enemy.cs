@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
 {
     protected Transform m_target;
     protected EnemyType m_enemyType;
+    public Animator m_enemyAnim;
 
     protected bool m_isAttacking = false;
     protected bool m_isHit = false;
@@ -40,7 +41,6 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-        Movement();
     }
 
     public EnemyType GetEnemyType()
@@ -48,21 +48,9 @@ public class Enemy : MonoBehaviour
         return m_enemyType;
     }
 
-    public virtual void Movement()
+    public virtual void MovementAnimation(bool _walk)
     {
-        if(!m_inCombat)
-        {
-            //if(m_wanderTime > 0.0f)
-            //{
-            //    transform.Translate(Vector3.forward * m_movementSpeed);
-            //    m_wanderTime -= Time.deltaTime;
-            //}
-            //else
-            //{
-            //    m_wanderTime = Random.Range(5.0f, 15.0f);
-            //    Patrol();
-            //}
-        }
+        m_enemyAnim.SetBool("Walk", _walk);
     }
 
     public void Patrol()
@@ -75,4 +63,5 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDamage(GameObject _attackedFrom) {}
 
     public virtual void Die(){}
+
 }

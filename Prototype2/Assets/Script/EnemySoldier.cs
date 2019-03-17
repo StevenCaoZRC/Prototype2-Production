@@ -24,9 +24,9 @@ public class EnemySoldier : Enemy
 
     }
 
-    public override void Movement()
+    public override void MovementAnimation(bool _walk)
     {
-
+        base.MovementAnimation(_walk);
     }
 
     public override void Attack()
