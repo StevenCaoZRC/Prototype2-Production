@@ -17,7 +17,7 @@ public class TempCharaMove : MonoBehaviour
 
 
     Quaternion m_targetRotation;
-    public Rigidbody m_rigidBody;
+    Rigidbody m_rigidBody;
     // Start is called before the first frame update
     void Start()
     {

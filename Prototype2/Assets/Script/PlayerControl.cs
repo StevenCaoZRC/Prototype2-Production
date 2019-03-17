@@ -33,27 +33,22 @@ public class PlayerControl : MonoBehaviour
 
     public Animator m_playerAnimator;
     public bool m_disabledInput = false;
-<<<<<<< HEAD
+
     Rigidbody rb;
 
-    //Helath and Stamina
-=======
-    public Rigidbody rb;
->>>>>>> 7b15c4f026b869c10d164a01124e2a55894ced52
+
     public Health m_playerHealth;
     public Stamina m_playerStamina;
     public float m_normalAttackCost = 10.0f;
     public float m_SpecialAttackCost = 40.0f;
 
-<<<<<<< HEAD
-    //Charge timer
-=======
+
     private TempCharaMove m_playerMove;
     private float m_normalSpeed = 5.0f;
     private float m_boostSpeed = 10.0f;
     private float m_rotSpeed = 2.0f;
     Vector3 _velocity = Vector3.zero;
->>>>>>> 7b15c4f026b869c10d164a01124e2a55894ced52
+
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
 
@@ -63,11 +58,11 @@ public class PlayerControl : MonoBehaviour
         m_chargeReachedParticles.SetActive(false);
         m_chargingParticles.SetActive(false);
         rb = GetComponent<Rigidbody>();
-<<<<<<< HEAD
+
         m_isDead = false;
-=======
+
         m_playerMove = GetComponent<TempCharaMove>();
->>>>>>> 7b15c4f026b869c10d164a01124e2a55894ced52
+
     }
 
     // Update is called once per frame

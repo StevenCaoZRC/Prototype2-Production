@@ -51,13 +51,14 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        
         CamMovement();
     }
     private void CamMovement()
     {
         if (Input.GetButton("CamReset") && m_canBeReset)
         {
-            Quaternion rotation1 = Quaternion.Euler(m_camTransform.transform.rotation.x, 0, 0);
+            Quaternion rotation1 = Quaternion.Euler(m_camTransform.rotation.x, 0, 0);
             m_camTransform.position = rotation1 * m_resetCamPos.transform.position;
             m_camTransform.LookAt(m_lookAt.position);
             m_canBeReset = false;
@@ -65,10 +66,13 @@ public class CameraMovement : MonoBehaviour
             m_currentY = 0.0f;
             return;
         }
-        
+        else
+        {
             rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
             m_camTransform.position = m_lookAt.position + rotation * m_camStartPos;
             m_camTransform.LookAt(m_lookAt.position);
-           
+        }
+
+
     }
 }
