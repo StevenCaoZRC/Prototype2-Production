@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public float m_maxHealth;
     [HideInInspector]
     public float m_currentHealth;
-    public Image m_healthOrb;
+    public Image m_healthBar;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,6 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_healthOrb.fillAmount = m_currentHealth / m_maxHealth;
+        m_healthBar.fillAmount = m_currentHealth / m_maxHealth;
     }
 }
