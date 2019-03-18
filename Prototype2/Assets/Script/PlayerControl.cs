@@ -243,8 +243,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (m_playerHealth.m_currentHealth > 0)
         {
-            //m_enemyAnim.SetTrigger("IsHit");
-            //m_playerAnimator.SetTrigger("IsHit");
+            m_playerAnimator.SetTrigger("IsHit");
 
             m_playerHealth.m_currentHealth -= _attackedFrom.GetComponent<EnemyWeapon>().GetAttackDamage();//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Player health: " + m_playerHealth.m_currentHealth);
