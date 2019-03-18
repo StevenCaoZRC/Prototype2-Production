@@ -29,14 +29,20 @@ public class EnemySoldier : Enemy
         base.MovementAnimation(_walk);
     }
 
-    public override void Attack()
+    public override void EnemyAttack()
     {
-        if (!m_isAttacking)
-        {
-
-        }
+        base.EnemyAttack();
     }
-  
+
+    public override void EnemyBlock()
+    {
+        //if ()
+        //{
+
+        //}
+    }
+
+
     public override void TakeDamage(GameObject _attackedFrom)
     {
         if (!m_isHit && m_health > 0)

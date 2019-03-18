@@ -54,6 +54,7 @@ public class PlayerShield : Shield
     {
         Debug.Log("Attack Blocked By Player");
         m_blockedAttack = false;
+        m_isBlocking = false;
         yield return null;
     }
 }
