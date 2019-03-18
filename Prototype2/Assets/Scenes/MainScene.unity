@@ -2034,11 +2034,6 @@ PrefabInstance:
       propertyPath: m_playerRigidBody
       value: 
       objectReference: {fileID: 1401985981}
-    - target: {fileID: 6721417582216807631, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1401985981}
     - target: {fileID: 8015556378175057149, guid: fb66269965b114a40a2724ba812e1c9e,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2059,6 +2054,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: EnemyShield
       objectReference: {fileID: 0}
+    - target: {fileID: 6721417582216807631, guid: fb66269965b114a40a2724ba812e1c9e,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1401985981}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb66269965b114a40a2724ba812e1c9e, type: 3}
 --- !u!1001 &1194643594043823594
@@ -2127,21 +2127,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235879918536600670, guid: 86357bfd689ce0a4388b0b83f36a43cd,
-        type: 3}
-      propertyPath: m_BaseOffset
-      value: 0.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194643593386481452, guid: 86357bfd689ce0a4388b0b83f36a43cd,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194643593386481454, guid: 86357bfd689ce0a4388b0b83f36a43cd,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86357bfd689ce0a4388b0b83f36a43cd, type: 3}
