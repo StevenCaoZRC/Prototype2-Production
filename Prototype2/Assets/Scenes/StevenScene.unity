@@ -467,6 +467,10 @@ PrefabInstance:
       propertyPath: m_resetCamPos
       value: 
       objectReference: {fileID: 832824509}
+    - target: {fileID: 367736443, guid: 401c805093993e44c97503ff944491f9, type: 3}
+      propertyPath: m_lookAt
+      value: 
+      objectReference: {fileID: 662739854}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 401c805093993e44c97503ff944491f9, type: 3}
 --- !u!1 &501291929
@@ -560,6 +564,12 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &662739854 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4561504833827313858, guid: 401c805093993e44c97503ff944491f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 367736438}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &681532125
 GameObject:
   m_ObjectHideFlags: 0
