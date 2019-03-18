@@ -33,10 +33,10 @@ public class PlayerControl : MonoBehaviour
 
     public Animator m_playerAnimator;
     public bool m_disabledInput = false;
-
+    
     Rigidbody rb;
 
-
+    //Helath and Stamina
     public Health m_playerHealth;
     public Stamina m_playerStamina;
     public float m_normalAttackCost = 10.0f;
@@ -48,7 +48,6 @@ public class PlayerControl : MonoBehaviour
     private float m_boostSpeed = 10.0f;
     private float m_rotSpeed = 2.0f;
     Vector3 _velocity = Vector3.zero;
-
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
 
@@ -211,7 +210,7 @@ public class PlayerControl : MonoBehaviour
     {
         finished = true;
         m_shield.GetComponent<PlayerShield>().m_knockedBack = true;
-        rb.AddForce(-transform.forward.normalized * 20.0f, ForceMode.Impulse);
+        rb.AddForce(-transform.forward.normalized * 500.0f, ForceMode.Impulse);
         yield return new WaitForSeconds(1.0f);
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;

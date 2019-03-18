@@ -12,7 +12,6 @@ public class CameraMovement : MonoBehaviour
 
     private Camera m_cam;
 
-    private float m_disFromPlayer = 10.0f;
     private float m_currentX = 0.0f;
     private float m_currentY = 0.0f;
     private Quaternion m_startingRotation;
@@ -24,9 +23,11 @@ public class CameraMovement : MonoBehaviour
     {
         m_camTransform = transform;
         m_cam = Camera.main;
-        m_camStartPos = new Vector3(0, 5f, -3);
-        rotation = Quaternion.Euler(10, 0, 0);
+        m_camStartPos = new Vector3(0, 2f, -4);
+        //m_resetCamPos.transform.position = new Vector3(0, 2f, -4);
+        rotation = Quaternion.Euler(15, 0, 0);
         m_startingRotation = m_camTransform.rotation;
+
     }
 
     private void Update()
@@ -59,9 +60,9 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetButton("CamReset") && m_canBeReset)
         {
-            Quaternion rotation1 = Quaternion.Euler(m_camTransform.rotation.x, 0, 0);
-            m_camTransform.position = rotation1 * m_resetCamPos.transform.position;
-            m_camTransform.LookAt(m_lookAt.position);
+            Quaternion rotation1 = Quaternion.Euler(m_camTransform.rotation.x,0, 0);
+            m_camTransform.position = m_lookAt.position + rotation1 * m_resetCamPos.transform.position;
+            m_camTransform.LookAt(m_lookAt.position + new Vector3(0, 0, 5));
             m_canBeReset = false;
             m_currentX = 0.0f;
             m_currentY = 0.0f;
@@ -71,7 +72,7 @@ public class CameraMovement : MonoBehaviour
         {
             rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
             m_camTransform.position = m_lookAt.position + rotation * m_camStartPos;
-            m_camTransform.LookAt(m_lookAt.position);
+            m_camTransform.LookAt(m_lookAt.position + new Vector3 (0,0,5));
         }
 
 

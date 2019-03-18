@@ -26,7 +26,7 @@ public class PlayerShield : Shield
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.transform.GetChild(1).tag);
+       // Debug.Log(other.gameObject.transform.GetChild(1).tag);
         if (m_isBlocking)
         {
             if (other.gameObject.transform.GetChild(1).tag == "GuardSword")
