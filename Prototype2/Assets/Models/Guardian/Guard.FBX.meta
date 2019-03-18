@@ -127,7 +127,22 @@ ModelImporter:
     9500000: //RootNode
     13700000: Armor
     13700002: BaseDude
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 5899ef261f1489948a4a006ba6b9ad95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: 5899ef261f1489948a4a006ba6b9ad95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert6
+    second: {fileID: 2100000, guid: f87c95a5ea8a3a04a87aeae6f059cbd4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
