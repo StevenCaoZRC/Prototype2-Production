@@ -240,6 +240,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_knockedBack: 0
+--- !u!136 &474407921242992719
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148550955734813516}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 0.60000014
+  m_Direction: 0
+  m_Center: {x: -0.000007591403, y: 0.07, z: 0.73}
+--- !u!114 &3570147893989910134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148550955734813516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542aa3895a48bf04fbde11dcd08fc4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_attackDamage: 30
 --- !u!1 &5427844674807754399
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyAnim: {fileID: 5427844675092972594}
+  m_enemyWeapon: {fileID: 2148550955734813516}
   m_playerRigidBody: {fileID: 0}
   m_enemyShield: {fileID: 6530410353231079159}
 --- !u!114 &2092525670009658578
@@ -535,6 +563,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41192e63ba462e8428b8feb54fc58504, type: 3}
+--- !u!1 &2148550955734813516 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 41192e63ba462e8428b8feb54fc58504,
+    type: 3}
+  m_PrefabInstance: {fileID: 2148550955734912492}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3807463235310240414
 PrefabInstance:
   m_ObjectHideFlags: 0

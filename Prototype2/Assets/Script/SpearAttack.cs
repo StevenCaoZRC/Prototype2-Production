@@ -10,7 +10,7 @@ public enum SpearAttackType
 
 public class SpearAttack : MonoBehaviour
 {
-    float m_spearSpeed = 0.2f;
+    //float m_spearSpeed = 0.2f;
     bool m_hitSomething = false;
     bool m_isAttacking = false;
     public GameObject m_windStreakParticles;

@@ -114,7 +114,9 @@ public class Patrol : MonoBehaviour
                     {
                         m_travelling = false;
 
-                        //Begin attack 
+                        //Begin attack
+                        m_enemy.EnemyAttack();
+
                     }
                     else
                     {
@@ -129,10 +131,6 @@ public class Patrol : MonoBehaviour
                         SetDestination();
 
                     }
-                    //m_enemy.MovementAnimation(true);
-
-
-
                 }
             }
             else

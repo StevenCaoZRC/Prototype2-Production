@@ -27,7 +27,7 @@ public class EnemyGuard : Enemy
     }
     public void FixedUpdate()
     {
-        EnemyBlocking();
+        //EnemyBlocking();
     }
 
     public override void MovementAnimation(bool _walk)
@@ -35,14 +35,13 @@ public class EnemyGuard : Enemy
         base.MovementAnimation(_walk);
     }
 
-    public override void Attack()
+    public override void EnemyAttack()
     {
-        if(!m_isAttacking)
-        {
+        base.EnemyAttack();
 
-        }
     }
-    public void EnemyBlocking()
+
+    public override void EnemyBlock()
     {
         if(!m_enemyShield.GetComponent<EnemyShield>().GetIsBlocking())
         {
@@ -52,11 +51,8 @@ public class EnemyGuard : Enemy
                 m_enemyAnim.SetTrigger("Block");
                 Debug.Log("Enemy Pushing Player");
                 StartCoroutine(PushBack());
-
             }
         }
-      //  
-        
     }
 
     IEnumerator PushBack()

@@ -18,15 +18,17 @@ public class EnemyShield : Shield
     }
     public void EnemyBlock()
     {
-        m_isBlocking = true;
         StartCoroutine(EnemyBlockAttack());
 
     }
+
     IEnumerator EnemyBlockAttack()
     {
+        m_isBlocking = true;
         Debug.Log("Enemy Block an Attack");
-        //play animation
+        yield return new WaitForSeconds(0.5f);
         m_blockedAttack = false;
+        m_isBlocking = false;
         yield return null;
     }
 

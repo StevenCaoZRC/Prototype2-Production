@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StevenScene.unity
     guid: fff2cc2998b8c754ca192a7b01143982
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: efa6345cfcc79be4485a388349bc230e
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 19d590db123158541a1e9c649399c09c
   m_configObjects: {}
