@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: ee4b7944fdd7f3e44a4f4b3c992b00df
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Armor
+    100002: BaseDude
+    100004: //RootNode
+    100006: IzzyHead
+    100008: IzzyL-Middle1
+    100010: IzzyL-Middle2
+    100012: IzzyL-Middle3
+    100014: IzzyL_Index1
+    100016: IzzyL_Index2
+    100018: IzzyL_Index3
+    100020: IzzyL_Pinky1
+    100022: IzzyL_Pinky2
+    100024: IzzyL_Pinky3
+    100026: IzzyL_Ring1
+    100028: IzzyL_Ring2
+    100030: IzzyL_Ring3
+    100032: IzzyL_Thumb1
+    100034: IzzyL_Thumb2
+    100036: IzzyL_Thumb3
+    100038: IzzyLCalf
+    100040: IzzyLCollarbone
+    100042: IzzyLFoot
+    100044: IzzyLForearm
+    100046: IzzyLPalm
+    100048: IzzyLThigh
+    100050: IzzyLUpperarm
+    100052: IzzyNeck1
+    100054: IzzyNeck2
+    100056: IzzyPelvis
+    100058: IzzyR_Index1
+    100060: IzzyR_Index2
+    100062: IzzyR_Index3
+    100064: IzzyR_Middle1
+    100066: IzzyR_Middle2
+    100068: IzzyR_Middle3
+    100070: IzzyR_Pinky1
+    100072: IzzyR_Pinky2
+    100074: IzzyR_Pinky3
+    100076: IzzyR_Ring1
+    100078: IzzyR_Ring2
+    100080: IzzyR_Ring3
+    100082: IzzyR_Thumb1
+    100084: IzzyR_Thumb2
+    100086: IzzyR_Thumb3
+    100088: IzzyRCalf
+    100090: IzzyRCollarbone
+    100092: IzzyRFoot
+    100094: IzzyRForearm
+    100096: IzzyRibcage
+    100098: IzzyRoot
+    100100: IzzyRPalm
+    100102: IzzyRThigh
+    100104: IzzyRUpperarm
+    100106: IzzySpine1
+    100108: IzzySpine2
+    100110: IzzySpine3
+    100112: IzzySpine4
+    100114: IzzyTail1
+    400000: Armor
+    400002: BaseDude
+    400004: //RootNode
+    400006: IzzyHead
+    400008: IzzyL-Middle1
+    400010: IzzyL-Middle2
+    400012: IzzyL-Middle3
+    400014: IzzyL_Index1
+    400016: IzzyL_Index2
+    400018: IzzyL_Index3
+    400020: IzzyL_Pinky1
+    400022: IzzyL_Pinky2
+    400024: IzzyL_Pinky3
+    400026: IzzyL_Ring1
+    400028: IzzyL_Ring2
+    400030: IzzyL_Ring3
+    400032: IzzyL_Thumb1
+    400034: IzzyL_Thumb2
+    400036: IzzyL_Thumb3
+    400038: IzzyLCalf
+    400040: IzzyLCollarbone
+    400042: IzzyLFoot
+    400044: IzzyLForearm
+    400046: IzzyLPalm
+    400048: IzzyLThigh
+    400050: IzzyLUpperarm
+    400052: IzzyNeck1
+    400054: IzzyNeck2
+    400056: IzzyPelvis
+    400058: IzzyR_Index1
+    400060: IzzyR_Index2
+    400062: IzzyR_Index3
+    400064: IzzyR_Middle1
+    400066: IzzyR_Middle2
+    400068: IzzyR_Middle3
+    400070: IzzyR_Pinky1
+    400072: IzzyR_Pinky2
+    400074: IzzyR_Pinky3
+    400076: IzzyR_Ring1
+    400078: IzzyR_Ring2
+    400080: IzzyR_Ring3
+    400082: IzzyR_Thumb1
+    400084: IzzyR_Thumb2
+    400086: IzzyR_Thumb3
+    400088: IzzyRCalf
+    400090: IzzyRCollarbone
+    400092: IzzyRFoot
+    400094: IzzyRForearm
+    400096: IzzyRibcage
+    400098: IzzyRoot
+    400100: IzzyRPalm
+    400102: IzzyRThigh
+    400104: IzzyRUpperarm
+    400106: IzzySpine1
+    400108: IzzySpine2
+    400110: IzzySpine3
+    400112: IzzySpine4
+    400114: IzzyTail1
+    2100000: lambert1
+    2100002: lambert4
+    2100004: lambert6
+    4300000: Armor
+    4300002: BaseDude
+    9500000: //RootNode
+    13700000: Armor
+    13700002: BaseDude
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
