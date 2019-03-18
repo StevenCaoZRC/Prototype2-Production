@@ -66,7 +66,7 @@ public class SpearAttack : MonoBehaviour
 
     IEnumerator TempMoveSpear()
     {
-        yield return new WaitForSeconds(0.5f); //Prepare attack anim
+        yield return new WaitForSeconds(0.2f); //Prepare attack anim
         this.GetComponent<Collider>().enabled = true;
         m_windStreakParticles.SetActive(true);
 
@@ -86,7 +86,7 @@ public class SpearAttack : MonoBehaviour
         m_windStreakParticles.SetActive(true);
         this.GetComponent<Collider>().enabled = true;
 
-        yield return new WaitForSeconds(0.3f); //Prepare attack anim
+        yield return new WaitForSeconds(0.1f); //Prepare attack anim
         m_windStreakParticles.SetActive(false);
 
         //Special spear has different timing as it plays instantly 

@@ -72,6 +72,7 @@ public class Patrol : MonoBehaviour
                     m_enemy.MovementAnimation(true);
 
                 }
+
                 if (!m_targetingPlayer)
                 {
 

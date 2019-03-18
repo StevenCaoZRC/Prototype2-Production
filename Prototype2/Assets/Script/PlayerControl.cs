@@ -141,13 +141,14 @@ public class PlayerControl : MonoBehaviour
 
     public void PlayerBlock()
     {
-        
+        Debug.Log("blockref: " + m_blocked + " is blocking: " + m_shield.GetComponent<PlayerShield>().GetIsBlocking());
+
         if (GameManager.GetAxisOnce(ref m_blocked, "Shield"))
         {
-            if (m_playerStamina.m_currentStamina >= 20.0f)
-            { m_playerStamina.m_currentStamina -= 20.0f;     }
-            if (!m_shield.GetComponent<PlayerShield>().GetIsBlocking() && m_playerStamina.m_currentStamina >= 20.0f)
+            if (m_playerStamina.m_currentStamina >= 20.0f && !m_shield.GetComponent<PlayerShield>().GetIsBlocking())
             {
+                m_playerAnimator.SetTrigger("Block"); //Start attack anim
+
                 m_shield.GetComponent<PlayerShield>().PlayerBlock();
                 //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
                 if (m_shield.GetComponent<PlayerShield>().CheckCol())
