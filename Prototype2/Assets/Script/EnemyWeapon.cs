@@ -30,6 +30,8 @@ public class EnemyWeapon : MonoBehaviour
         Debug.Log("Enemy finished attack");
         yield return new WaitForSeconds(0.2f);
         this.GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(0.3f);
+
         m_hitSomething = false;
         m_isAttacking = false;
 
