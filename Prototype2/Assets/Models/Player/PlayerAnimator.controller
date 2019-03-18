@@ -14,37 +14,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: NormalAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ChargeSpear
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Direction
     m_Type: 1
     m_DefaultFloat: -1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Running
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Walking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -969,10 +969,10 @@ AnimatorStateMachine:
     m_Position: {x: 984, y: 312, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102546663343133840}
-    m_Position: {x: -192, y: 384, z: 0}
+    m_Position: {x: -72, y: 276, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102118373004308024}
-    m_Position: {x: 660, y: 528, z: 0}
+    m_Position: {x: 492, y: 528, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102984568853873506}
     m_Position: {x: 660, y: 120, z: 0}
@@ -984,7 +984,7 @@ AnimatorStateMachine:
     m_Position: {x: 660, y: 312, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102584287479243752}
-    m_Position: {x: -36, y: 576, z: 0}
+    m_Position: {x: 96, y: 528, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102292567510392680}
     m_Position: {x: 288, y: 264, z: 0}
