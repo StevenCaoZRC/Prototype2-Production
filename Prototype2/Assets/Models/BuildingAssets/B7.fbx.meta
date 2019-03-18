@@ -1,16 +1,14 @@
 fileFormatVersion: 2
-guid: 976ea3785bd5130498e19d41064b88f0
+guid: de45325a3ee79f74890aa83be78645d5
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: lambert1
-    2100002: lambert2
+    2100000: lambert8
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sword
-    4300002: Shield
+    4300000: B7
   externalObjects: {}
   materials:
     importMaterials: 1
