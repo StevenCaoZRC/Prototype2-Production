@@ -6,9 +6,13 @@ public class CameraMovement : MonoBehaviour
 {
     public Transform m_lookAt;
     public Transform m_camTransform;
-    public GameObject m_resetCamPos;
+    public Transform m_resetCamPos;
     private const float Y_MIN_ANGLE = -50.0f;
     private const float Y_MAX_ANGLE = 25.0f;
+
+    private const float X_MIN_ANGLE = -30.0f;
+    private const float X_MAX_ANGLE = 30.0f;
+
 
     private Camera m_cam;
 
@@ -23,9 +27,10 @@ public class CameraMovement : MonoBehaviour
     {
         m_camTransform = transform;
         m_cam = Camera.main;
-        m_camStartPos = new Vector3(0, 2f, -4);
+        m_camStartPos = new Vector3(0, 4, -6);
         //m_resetCamPos.transform.position = new Vector3(0, 2f, -4);
-        rotation = Quaternion.Euler(15, 0, 0);
+        //rotation = Quaternion.Euler(15, 0, 0);
+        m_camTransform.rotation = Quaternion.Euler(15, 0, 0);
         m_startingRotation = m_camTransform.rotation;
 
     }
@@ -36,44 +41,34 @@ public class CameraMovement : MonoBehaviour
         m_currentY += Input.GetAxis("cameraRotVer");
 
         m_currentY = Mathf.Clamp(m_currentY, Y_MIN_ANGLE, Y_MAX_ANGLE);
-       
-
+        // m_currentX = Mathf.Clamp(m_currentX, X_MIN_ANGLE, X_MAX_ANGLE);
         
-        if (m_camTransform.rotation != m_startingRotation)
-        {
-            m_canBeReset = true;
-        }
-        else
-        {
-            m_canBeReset = false;
-        }
-        CamMovement();
     }
 
-    // Update is called once per frame
+        // Update is called once per frame
     void LateUpdate()
     {
-        
-        CamMovement();
-    }
-    private void CamMovement()
-    {
-        if (Input.GetButton("CamReset") && m_canBeReset)
+        if (Input.GetButton("CamReset"))
         {
-            Quaternion rotation1 = Quaternion.Euler(m_camTransform.rotation.x,0, 0);
-            m_camTransform.position = m_lookAt.position + rotation1 * m_resetCamPos.transform.position;
-            m_camTransform.LookAt(m_lookAt.position + new Vector3(0, 0, 5));
-            m_canBeReset = false;
+            Quaternion rotation1 = Quaternion.Euler(m_resetCamPos.rotation.x, m_resetCamPos.rotation.y, m_resetCamPos.rotation.z);
+            m_camTransform.position = rotation1 * m_resetCamPos.position;
+            m_camTransform.LookAt(m_lookAt.position);
+
             m_currentX = 0.0f;
             m_currentY = 0.0f;
             return;
         }
-        else
-        {
-            rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
+        CamMovement();
+
+    }
+    private void CamMovement()
+    {
+
+        
+        rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
             m_camTransform.position = m_lookAt.position + rotation * m_camStartPos;
-            m_camTransform.LookAt(m_lookAt.position + new Vector3 (0,0,5));
-        }
+            m_camTransform.LookAt(m_lookAt.position );
+
 
 
     }
