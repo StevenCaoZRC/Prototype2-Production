@@ -537,6 +537,12 @@ MonoBehaviour:
   m_Center: {x: 0, y: 1, z: 0}
   m_Area: 1
   m_AffectedAgents: ffffffff
+--- !u!95 &453768141 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4561504833820423970, guid: 401c805093993e44c97503ff944491f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 2868775036015939189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &501291929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,10 +2188,25 @@ PrefabInstance:
       propertyPath: m_playerStamina
       value: 
       objectReference: {fileID: 684391209}
+    - target: {fileID: 2868775037348713910, guid: 401c805093993e44c97503ff944491f9,
+        type: 3}
+      propertyPath: m_horseAnimator
+      value: 
+      objectReference: {fileID: 453768141}
+    - target: {fileID: 2868775036043092929, guid: 401c805093993e44c97503ff944491f9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.016
+      objectReference: {fileID: 0}
     - target: {fileID: 1461827167662232445, guid: 401c805093993e44c97503ff944491f9,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 2868775036033797177, guid: 401c805093993e44c97503ff944491f9,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 02f09bb425f88c34498aa13742b056b2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 401c805093993e44c97503ff944491f9, type: 3}

@@ -56,7 +56,6 @@ public class SpearAttack : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Enemy collider: " + other.tag + " parent : " + other.transform.parent.tag);
         if (other.tag == "EnemyCollider" && !m_hitSomething)
         {
             m_hitSomething = true;
