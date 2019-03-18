@@ -32,6 +32,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject m_chargingParticles;
 
     public Animator m_playerAnimator;
+    public Animator m_horseAnimator;
+
     public bool m_disabledInput = false;
     
     Rigidbody rb;
@@ -47,7 +49,7 @@ public class PlayerControl : MonoBehaviour
     private float m_normalSpeed = 5.0f;
     private float m_boostSpeed = 10.0f;
     private float m_rotSpeed = 2.0f;
-    Vector3 _velocity = Vector3.zero;
+    Vector3 m_velocity = Vector3.zero;
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
 
@@ -96,7 +98,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging && m_playerStamina.m_currentStamina >= m_normalAttackCost)
             {
-                m_playerAnimator.GetComponent<Animator>().SetTrigger("NormalAttack"); //Start attack anim
+                m_playerAnimator.SetTrigger("NormalAttack"); //Start attack anim
                 m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
                 m_playerStamina.m_currentStamina -= 20.0f;
 
@@ -152,9 +154,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     Debug.Log("PUSHED");
                     StartCoroutine(PushBackPlayer());
-
                 }
-                
             }
         }
       
@@ -164,33 +164,60 @@ public class PlayerControl : MonoBehaviour
     {
         float _x = Input.GetAxisRaw("Horizontal");
         float _z = Input.GetAxisRaw("Vertical");
+        float _y = Input.GetAxisRaw("Horizontal");
 
         Vector3 _moveX = transform.right * _x;
         Vector3 _moveZ = transform.forward * _z;
-      
-        //Calculating Player movement
-        if (Input.GetAxisRaw("Boost") > 0)
+        Vector3 _rotation = new Vector3(0, _y, 0) * m_rotSpeed;
+
+        if (_x != 0.0f || _z != 0.0f || _y != 0.0f)
         {
-            _velocity = (_moveX + _moveZ).normalized * m_boostSpeed ;
+            if(!m_playerAnimator.GetBool("Running"))
+            {
+                m_playerAnimator.SetBool("Walking", true);
+                m_horseAnimator.SetBool("Walking", true);
+            }
         }
         else
         {
-            _velocity = (_moveX + _moveZ).normalized * m_normalSpeed  ;
+            m_playerAnimator.SetBool("Walking", false);
+            m_playerAnimator.SetBool("Running", false);
+            m_horseAnimator.SetBool("Walking", false);
+            m_horseAnimator.SetBool("Running", false);
+
         }
+
+        //Calculating Player movement
+        if (Input.GetAxisRaw("Boost") > 0)
+        {
+            m_velocity = (_moveX + _moveZ).normalized * m_boostSpeed;
+            if (m_velocity != Vector3.zero)
+            {
+                m_playerAnimator.SetBool("Running", true);
+                m_playerAnimator.SetBool("Walking", false);
+                m_horseAnimator.SetBool("Running", true);
+                m_horseAnimator.SetBool("Walking", false);
+
+            }
+        }
+        else
+        {
+            m_velocity = (_moveX + _moveZ).normalized * m_normalSpeed;
+            m_playerAnimator.SetBool("Running", false);
+            m_horseAnimator.SetBool("Running", false);
+
+        }
+
         //Apply Movement
-        m_playerMove.GetMovement(_velocity);
+        m_playerMove.SetMovement(m_velocity);
 
         //Calculating Player Rotation
-        float _y = Input.GetAxisRaw("Horizontal");
-        Vector3 _rotation = new Vector3(0, _y, 0) * m_rotSpeed;
 
         //Apply Rotation of Player
-        m_playerMove.GetRotation(_rotation);
-
-       
+        m_playerMove.SetRotation(_rotation);
     }
 
-  
+
     void KnockbackListener()
     {
         if (m_shield.GetComponent<PlayerShield>().m_knockedBack)

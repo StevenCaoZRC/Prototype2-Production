@@ -60,7 +60,7 @@ public class SpearAttack : MonoBehaviour
         {
             m_hitSomething = true;
             Debug.Log("Player attacking");
-            other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            other.transform.parent.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
         }
     }
 
