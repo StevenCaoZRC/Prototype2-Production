@@ -202,7 +202,6 @@ public class PlayerControl : MonoBehaviour
                     m_playerAnimator.SetBool("Walking", false);
                     m_horseAnimator.SetBool("Running", true);
                     m_horseAnimator.SetBool("Walking", false);
-
                 }
             }
             else
@@ -210,7 +209,11 @@ public class PlayerControl : MonoBehaviour
                 m_velocity = (_moveX + _moveZ).normalized * m_normalSpeed;
                 m_playerAnimator.SetBool("Running", false);
                 m_horseAnimator.SetBool("Running", false);
+            }
 
+            if (_z <= -0.1f) //if going backwards
+            {
+                m_velocity *= 0.5f;
             }
 
             //Apply Movement
