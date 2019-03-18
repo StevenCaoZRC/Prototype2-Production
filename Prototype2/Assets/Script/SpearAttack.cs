@@ -56,11 +56,11 @@ public class SpearAttack : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Enemy" && !m_hitSomething)
+        if (other.tag == "EnemyCollider" && !m_hitSomething)
         {
             m_hitSomething = true;
             Debug.Log("Player attacking");
-            other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            other.transform.parent.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
         }
     }
 

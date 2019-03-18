@@ -14,7 +14,7 @@ public class EnemyGuard : Enemy
         base.Start();
         m_enemyType = EnemyType.GUARD;
         m_rigidBody = GetComponent<Rigidbody>();
-
+       
         m_attackOneDamage = 20.0f;
         m_attackTwoDamage = 50.0f;
     }
@@ -27,7 +27,7 @@ public class EnemyGuard : Enemy
     }
     public void FixedUpdate()
     {
-        EnemyBlock();
+        EnemyBlocking();
     }
 
     public override void MovementAnimation(bool _walk)
@@ -42,12 +42,12 @@ public class EnemyGuard : Enemy
 
         }
     }
-    public void EnemyBlock()
+    public void EnemyBlocking()
     {
-        if(!m_enemyShield.GetComponent<ShieldBlock>().GetIsBlocking())
+        if(!m_enemyShield.GetComponent<EnemyShield>().GetIsBlocking())
         {
-            m_enemyShield.GetComponent<ShieldBlock>().EnemyBlock();
-            if (m_enemyShield.GetComponent<ShieldBlock>().CheckCol())
+            m_enemyShield.GetComponent<EnemyShield>().EnemyBlock();
+            if (m_enemyShield.GetComponent<EnemyShield>().CheckCol())
             {
                 m_enemyAnim.SetTrigger("Block");
                 Debug.Log("Enemy Pushing Player");
@@ -62,9 +62,11 @@ public class EnemyGuard : Enemy
     IEnumerator PushBack()
     {
         //wait for animation 
-        yield return new WaitForSeconds(1.0f);
+       yield return new WaitForSeconds(0.35f);
 
-        m_playerRigidBody.AddForce(transform.forward.normalized * 5f, ForceMode.Impulse);
+        m_playerRigidBody.AddForce(transform.forward.normalized * 10.0f, ForceMode.Impulse);
+        m_enemyShield.GetComponent<EnemyShield>().m_knockedBack = false;
+        m_playerRigidBody.velocity = Vector3.zero;
         yield return null;
     }
 
@@ -79,6 +81,7 @@ public class EnemyGuard : Enemy
             Debug.Log("Guard health: " + m_health);
 
             var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
+
             m_rigidBody.AddForce(moveDirection.normalized * 500f);
             StartCoroutine(ResetHit());
 
@@ -86,6 +89,9 @@ public class EnemyGuard : Enemy
             {
                 Die();
             }
+
+            m_rigidBody.AddForce(moveDirection.normalized * 20f);
+
         }
     }
     

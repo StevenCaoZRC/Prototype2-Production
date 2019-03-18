@@ -530,7 +530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+  m_AnchoredPosition: {x: -0.00024414062, y: 0}
   m_SizeDelta: {x: 230, y: 108}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8435858787182542201
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHealth: 0
   m_currentHealth: 0
-  m_healthOrb: {fileID: 8435858787722198939}
+  m_healthBar: {fileID: 8435858787722198939}
 --- !u!1 &8435858787320566274
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 0.00024414062, y: 0}
   m_SizeDelta: {x: 230, y: 108}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &8435858787320566278
@@ -676,7 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxStamina: 0
   m_currentStamina: 0
-  m_staminaOrb: {fileID: 8435858787811465785}
+  m_staminaBar: {fileID: 8435858787811465785}
   m_rechargeStamina: 0
 --- !u!1 &8435858787594175499
 GameObject:

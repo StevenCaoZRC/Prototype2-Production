@@ -10,6 +10,7 @@ TagManager:
   - WayPoint
   - WindParticles
   - EnemyCollider
+  - EnemyShield
   layers:
   - Default
   - TransparentFX
