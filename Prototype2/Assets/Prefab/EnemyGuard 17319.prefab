@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 2092525670520517936}
   - component: {fileID: 2092525670520517939}
   - component: {fileID: 2092525670520517938}
-  - component: {fileID: 2212142462320050956}
+  - component: {fileID: 7635863299124672411}
   m_Layer: 9
   m_Name: Shield
   m_TagString: Untagged
@@ -183,7 +183,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2212142462320050956
+--- !u!114 &7635863299124672411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,10 +192,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2092525670520517940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f94f21e6b8224df499f2342fef98cd89, type: 3}
+  m_Script: {fileID: 11500000, guid: c786e9d9444edb84a89cb5c06fbda427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  m_knockedBack: 0
 --- !u!1 &5427844674807754399
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 5427844674807754398}
   - component: {fileID: 5427844674807754388}
   m_Layer: 11
-  m_Name: EnemyGuard 1
+  m_Name: EnemyGuard 17319
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,6 +418,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guardian
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 89c9f4513046e454c998f4691f10ff6f, type: 2}
     - target: {fileID: 400024, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -462,10 +466,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
-      propertyPath: m_Controller
+    - target: {fileID: 13700006, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 9100000, guid: 89c9f4513046e454c998f4691f10ff6f, type: 2}
+      objectReference: {fileID: 2100000, guid: f71da07755ba2bc47ad35a47a3af54b4, type: 2}
     - target: {fileID: 13700008, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -478,10 +482,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 5221603e9bed6d84297f717f338cad7f, type: 2}
-    - target: {fileID: 13700006, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f71da07755ba2bc47ad35a47a3af54b4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98dad242a9791444bc2fc69c00144d0, type: 3}
 --- !u!4 &3807463235309852678 stripped

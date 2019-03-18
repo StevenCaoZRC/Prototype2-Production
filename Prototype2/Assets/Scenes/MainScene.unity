@@ -2103,31 +2103,6 @@ PrefabInstance:
       propertyPath: m_playerRigidBody
       value: 
       objectReference: {fileID: 1401985981}
-    - target: {fileID: 8015556378175057149, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.066
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270833476856152924, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 6845044231064771344, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: m_BaseOffset
-      value: 0.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 6845044230637679351, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: m_TagString
-      value: EnemyShield
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721417582216807631, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1401985981}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb66269965b114a40a2724ba812e1c9e, type: 3}
 --- !u!1001 &2868775036015939189
