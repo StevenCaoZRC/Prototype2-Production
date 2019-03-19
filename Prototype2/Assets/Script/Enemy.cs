@@ -103,19 +103,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void AttackEvent()
-    {
-        Debug.Log("ASDHFKASDHKASHDKASHDKJHJASDHJHDHASKJ");
-        //m_enemyWeapon.GetComponent<EnemyWeapon>().NormalAttack();
-    }
-
-    public void EndAttackEvent()
-    {
-        Debug.Log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-        //m_enemyWeapon.GetComponent<EnemyWeapon>().EndAttack();
-    }
-
-
     public virtual void TakeDamage(GameObject _attackedFrom) {}
 
     public virtual void Die(){}
