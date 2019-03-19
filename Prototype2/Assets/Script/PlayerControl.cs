@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
 
     public bool m_isBlocking = false;
     private bool m_isDead = false;
+    private bool m_isHit = false;
 
 
     //Particles
@@ -202,7 +203,6 @@ public class PlayerControl : MonoBehaviour
                     m_playerAnimator.SetBool("Walking", false);
                     m_horseAnimator.SetBool("Running", true);
                     m_horseAnimator.SetBool("Walking", false);
-
                 }
             }
             else
@@ -210,7 +210,11 @@ public class PlayerControl : MonoBehaviour
                 m_velocity = (_moveX + _moveZ).normalized * m_normalSpeed;
                 m_playerAnimator.SetBool("Running", false);
                 m_horseAnimator.SetBool("Running", false);
+            }
 
+            if (_z <= -0.1f) //if going backwards
+            {
+                m_velocity *= 0.5f;
             }
 
             //Apply Movement
@@ -241,20 +245,29 @@ public class PlayerControl : MonoBehaviour
 
     public void TakeDamage(GameObject _attackedFrom)
     {
-        if (m_playerHealth.m_currentHealth > 0)
+        if (m_playerHealth.m_currentHealth > 0 && !m_isHit)
         {
             m_playerAnimator.SetTrigger("IsHit");
-
+            m_isHit = true;
             m_playerHealth.m_currentHealth -= _attackedFrom.GetComponent<EnemyWeapon>().GetAttackDamage();//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Player health: " + m_playerHealth.m_currentHealth);
 
             var moveDirection = rb.transform.position - _attackedFrom.transform.position;
             rb.AddForce(moveDirection.normalized * 500f);
+            StartCoroutine(ResetHit());
+
             if (m_playerHealth.m_currentHealth <= 0)
             {
                 Die();
             }
         }
+    }
+
+    IEnumerator ResetHit()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        m_isHit = false;
     }
 
     IEnumerator PushBackPlayer()
