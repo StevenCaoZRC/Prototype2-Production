@@ -12,9 +12,9 @@ public class PlayerControl : MonoBehaviour
     public bool m_isholdingCharge = false;
 
     public bool m_isBlocking = false;
-    private bool m_isDead = false;
 
-
+    public bool m_isDead = false; 
+    public bool m_LevelCleared = false;
     //Particles
     public GameObject m_chargeReachedParticles;
 
@@ -105,6 +105,7 @@ public class PlayerControl : MonoBehaviour
             }
             else if(Input.GetAxis("ChargeSpear") > 0f && m_playerStamina.m_currentStamina >= m_SpecialAttackCost) //If player is charging
             {
+                
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime; //Increase charge timer
                 m_chargingParticles.SetActive(true); //Activate charging particles
@@ -216,7 +217,6 @@ public class PlayerControl : MonoBehaviour
         //Apply Rotation of Player
         m_playerMove.SetRotation(_rotation);
     }
-
 
     void KnockbackListener()
     {

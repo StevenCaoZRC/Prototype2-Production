@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -552,9 +552,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &627802171 stripped
+--- !u!114 &623974332 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8435858787605205332, guid: 0ea7a58376e5aeb468776c57d59afa82,
+  m_CorrespondingSourceObject: {fileID: 9011228222661737804, guid: 0ea7a58376e5aeb468776c57d59afa82,
     type: 3}
   m_PrefabInstance: {fileID: 8435858786598397977}
   m_PrefabAsset: {fileID: 0}
@@ -957,7 +957,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_staminaBar
       value: 
-      objectReference: {fileID: 627802171}
+      objectReference: {fileID: 623974332}
     - target: {fileID: 8435858787182542200, guid: 0ea7a58376e5aeb468776c57d59afa82,
         type: 3}
       propertyPath: m_healthBar
