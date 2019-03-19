@@ -13,8 +13,8 @@ public class Enemy : MonoBehaviour
     protected Transform m_target;
     protected EnemyType m_enemyType;
     public Animator m_enemyAnim;
+    public GameObject m_enemyWeapon;
 
-    protected bool m_isAttacking = false;
     protected bool m_isHit = false;
     protected bool m_isDead = false;
 
@@ -31,7 +31,6 @@ public class Enemy : MonoBehaviour
     public virtual void Start()
     {
         m_health = 100.0f;
-        m_isAttacking = false;
         m_isHit = false;
         m_isDead = false;
     }
@@ -93,10 +92,25 @@ public class Enemy : MonoBehaviour
         transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
     }
 
-    public virtual void Attack(){}
+    public virtual void EnemyAttack()
+    {
+        if(m_enemyWeapon != null && !m_isDead && !m_isHit)
+        {
+            if (!m_enemyWeapon.GetComponent<EnemyWeapon>().GetAttacking())
+            {
+                m_enemyAnim.SetTrigger("Attack");
+            }
+        }
+    }
 
     public virtual void TakeDamage(GameObject _attackedFrom) {}
 
     public virtual void Die(){}
 
+    public virtual void EnemyBlock() { }
+
+    public GameObject GetWeapon()
+    {
+        return m_enemyWeapon;
+    }
 }
