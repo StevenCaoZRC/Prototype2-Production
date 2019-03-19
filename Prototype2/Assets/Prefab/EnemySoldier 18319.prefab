@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4094d58f877bf0b46b33aeb8f1d9c06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _character: {fileID: 3472777478534714065}
 --- !u!1 &3472777478534714065
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +373,7 @@ PrefabInstance:
     - target: {fileID: 13700000, guid: f3115a53a0ff04b40acc78d0e5352a1d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5221603e9bed6d84297f717f338cad7f, type: 2}
+      objectReference: {fileID: 2100000, guid: f87c95a5ea8a3a04a87aeae6f059cbd4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3115a53a0ff04b40acc78d0e5352a1d, type: 3}
 --- !u!1 &3472777478349857864 stripped
@@ -471,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: f1412135ffe69094bbc360be65e7f364, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 98e4959e3ce20984aaf6af43eb9fe978, type: 2}
+      objectReference: {fileID: 2100000, guid: f87c95a5ea8a3a04a87aeae6f059cbd4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1412135ffe69094bbc360be65e7f364, type: 3}
 --- !u!1 &3472777479565970347 stripped

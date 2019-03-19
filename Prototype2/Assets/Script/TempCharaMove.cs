@@ -7,8 +7,6 @@ public class TempCharaMove : MonoBehaviour
     private Vector3 m_velocity = Vector3.zero;
     private Vector3 m_rotation = Vector3.zero;
     private Vector3 m_camRotation = Vector3.zero;
-    [SerializeField]
-    public Camera cam;
 
     Quaternion m_targetRotation;
     Rigidbody m_rigidBody;

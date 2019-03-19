@@ -63,7 +63,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         m_isDead = false;
-
+        m_isHit = false;
         m_playerMove = GetComponent<TempCharaMove>();
 
     }

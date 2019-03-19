@@ -12,12 +12,13 @@ public class EnemyWeapon : MonoBehaviour
     void Start()
     {
         m_isAttacking = false;
-        //this.GetComponent<Collider>().enabled = false;
+        this.GetComponent<Collider>().enabled = false;
     }
 
     public void NormalAttack()
     {
         m_isAttacking = true;
+        m_hitSomething = false;
         this.GetComponent<Collider>().enabled = true;
 
         //StartCoroutine(EnemyAttacking());

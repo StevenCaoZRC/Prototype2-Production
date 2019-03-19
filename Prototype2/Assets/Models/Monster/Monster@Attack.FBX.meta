@@ -188,14 +188,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.6390845
-        functionName: AttackEvent
+        functionName: EnemyAttackEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: EndAttackEvent
+        functionName: EnemyEndAttackEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

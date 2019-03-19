@@ -64,12 +64,12 @@ public class EnemySoldier : Enemy
         }
     }
     
-    public override void Die()
-    {
-        //Play dead anim
-        //Spawn particles
-        StartCoroutine(DeathAnimation());
-    }
+    //public override void Die()
+    //{
+    //    //Play dead anim
+    //    //Spawn particles
+    //    StartCoroutine(DeathAnimation());
+    //}
 
     public float GetDamage(SpearAttackType _type)
     {

@@ -38,7 +38,14 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        
+        //Destroy enemy when death animation finishes and enemy is dead
+        if (m_enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("Death")
+            && m_enemyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f
+            && m_isDead)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+
     }
 
     protected IEnumerator ResetHit()
@@ -105,7 +112,14 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(GameObject _attackedFrom) {}
 
-    public virtual void Die(){}
+    protected void Die()
+    {
+        if (m_enemyAnim != null)
+        {
+            m_enemyAnim.SetTrigger("IsDead");
+            m_isDead = true;
+        }
+    }
 
     public virtual void EnemyBlock() { }
 
