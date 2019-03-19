@@ -17,26 +17,37 @@ public class EnemyWeapon : MonoBehaviour
 
     public void NormalAttack()
     {
-        StartCoroutine(EnemyAttacking());
+        m_isAttacking = true;
+        this.GetComponent<Collider>().enabled = true;
+
+        //StartCoroutine(EnemyAttacking());
     }
 
-
-    IEnumerator EnemyAttacking()
+    public void EndAttack()
     {
-        m_isAttacking = true;
-        yield return new WaitForSeconds(0.6f); //Prepare attack anim
-        //this.GetComponent<Collider>().enabled = true;
-        
-        Debug.Log("Enemy finished attack");
-        yield return new WaitForSeconds(0.3f);
-        //this.GetComponent<Collider>().enabled = false;
-        yield return new WaitForSeconds(0.3f);
-
+        this.GetComponent<Collider>().enabled = false;
         m_hitSomething = false;
         m_isAttacking = false;
-
-        yield return null;
+        //StartCoroutine(EnemyAttacking());
     }
+
+
+    //IEnumerator EnemyAttacking()
+    //{
+    //    m_isAttacking = true;
+    //    yield return new WaitForSeconds(0.6f); //Prepare attack anim
+    //    //this.GetComponent<Collider>().enabled = true;
+        
+    //    Debug.Log("Enemy finished attack");
+    //    yield return new WaitForSeconds(0.3f);
+    //    //this.GetComponent<Collider>().enabled = false;
+    //    yield return new WaitForSeconds(0.3f);
+
+    //    m_hitSomething = false;
+    //    m_isAttacking = false;
+
+    //    yield return null;
+    //}
 
     public bool GetAttacking()
     {

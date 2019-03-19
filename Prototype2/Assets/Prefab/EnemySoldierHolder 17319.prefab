@@ -509,6 +509,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194643592215803573}
     m_Modifications:
+    - target: {fileID: 3472777478534714065, guid: 3d15aa49eb6002846929823d3c72f3b6,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySoldier
+      objectReference: {fileID: 0}
     - target: {fileID: 3472777478534714030, guid: 3d15aa49eb6002846929823d3c72f3b6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -563,11 +568,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3472777478534714065, guid: 3d15aa49eb6002846929823d3c72f3b6,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySoldier
       objectReference: {fileID: 0}
     - target: {fileID: 1904227578481963223, guid: 3d15aa49eb6002846929823d3c72f3b6,
         type: 3}

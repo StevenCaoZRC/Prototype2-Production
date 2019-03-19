@@ -99,10 +99,22 @@ public class Enemy : MonoBehaviour
             if (!m_enemyWeapon.GetComponent<EnemyWeapon>().GetAttacking())
             {
                 m_enemyAnim.SetTrigger("Attack");
-                m_enemyWeapon.GetComponent<EnemyWeapon>().NormalAttack();
             }
         }
     }
+
+    public void AttackEvent()
+    {
+        Debug.Log("ASDHFKASDHKASHDKASHDKJHJASDHJHDHASKJ");
+        //m_enemyWeapon.GetComponent<EnemyWeapon>().NormalAttack();
+    }
+
+    public void EndAttackEvent()
+    {
+        Debug.Log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        //m_enemyWeapon.GetComponent<EnemyWeapon>().EndAttack();
+    }
+
 
     public virtual void TakeDamage(GameObject _attackedFrom) {}
 
@@ -110,4 +122,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyBlock() { }
 
+    public GameObject GetWeapon()
+    {
+        return m_enemyWeapon;
+    }
 }
