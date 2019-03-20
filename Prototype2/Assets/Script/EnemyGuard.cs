@@ -70,15 +70,18 @@ public class EnemyGuard : Enemy
     {
         if(!m_isHit && !m_isDead)
         {
+            base.TakeDamage(_attackedFrom);
+
+            GetWeapon().GetComponent<EnemyWeapon>().EndAttack();
             m_enemyAnim.SetTrigger("IsHit");
 
             m_isHit = true;
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Guard health: " + m_health);
 
-            var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
+            //var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
 
-            m_rigidBody.AddForce(moveDirection.normalized * 500f);
+            //m_rigidBody.AddForce(moveDirection.normalized * 500f);
             StartCoroutine(ResetHit());
 
             if (m_health <= 0)
@@ -86,16 +89,9 @@ public class EnemyGuard : Enemy
                 Die();
             }
 
-            m_rigidBody.AddForce(moveDirection.normalized * 20f);
+            //m_rigidBody.AddForce(moveDirection.normalized * 20f);
 
         }
-    }
-    
-    public override void Die()
-    {
-        //Play dead anim
-        //Spawn particles
-        StartCoroutine(DeathAnimation());
     }
 
     public float GetDamage(SpearAttackType _type)

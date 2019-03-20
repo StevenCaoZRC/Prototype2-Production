@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     protected EnemyType m_enemyType;
     public Animator m_enemyAnim;
     public GameObject m_enemyWeapon;
+    public GameObject m_hitParticle;
 
     protected bool m_isHit = false;
     protected bool m_isDead = false;
@@ -33,18 +34,32 @@ public class Enemy : MonoBehaviour
         m_health = 100.0f;
         m_isHit = false;
         m_isDead = false;
+        if (m_hitParticle != null)
+        {
+            m_hitParticle.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        
+        //Destroy enemy when death animation finishes and enemy is dead
+        if (m_enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("Death")
+            && m_enemyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f
+            && m_isDead)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+
     }
 
-    protected IEnumerator ResetHit()
+    public IEnumerator ResetHit()
     {
-
         yield return new WaitForSeconds(0.5f);
+        if (m_hitParticle != null)
+        {
+            m_hitParticle.SetActive(false);
+        }
         m_isHit = false;
     }
 
@@ -98,16 +113,38 @@ public class Enemy : MonoBehaviour
         {
             if (!m_enemyWeapon.GetComponent<EnemyWeapon>().GetAttacking())
             {
+                m_enemyWeapon.GetComponent<EnemyWeapon>().SetAttacking(true);
                 m_enemyAnim.SetTrigger("Attack");
-                m_enemyWeapon.GetComponent<EnemyWeapon>().NormalAttack();
             }
         }
     }
 
-    public virtual void TakeDamage(GameObject _attackedFrom) {}
+    public virtual void TakeDamage(GameObject _attackedFrom)
+    {
+        if (m_hitParticle != null)
+        {
+            m_hitParticle.SetActive(true);
+        }
 
-    public virtual void Die(){}
+    }
+
+    protected void Die()
+    {
+        if (m_enemyAnim != null)
+        {
+            if (m_hitParticle != null)
+            {
+                m_hitParticle.SetActive(false);
+            }
+            m_enemyAnim.SetTrigger("IsDead");
+            m_isDead = true;
+        }
+    }
 
     public virtual void EnemyBlock() { }
 
+    public GameObject GetWeapon()
+    {
+        return m_enemyWeapon;
+    }
 }

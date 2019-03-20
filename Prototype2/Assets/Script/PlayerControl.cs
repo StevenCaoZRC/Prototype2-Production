@@ -2,30 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 
 public class PlayerControl : MonoBehaviour
 {
+    #region Booleans
     [HideInInspector]
     public bool m_isAttacking = false;
     [HideInInspector]
     public bool m_isCharging = false;
     [HideInInspector]
     public bool m_isholdingCharge = false;
-
-    public bool m_isBlocking = false;
-    private bool m_isDead = false;
-    private bool m_isHit = false;
-
-
-    //Particles
-    public GameObject m_chargeReachedParticles;
-
     [HideInInspector]
     public bool m_blocked = false;
     [HideInInspector]
     public bool m_pushedBack = false;
 
+    public bool m_isBlocking = false;
+    public bool m_isDead = false;
+    private bool m_isHit = false;
+    public bool m_LevelCleared = false;
     bool finished = false;
+    public bool m_disabledInput = false;
+
+    #endregion
+    #region GameObjects
+    //Particles
+    public GameObject m_chargeReachedParticles;
    
     public GameObject m_spear;  //reference to the spear object
     public GameObject m_shield; //reference to the player shield object
@@ -35,18 +38,21 @@ public class PlayerControl : MonoBehaviour
 
     public Animator m_playerAnimator;
     public Animator m_horseAnimator;
-
-    public bool m_disabledInput = false;
-    
+    #endregion
     Rigidbody rb;
-
+    #region Health and Stamina varables
     //Helath and Stamina
     public Health m_playerHealth;
     public Stamina m_playerStamina;
     public float m_normalAttackCost = 10.0f;
     public float m_SpecialAttackCost = 40.0f;
-
-
+    #endregion
+    #region Controller Vibration
+    bool playerIndexSet = false;
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
+    #endregion
     private TempCharaMove m_playerMove;
     private float m_normalSpeed = 5.0f;
     private float m_boostSpeed = 10.0f;
@@ -54,6 +60,7 @@ public class PlayerControl : MonoBehaviour
     Vector3 m_velocity = Vector3.zero;
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
+    public float _y = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +70,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         m_isDead = false;
-
+        m_isHit = false;
         m_playerMove = GetComponent<TempCharaMove>();
 
     }
@@ -78,7 +85,7 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         PlayerMove();
-
+        FindPlayerController();
         KnockbackListener();
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -93,19 +100,48 @@ public class PlayerControl : MonoBehaviour
             m_playerHealth.m_currentHealth = m_playerHealth.m_maxHealth;
         }
     }
+    void FindPlayerController()
+    {
+        // Find a PlayerIndex, for a single player game
+        // Will find the first controller that is connected ans use it
+        if (!playerIndexSet || !prevState.IsConnected)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                PlayerIndex testPlayerIndex = (PlayerIndex)i;
+                GamePadState testState = GamePad.GetState(testPlayerIndex);
+                if (testState.IsConnected)
+                {
+                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                    playerIndex = testPlayerIndex;
+                    playerIndexSet = true;
+                }
+            }
+        }
 
+        prevState = state;
+        state = GamePad.GetState(playerIndex);
+    }
     public void PlayerAttack()
     {
         if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
         {
-            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging && m_playerStamina.m_currentStamina >= m_normalAttackCost)
+            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") 
+                && !m_spear.GetComponent<SpearAttack>().GetIsAttacking() 
+                && !m_isHit && !m_isCharging
+                && m_playerStamina.m_currentStamina >= m_normalAttackCost)
             {
                 m_playerAnimator.SetTrigger("NormalAttack"); //Start attack anim
-                m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
+                m_spear.GetComponent<SpearAttack>().SetAttacking(true); //Start attack mechanic
+
+                //m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
                 m_playerStamina.m_currentStamina -= 20.0f;
 
             }
-            else if(Input.GetAxis("ChargeSpear") > 0f && m_playerStamina.m_currentStamina >= m_SpecialAttackCost) //If player is charging
+            else if(Input.GetAxis("ChargeSpear") > 0f
+                && !m_isHit
+                && !m_spear.GetComponent<SpearAttack>().GetIsAttacking()
+                && m_playerStamina.m_currentStamina >= m_SpecialAttackCost) //If player is charging
             {
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime; //Increase charge timer
@@ -124,9 +160,10 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                m_chargeHoldTimer = 0;
+                m_chargeHoldTimer = 0.0f;
                 m_isCharging = false;
                 m_chargingParticles.SetActive(false);
+                m_chargeReachedParticles.SetActive(false);
                 m_playerAnimator.SetBool("ChargeSpear", false);
             }
 
@@ -143,7 +180,7 @@ public class PlayerControl : MonoBehaviour
 
     public void PlayerBlock()
     {
-        Debug.Log("blockref: " + m_blocked + " is blocking: " + m_shield.GetComponent<PlayerShield>().GetIsBlocking());
+       // Debug.Log("blockref: " + m_blocked + " is blocking: " + m_shield.GetComponent<PlayerShield>().GetIsBlocking());
 
         if (GameManager.GetAxisOnce(ref m_blocked, "Shield"))
         {
@@ -170,7 +207,7 @@ public class PlayerControl : MonoBehaviour
 
             float _x = Input.GetAxisRaw("Horizontal");
             float _z = Input.GetAxisRaw("Vertical");
-            float _y = Input.GetAxisRaw("Horizontal");
+             _y = Input.GetAxisRaw("Horizontal");
 
             Vector3 _moveX = transform.right * _x;
             Vector3 _moveZ = transform.forward * _z;
@@ -247,8 +284,11 @@ public class PlayerControl : MonoBehaviour
     {
         if (m_playerHealth.m_currentHealth > 0 && !m_isHit)
         {
-            m_playerAnimator.SetTrigger("IsHit");
             m_isHit = true;
+
+            m_spear.GetComponent<SpearAttack>().EndAttack(); //Start attack mechanic
+
+            m_playerAnimator.SetTrigger("IsHit");
             m_playerHealth.m_currentHealth -= _attackedFrom.GetComponent<EnemyWeapon>().GetAttackDamage();//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Player health: " + m_playerHealth.m_currentHealth);
 
@@ -265,8 +305,9 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator ResetHit()
     {
-
+        GamePad.SetVibration(playerIndex,0.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
+        GamePad.SetVibration(playerIndex, 0.0f, 0.0f);
         m_isHit = false;
     }
 
@@ -292,9 +333,9 @@ public class PlayerControl : MonoBehaviour
 
     void ChargeAttack()
     {
-        m_spear.GetComponent<SpearAttack>().ChargeAttack(m_playerAnimator);
-        Debug.Log("suPERSAIYAN");
-
+        //m_spear.GetComponent<SpearAttack>().ChargeAttack();
+        //Debug.Log("suPERSAIYAN");
+        m_spear.GetComponent<SpearAttack>().SetAttacking(true);
         //Reset timer values
         m_chargeHoldTimer = 0;
         m_isCharging = false;
@@ -325,5 +366,10 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("MainMenu");
         yield return null;
+    }
+
+    public GameObject GetWeapon()
+    {
+        return m_spear;
     }
 }

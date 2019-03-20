@@ -4,85 +4,54 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform m_lookAt;
-    public Transform m_camTransform;
-    public Transform m_resetCamPos;
-    private const float Y_MIN_ANGLE = -50.0f;
-    private const float Y_MAX_ANGLE = 25.0f;
+    public Transform m_cameraPivot;
+    public GameObject m_player;
 
-    private const float X_MIN_ANGLE = -30.0f;
-    private const float X_MAX_ANGLE = 30.0f;
+    private const float Y_MIN_ANGLE = -35.0f;
+    private const float Y_MAX_ANGLE = 60.0f;
+
     public float m_sensitivity = 1.0f;
-
-    private Camera m_cam;
 
     private float m_currentX = 0.0f;
     private float m_currentY = 0.0f;
-    private Quaternion m_startingRotation;
-    Vector3 m_camStartPos;
-    Quaternion rotation;
-    bool m_canBeReset = false;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        m_camTransform = transform;
-        m_cam = Camera.main;
-        //m_camStartPos = new Vector3(0, 4, -6);
-        //m_resetCamPos.transform.position = new Vector3(0, 2f, -4);
-        //rotation = Quaternion.Euler(15, 0, 0);
-       // m_camTransform.rotation = Quaternion.Euler(15, 0, 0);
-        m_startingRotation = m_camTransform.rotation;
-
-    }
-
-    private void Update()
-    {
-        
-        m_currentX = Input.GetAxis("cameraRotHor");
-        m_currentY = Input.GetAxis("cameraRotVer");
-
-        m_currentY = Mathf.Clamp(m_currentY, Y_MIN_ANGLE, Y_MAX_ANGLE);
-        //m_currentX = Mathf.Clamp(m_currentX, X_MIN_ANGLE, X_MAX_ANGLE);
 
     }
 
         // Update is called once per frame
     void LateUpdate()
     {
-      
         CamMovement();
-
     }
     private void CamMovement()
     {
-      
+        m_currentX += Input.GetAxis("cameraRotHor");// * m_sensitivity * Time.deltaTime;
+        m_currentY -= Input.GetAxis("cameraRotVer");// * m_sensitivity* Time.deltaTime;
+        m_cameraPivot.position = new Vector3(m_player.transform.position.x, m_player.transform.position.y + 2.5f, m_player.transform.position.z);
 
-        
+
+
+        m_currentY = Mathf.Clamp(m_currentY, Y_MIN_ANGLE, Y_MAX_ANGLE);
+
+        transform.LookAt(m_cameraPivot);
+    
+        if (m_currentX != 0)
+        {
+            m_cameraPivot.rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
+        }
+
         if (Input.GetButtonDown("CamReset"))
         {
+            m_currentX = 0;
+            m_currentY = 0;
 
-            m_currentX = 0.0f;
-            m_currentY = 0.0f;
-            rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
-            //m_camTransform.position =  rotation * m_camStartPos;
-            //m_camTransform.LookAt(m_lookAt.position);
-
-            m_camTransform.position = m_resetCamPos.position;
-            m_camTransform.rotation = m_resetCamPos.rotation;
-
-            m_camTransform.LookAt(m_lookAt.position);
+            m_cameraPivot.rotation = Quaternion.Euler(m_player.transform.rotation.x, m_player.transform.rotation.y, 0);
+           // m_cameraPivot.position = m_player.transform.GetChild(0).transform.position;
+            m_cameraPivot.forward = m_player.transform.forward;
+            
         }
-        rotation.eulerAngles += new Vector3(m_currentY * -m_sensitivity * Time.deltaTime, m_currentX * m_sensitivity * Time.deltaTime, 0);
-       // rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
-
-        //rotation = Quaternion.AngleAxis(Input.GetAxis("cameraRotVer") * 2.0f, Vector3.up) * rotation;
-        //rotation = Quaternion.Euler(m_currentY, m_currentX, 0);
-      
-        m_camTransform.position = rotation * m_resetCamPos.position;
-        m_camTransform.rotation = rotation;
-        m_camTransform.LookAt(m_lookAt.position);
-
-
-
     }
 }
