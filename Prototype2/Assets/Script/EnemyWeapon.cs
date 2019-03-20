@@ -8,15 +8,32 @@ public class EnemyWeapon : MonoBehaviour
     bool m_isAttacking = false;
     public float m_attackDamage = 10.0f;
 
+    float m_attackEndTimer = 0.0f;
+    float m_attackTotalTimer = 0.2f;
+
     // Start is called before the first frame update
     void Start()
     {
         m_isAttacking = false;
-        //this.GetComponent<Collider>().enabled = false;
+        this.GetComponent<Collider>().enabled = false;
+    }
+
+    void Update()
+    {
+        Debug.Log("Attack: " + m_isAttacking + " Hit: " + m_hitSomething);
+        if ((m_isAttacking || m_hitSomething) && this.GetComponent<Collider>().enabled)
+        {
+            m_attackEndTimer += Time.deltaTime;
+            if (m_attackEndTimer > m_attackTotalTimer)
+            {
+                EndAttack();
+            }
+        }
     }
 
     public void NormalAttack()
     {
+        m_attackEndTimer = 0.0f;
         m_isAttacking = true;
         this.GetComponent<Collider>().enabled = true;
 
@@ -25,6 +42,8 @@ public class EnemyWeapon : MonoBehaviour
 
     public void EndAttack()
     {
+        m_attackEndTimer = 0.0f;
+
         this.GetComponent<Collider>().enabled = false;
         m_hitSomething = false;
         m_isAttacking = false;
@@ -49,6 +68,11 @@ public class EnemyWeapon : MonoBehaviour
     //    yield return null;
     //}
 
+    public void SetAttacking(bool _attack)
+    {
+        m_isAttacking = _attack;
+    }
+
     public bool GetAttacking()
     {
         return m_isAttacking;
@@ -63,8 +87,6 @@ public class EnemyWeapon : MonoBehaviour
     {
         if (other.tag == "Player" && !m_hitSomething && m_isAttacking)
         {
-            Debug.Log("Enemy attacking " + m_hitSomething);
-
             m_hitSomething = true;
             other.gameObject.GetComponent<PlayerControl>().TakeDamage(gameObject);
         }
