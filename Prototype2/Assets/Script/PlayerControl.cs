@@ -60,6 +60,7 @@ public class PlayerControl : MonoBehaviour
     Vector3 m_velocity = Vector3.zero;
     float m_chargeHoldTimer = 0.0f;
     float m_chargeHoldRequired = 2.0f;
+    public float _y = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -170,7 +171,7 @@ public class PlayerControl : MonoBehaviour
 
     public void PlayerBlock()
     {
-        Debug.Log("blockref: " + m_blocked + " is blocking: " + m_shield.GetComponent<PlayerShield>().GetIsBlocking());
+       // Debug.Log("blockref: " + m_blocked + " is blocking: " + m_shield.GetComponent<PlayerShield>().GetIsBlocking());
 
         if (GameManager.GetAxisOnce(ref m_blocked, "Shield"))
         {
@@ -197,7 +198,7 @@ public class PlayerControl : MonoBehaviour
 
             float _x = Input.GetAxisRaw("Horizontal");
             float _z = Input.GetAxisRaw("Vertical");
-            float _y = Input.GetAxisRaw("Horizontal");
+             _y = Input.GetAxisRaw("Horizontal");
 
             Vector3 _moveX = transform.right * _x;
             Vector3 _moveZ = transform.forward * _z;
