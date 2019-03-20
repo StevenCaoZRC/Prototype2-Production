@@ -2,30 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 
 public class PlayerControl : MonoBehaviour
 {
+    #region Booleans
     [HideInInspector]
     public bool m_isAttacking = false;
     [HideInInspector]
     public bool m_isCharging = false;
     [HideInInspector]
     public bool m_isholdingCharge = false;
-
-    public bool m_isBlocking = false;
-    private bool m_isDead = false;
-    private bool m_isHit = false;
-
-
-    //Particles
-    public GameObject m_chargeReachedParticles;
-
     [HideInInspector]
     public bool m_blocked = false;
     [HideInInspector]
     public bool m_pushedBack = false;
 
+    public bool m_isBlocking = false;
+    public bool m_isDead = false;
+    private bool m_isHit = false;
+    public bool m_LevelCleared = false;
     bool finished = false;
+    public bool m_disabledInput = false;
+
+    #endregion
+    #region GameObjects
+    //Particles
+    public GameObject m_chargeReachedParticles;
    
     public GameObject m_spear;  //reference to the spear object
     public GameObject m_shield; //reference to the player shield object
@@ -35,18 +38,21 @@ public class PlayerControl : MonoBehaviour
 
     public Animator m_playerAnimator;
     public Animator m_horseAnimator;
-
-    public bool m_disabledInput = false;
-    
+    #endregion
     Rigidbody rb;
-
+    #region Health and Stamina varables
     //Helath and Stamina
     public Health m_playerHealth;
     public Stamina m_playerStamina;
     public float m_normalAttackCost = 10.0f;
     public float m_SpecialAttackCost = 40.0f;
-
-
+    #endregion
+    #region Controller Vibration
+    bool playerIndexSet = false;
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
+    #endregion
     private TempCharaMove m_playerMove;
     private float m_normalSpeed = 5.0f;
     private float m_boostSpeed = 10.0f;
@@ -78,7 +84,7 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         PlayerMove();
-
+        FindPlayerController();
         KnockbackListener();
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -93,7 +99,28 @@ public class PlayerControl : MonoBehaviour
             m_playerHealth.m_currentHealth = m_playerHealth.m_maxHealth;
         }
     }
+    void FindPlayerController()
+    {
+        // Find a PlayerIndex, for a single player game
+        // Will find the first controller that is connected ans use it
+        if (!playerIndexSet || !prevState.IsConnected)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                PlayerIndex testPlayerIndex = (PlayerIndex)i;
+                GamePadState testState = GamePad.GetState(testPlayerIndex);
+                if (testState.IsConnected)
+                {
+                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                    playerIndex = testPlayerIndex;
+                    playerIndexSet = true;
+                }
+            }
+        }
 
+        prevState = state;
+        state = GamePad.GetState(playerIndex);
+    }
     public void PlayerAttack()
     {
         if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
@@ -265,8 +292,9 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator ResetHit()
     {
-
+        GamePad.SetVibration(playerIndex,0.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
+        GamePad.SetVibration(playerIndex, 0.0f, 0.0f);
         m_isHit = false;
     }
 
