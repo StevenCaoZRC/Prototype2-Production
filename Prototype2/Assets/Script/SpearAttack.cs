@@ -19,7 +19,7 @@ public class SpearAttack : MonoBehaviour
     //float m_specialAttackAmount = 50.0f;
 
     float m_attackEndTimer = 0.0f;
-    float m_attackTotalTimer = 1.0f;
+    float m_attackTotalTimer = 0.2f;
 
     SpearAttackType m_spearAttack;
 
@@ -36,10 +36,10 @@ public class SpearAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_isAttacking)
+        if((m_isAttacking || m_hitSomething) && this.GetComponent<Collider>().enabled)
         {
             m_attackEndTimer += Time.deltaTime;
-            if(m_attackEndTimer < m_attackTotalTimer)
+            if(m_attackEndTimer > m_attackTotalTimer)
             {
                 EndAttack();
             }
@@ -48,10 +48,10 @@ public class SpearAttack : MonoBehaviour
 
     public void NormalAttack()
     {
+        m_attackEndTimer = 0.0f;
         m_spearAttack = SpearAttackType.NORMAL;
         this.GetComponent<Collider>().enabled = true;
         m_windStreakParticles.SetActive(true);
-
         //StartCoroutine(TempMoveSpear());
         m_isAttacking = true;
     }
@@ -61,6 +61,7 @@ public class SpearAttack : MonoBehaviour
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
         m_hitSomething = false;
+        m_attackEndTimer = 0.0f;
         Debug.Log("Player finish attack");
         this.GetComponent<Collider>().enabled = false;
         m_windStreakParticles.SetActive(false);
@@ -79,6 +80,12 @@ public class SpearAttack : MonoBehaviour
     {
         return m_isAttacking;
     }
+
+    public void SetAttacking(bool _attack)
+    {
+        m_isAttacking = _attack;
+    }
+
 
     private void OnTriggerStay(Collider other)
     {

@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     protected EnemyType m_enemyType;
     public Animator m_enemyAnim;
     public GameObject m_enemyWeapon;
+    public GameObject m_hitParticle;
 
     protected bool m_isHit = false;
     protected bool m_isDead = false;
@@ -33,6 +34,10 @@ public class Enemy : MonoBehaviour
         m_health = 100.0f;
         m_isHit = false;
         m_isDead = false;
+        if (m_hitParticle != null)
+        {
+            m_hitParticle.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -48,10 +53,13 @@ public class Enemy : MonoBehaviour
 
     }
 
-    protected IEnumerator ResetHit()
+    public IEnumerator ResetHit()
     {
-
         yield return new WaitForSeconds(0.5f);
+        if (m_hitParticle != null)
+        {
+            m_hitParticle.SetActive(false);
+        }
         m_isHit = false;
     }
 
@@ -105,17 +113,29 @@ public class Enemy : MonoBehaviour
         {
             if (!m_enemyWeapon.GetComponent<EnemyWeapon>().GetAttacking())
             {
+                m_enemyWeapon.GetComponent<EnemyWeapon>().SetAttacking(true);
                 m_enemyAnim.SetTrigger("Attack");
             }
         }
     }
 
-    public virtual void TakeDamage(GameObject _attackedFrom) {}
+    public virtual void TakeDamage(GameObject _attackedFrom)
+    {
+        if (m_hitParticle != null)
+        {
+            m_hitParticle.SetActive(true);
+        }
+
+    }
 
     protected void Die()
     {
         if (m_enemyAnim != null)
         {
+            if (m_hitParticle != null)
+            {
+                m_hitParticle.SetActive(false);
+            }
             m_enemyAnim.SetTrigger("IsDead");
             m_isDead = true;
         }

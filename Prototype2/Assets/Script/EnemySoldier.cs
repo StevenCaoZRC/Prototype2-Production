@@ -47,17 +47,15 @@ public class EnemySoldier : Enemy
     {
         if (!m_isHit && m_health > 0)
         {
-            //m_enemyAnim.SetTrigger("IsHit");
-            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
+            base.TakeDamage(_attackedFrom);
+            GetWeapon().GetComponent<EnemyWeapon>().EndAttack();
             m_enemyAnim.SetTrigger("IsHit");
-
             m_isHit = true;
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Soldier health: " + m_health);
 
-            var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
-            m_rigidBody.AddForce(moveDirection.normalized * 500f);
+            //var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
+            //m_rigidBody.AddForce(moveDirection.normalized * 500f);
             StartCoroutine(ResetHit());
             if (m_health <= 0)
             {
@@ -65,13 +63,6 @@ public class EnemySoldier : Enemy
             }
         }
     }
-    
-    //public override void Die()
-    //{
-    //    //Play dead anim
-    //    //Spawn particles
-    //    StartCoroutine(DeathAnimation());
-    //}
 
     public float GetDamage(SpearAttackType _type)
     {

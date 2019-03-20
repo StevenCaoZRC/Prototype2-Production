@@ -126,14 +126,22 @@ public class PlayerControl : MonoBehaviour
     {
         if(!m_spear.GetComponent<SpearAttack>().GetIsAttacking())
         {
-            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") && !m_isCharging && m_playerStamina.m_currentStamina >= m_normalAttackCost)
+            if (GameManager.GetAxisOnce(ref m_isAttacking, "Spear") 
+                && !m_spear.GetComponent<SpearAttack>().GetIsAttacking() 
+                && !m_isHit && !m_isCharging
+                && m_playerStamina.m_currentStamina >= m_normalAttackCost)
             {
                 m_playerAnimator.SetTrigger("NormalAttack"); //Start attack anim
-                m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
+                m_spear.GetComponent<SpearAttack>().SetAttacking(true); //Start attack mechanic
+
+                //m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
                 m_playerStamina.m_currentStamina -= 20.0f;
 
             }
-            else if(Input.GetAxis("ChargeSpear") > 0f && m_playerStamina.m_currentStamina >= m_SpecialAttackCost) //If player is charging
+            else if(Input.GetAxis("ChargeSpear") > 0f
+                && !m_isHit
+                && !m_spear.GetComponent<SpearAttack>().GetIsAttacking()
+                && m_playerStamina.m_currentStamina >= m_SpecialAttackCost) //If player is charging
             {
                 m_isCharging = true;
                 m_chargeHoldTimer += Time.deltaTime; //Increase charge timer
@@ -152,9 +160,10 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                m_chargeHoldTimer = 0;
+                m_chargeHoldTimer = 0.0f;
                 m_isCharging = false;
                 m_chargingParticles.SetActive(false);
+                m_chargeReachedParticles.SetActive(false);
                 m_playerAnimator.SetBool("ChargeSpear", false);
             }
 
@@ -275,8 +284,11 @@ public class PlayerControl : MonoBehaviour
     {
         if (m_playerHealth.m_currentHealth > 0 && !m_isHit)
         {
-            m_playerAnimator.SetTrigger("IsHit");
             m_isHit = true;
+
+            m_spear.GetComponent<SpearAttack>().EndAttack(); //Start attack mechanic
+
+            m_playerAnimator.SetTrigger("IsHit");
             m_playerHealth.m_currentHealth -= _attackedFrom.GetComponent<EnemyWeapon>().GetAttackDamage();//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Player health: " + m_playerHealth.m_currentHealth);
 
@@ -321,9 +333,9 @@ public class PlayerControl : MonoBehaviour
 
     void ChargeAttack()
     {
-        m_spear.GetComponent<SpearAttack>().ChargeAttack();
-        Debug.Log("suPERSAIYAN");
-
+        //m_spear.GetComponent<SpearAttack>().ChargeAttack();
+        //Debug.Log("suPERSAIYAN");
+        m_spear.GetComponent<SpearAttack>().SetAttacking(true);
         //Reset timer values
         m_chargeHoldTimer = 0;
         m_isCharging = false;
