@@ -40,7 +40,9 @@ public class TempCharaMove : MonoBehaviour
         {
             if (m_velocity != Vector3.zero)
             {
-                m_rigidBody.MovePosition(m_rigidBody.position + m_velocity * Time.fixedDeltaTime);
+                //pos.y -= gravity * Time.deltaTime;
+                Vector3 pos = m_rigidBody.position + m_velocity * Time.fixedDeltaTime;
+                m_rigidBody.MovePosition(new Vector3(pos.x, pos.y-2.0f*Time.deltaTime, pos.z));
             }
             m_rigidBody.MoveRotation(m_rigidBody.rotation * Quaternion.Euler(m_rotation));
         }

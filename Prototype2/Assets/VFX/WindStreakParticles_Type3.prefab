@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3427995944828455400}
-  m_LocalRotation: {x: -0, y: 0, z: -0.9238796, w: -0.38268328}
-  m_LocalPosition: {x: 0, y: -0.07, z: -0.019}
+  m_LocalRotation: {x: -0.069816515, y: -0.028918933, z: -0.9212379, w: -0.38158903}
+  m_LocalPosition: {x: 0.15, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 3429897594914851032}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -225}
+  m_LocalEulerAnglesHint: {x: 0, y: 8.668, z: -225}
 --- !u!198 &3267215581582881934
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 12
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4744,7 +4744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3429897594914851032}
   m_Layer: 0
-  m_Name: WindStreakParticles 1
+  m_Name: WindStreakParticles_Type3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4791,13 +4791,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3428065527502065306}
-  m_LocalRotation: {x: 0, y: 0, z: -0.3420201, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: -0.07, z: -0.019}
+  m_LocalRotation: {x: 0.038346786, y: -0.10535692, z: -0.33986372, w: 0.93376774}
+  m_LocalPosition: {x: -0.15, y: -0.07, z: 0}
   m_LocalScale: {x: 1.0000007, y: 1.0000005, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 3429897594914851032}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -40}
+  m_LocalEulerAnglesHint: {x: 0, y: -12.875001, z: -40}
 --- !u!198 &3266719333725873972
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5050,7 +5050,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 12
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2

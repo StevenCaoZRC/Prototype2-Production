@@ -195,14 +195,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.72887325
-        functionName: EnemyEndAttackEvent
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 4094d58f877bf0b46b33aeb8f1d9c06f,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

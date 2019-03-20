@@ -28,11 +28,6 @@ public class AnimAttack : MonoBehaviour
         m_enemyScript.GetWeapon().GetComponent<EnemyWeapon>().NormalAttack();
     }
 
-    public void EnemyEndAttackEvent()
-    {
-        m_enemyScript.GetWeapon().GetComponent<EnemyWeapon>().EndAttack();
-    }
-
     public void PNormalAttack()
     {
         m_playerControl.GetWeapon().GetComponent<SpearAttack>().NormalAttack();
