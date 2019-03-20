@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyAttack()
     {
-        if(m_enemyWeapon != null && !m_isDead)
+        if(m_enemyWeapon != null && !m_isDead && !m_isHit)
         {
             if (!m_enemyWeapon.GetComponent<EnemyWeapon>().GetAttacking())
             {

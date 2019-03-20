@@ -5,26 +5,35 @@ using UnityEngine.UI;
 
 public class ScrollingImage : MonoBehaviour
 {
-    public float m_verticalSpeed;
 
-    RawImage m_rawImage;
+    public float horizontalSpeed;
+    public float verticalSpeed;
+
+    RawImage myRawImage;
 
     public void Start()
     {
 
-         m_rawImage = GetComponent<RawImage>();
+        myRawImage = GetComponent<RawImage>();
 
     }
 
     public void Update()
     {
-        Rect currentUV =  m_rawImage.uvRect;
-        currentUV.y -= Time.deltaTime * m_verticalSpeed;
+        Rect currentUV = myRawImage.uvRect;
+        currentUV.x -= Time.deltaTime * horizontalSpeed;
+        currentUV.y -= Time.deltaTime * verticalSpeed;
+
+        if (currentUV.x <= -1f || currentUV.x >= 1f)
+        {
+            currentUV.x = 0f;
+        }
+
         if (currentUV.y <= -1f || currentUV.y >= 1f)
         {
             currentUV.y = 0f;
         }
 
-         m_rawImage.uvRect = currentUV;
+        myRawImage.uvRect = currentUV;
     }
 }

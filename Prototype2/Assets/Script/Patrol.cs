@@ -21,6 +21,9 @@ public class Patrol : MonoBehaviour
     private bool m_patrolForward;           //Check for whether the player is patrolling forwards or backwards (waypoint order)
     private float m_waitTimer;              //Current time waited if waiting
     private float m_directionProb = 0.2f;   //Probability of going back or forwards
+    private float m_attackWaitTimer;              //Current time waited if waiting
+    private float m_totalAttackWaitTime = 1.0f;    //Amount of time the enemy should stay on each spot
+
 
     //[SerializeField]
     public bool m_targetingPlayer = false;
@@ -113,9 +116,17 @@ public class Patrol : MonoBehaviour
                     if (m_travelling && m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
                     {
                         m_travelling = false;
-
+                        m_attackWaitTimer += Time.deltaTime;
                         //Begin attack
-                        m_enemy.EnemyAttack();
+                        if (m_attackWaitTimer >= m_totalAttackWaitTime)
+                        {
+                            if (!m_enemy.GetIsHit())
+                            {
+                                m_enemy.EnemyAttack();
+                                m_attackWaitTimer = 0;
+                            }
+                        }
+                        
 
                     }
                     else

@@ -12,7 +12,7 @@ public class EnemyWeapon : MonoBehaviour
     void Start()
     {
         m_isAttacking = false;
-        this.GetComponent<Collider>().enabled = false;
+        //this.GetComponent<Collider>().enabled = false;
     }
 
     public void NormalAttack()
@@ -24,12 +24,12 @@ public class EnemyWeapon : MonoBehaviour
     IEnumerator EnemyAttacking()
     {
         m_isAttacking = true;
-        yield return new WaitForSeconds(0.2f); //Prepare attack anim
-        this.GetComponent<Collider>().enabled = true;
+        yield return new WaitForSeconds(0.6f); //Prepare attack anim
+        //this.GetComponent<Collider>().enabled = true;
         
         Debug.Log("Enemy finished attack");
-        yield return new WaitForSeconds(0.2f);
-        this.GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(0.3f);
+        //this.GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(0.3f);
 
         m_hitSomething = false;
@@ -50,7 +50,7 @@ public class EnemyWeapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && !m_hitSomething)
+        if (other.tag == "Player" && !m_hitSomething && m_isAttacking)
         {
             Debug.Log("Enemy attacking " + m_hitSomething);
 
