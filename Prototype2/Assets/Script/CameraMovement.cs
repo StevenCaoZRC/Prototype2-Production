@@ -29,7 +29,7 @@ public class CameraMovement : MonoBehaviour
     private void CamMovement()
     {
         m_currentX += Input.GetAxis("cameraRotHor");// * m_sensitivity * Time.deltaTime;
-        m_currentY -= Input.GetAxis("cameraRotVer");// * m_sensitivity* Time.deltaTime;
+        m_currentY += Input.GetAxis("cameraRotVer");// * m_sensitivity* Time.deltaTime;
         m_cameraPivot.position = new Vector3(m_player.transform.position.x, m_player.transform.position.y + 2.5f, m_player.transform.position.z);
 
 
