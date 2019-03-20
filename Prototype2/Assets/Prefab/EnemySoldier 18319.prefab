@@ -322,10 +322,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: f3115a53a0ff04b40acc78d0e5352a1d, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: c777c129e038f32459e9e46cdb164e36, type: 2}
     - target: {fileID: 400118, guid: f3115a53a0ff04b40acc78d0e5352a1d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -370,6 +366,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: f3115a53a0ff04b40acc78d0e5352a1d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c777c129e038f32459e9e46cdb164e36, type: 2}
     - target: {fileID: 13700000, guid: f3115a53a0ff04b40acc78d0e5352a1d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -292,7 +292,7 @@ public class PlayerControl : MonoBehaviour
 
     void ChargeAttack()
     {
-        m_spear.GetComponent<SpearAttack>().ChargeAttack(m_playerAnimator);
+        m_spear.GetComponent<SpearAttack>().ChargeAttack();
         Debug.Log("suPERSAIYAN");
 
         //Reset timer values
@@ -325,5 +325,10 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("MainMenu");
         yield return null;
+    }
+
+    public GameObject GetWeapon()
+    {
+        return m_spear;
     }
 }

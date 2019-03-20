@@ -5,16 +5,16 @@ using UnityEngine;
 public class AnimAttack : MonoBehaviour
 {
     public GameObject _character;
-    private Enemy _enemyScript;
-    //private PlayerControl PlayerControl;
+    private Enemy m_enemyScript;
+    private PlayerControl m_playerControl;
 
     // Start is called before the first frame update
     void Start()
     {
         if(_character.tag == "Enemy")
-            _enemyScript = transform.parent.gameObject.GetComponent<Enemy>();
-        //if (_character.tag == "Player")
-        //    PlayerControl = transform.parent.gameObject.GetComponent<PlayerControl>();
+            m_enemyScript = _character.GetComponent<Enemy>();
+        if (_character.tag == "Player")
+            m_playerControl = _character.GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
@@ -25,21 +25,21 @@ public class AnimAttack : MonoBehaviour
 
     public void EnemyAttackEvent()
     {
-        _enemyScript.GetWeapon().GetComponent<EnemyWeapon>().NormalAttack();
+        m_enemyScript.GetWeapon().GetComponent<EnemyWeapon>().NormalAttack();
     }
 
     public void EnemyEndAttackEvent()
     {
-        _enemyScript.GetWeapon().GetComponent<EnemyWeapon>().EndAttack();
+        m_enemyScript.GetWeapon().GetComponent<EnemyWeapon>().EndAttack();
     }
 
-    //public void EnemyAttackEvent()
-    //{
-    //    _enemyScript.GetWeapon().GetComponent<EnemyWeapon>().NormalAttack();
-    //}
+    public void PNormalAttack()
+    {
+        m_playerControl.GetWeapon().GetComponent<SpearAttack>().NormalAttack();
+    }
 
-    //public void EnemyEndAttackEvent()
-    //{
-    //    _enemyScript.GetWeapon().GetComponent<EnemyWeapon>().EndAttack();
-    //}
+    public void PChargeAttack()
+    {
+        m_playerControl.GetWeapon().GetComponent<SpearAttack>().ChargeAttack();
+    }
 }

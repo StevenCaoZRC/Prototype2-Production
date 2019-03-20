@@ -48,6 +48,8 @@ public class EnemySoldier : Enemy
         if (!m_isHit && m_health > 0)
         {
             //m_enemyAnim.SetTrigger("IsHit");
+            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
             m_enemyAnim.SetTrigger("IsHit");
 
             m_isHit = true;

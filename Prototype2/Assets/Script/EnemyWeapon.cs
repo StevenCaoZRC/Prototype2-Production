@@ -64,8 +64,6 @@ public class EnemyWeapon : MonoBehaviour
     {
         if (other.tag == "Player" && !m_hitSomething && m_isAttacking)
         {
-            Debug.Log("Enemy attacking " + m_hitSomething);
-
             m_hitSomething = true;
             other.gameObject.GetComponent<PlayerControl>().TakeDamage(gameObject);
         }
