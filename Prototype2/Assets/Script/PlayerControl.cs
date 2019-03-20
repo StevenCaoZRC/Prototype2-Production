@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 using XInputDotNetPure;
 
 public class PlayerControl : MonoBehaviour
@@ -133,7 +134,7 @@ public class PlayerControl : MonoBehaviour
             {
                 m_playerAnimator.SetTrigger("NormalAttack"); //Start attack anim
                 m_spear.GetComponent<SpearAttack>().SetAttacking(true); //Start attack mechanic
-
+            
                 //m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
                 m_playerStamina.m_currentStamina -= 20.0f;
 
@@ -212,13 +213,18 @@ public class PlayerControl : MonoBehaviour
             Vector3 _moveX = transform.right * _x;
             Vector3 _moveZ = transform.forward * _z;
             Vector3 _rotation = new Vector3(0, _y, 0) * m_rotSpeed;
-
+          
+               
+                    
+           
             if (_x != 0.0f || _z != 0.0f || _y != 0.0f)
             {
                 if (!m_playerAnimator.GetBool("Running"))
                 {
                     m_playerAnimator.SetBool("Walking", true);
                     m_horseAnimator.SetBool("Walking", true);
+                   
+                    //FindObjectOfType<AudioManager>().Stop("HorseWalking");
                 }
             }
             else
@@ -233,9 +239,12 @@ public class PlayerControl : MonoBehaviour
             //Calculating Player movement
             if (Input.GetAxisRaw("Boost") > 0)
             {
+             
                 m_velocity = (_moveX + _moveZ).normalized * m_boostSpeed;
                 if (m_velocity != Vector3.zero)
                 {
+                   // FindObjectOfType<AudioManager>().Stop("HorseWalking");
+                   // FindObjectOfType<AudioManager>().Play("HorseRunning");
                     m_playerAnimator.SetBool("Running", true);
                     m_playerAnimator.SetBool("Walking", false);
                     m_horseAnimator.SetBool("Running", true);
@@ -244,9 +253,12 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
+                //FindObjectOfType<AudioManager>().Stop("HorseRunning");
+                //FindObjectOfType<AudioManager>().Play("HorseWalking");
                 m_velocity = (_moveX + _moveZ).normalized * m_normalSpeed;
                 m_playerAnimator.SetBool("Running", false);
                 m_horseAnimator.SetBool("Running", false);
+             
             }
 
             if (_z <= -0.1f) //if going backwards
