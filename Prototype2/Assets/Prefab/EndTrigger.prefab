@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WinParticles: {fileID: 3359385804043145033}
+  Player: {fileID: 2868775037348713929, guid: 401c805093993e44c97503ff944491f9, type: 3}
 --- !u!1001 &2892437208613820256
 PrefabInstance:
   m_ObjectHideFlags: 0

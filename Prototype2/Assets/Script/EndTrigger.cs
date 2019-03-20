@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class EndTrigger : MonoBehaviour
 {
     public GameObject WinParticles;
+    public GameObject Player;
     // Start is called before the first frame update
     void Start()
     {
         WinParticles.SetActive(false);
+        Player.GetComponent<PlayerControl>().m_LevelCleared = false;
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class EndTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             StartCoroutine(EndLevel());
+            Player.GetComponent<PlayerControl>().m_LevelCleared = true;
         }
     }
     IEnumerator EndLevel()
