@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7963967193495068994}
   - component: {fileID: 7963967193494266210}
   - component: {fileID: 7963967193493169058}
+  - component: {fileID: 4543385129325001227}
   m_Layer: 0
   m_Name: FireTower
   m_TagString: Untagged
@@ -79,6 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4543385129325001227
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963967193495174498}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6229565, y: 22.075335, z: 3.985252}
+  m_Center: {x: 0.00000011920929, y: 11.072566, z: -0.00000029802322}
 --- !u!1001 &97599148302963121
 PrefabInstance:
   m_ObjectHideFlags: 0
