@@ -2785,78 +2785,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 820148224}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1299721899 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3858907132955411098, guid: be6508697b9e7074e90c2e8edf9441ce,
-    type: 3}
-  m_PrefabInstance: {fileID: 1781717108}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1299721900 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3858907132955411097, guid: be6508697b9e7074e90c2e8edf9441ce,
-    type: 3}
-  m_PrefabInstance: {fileID: 1781717108}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1299721901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299721899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 1299721900}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 1
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!4 &1315989611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 822004540844801814, guid: cf52caa4f761e0e449a5cbacb1dcd79e,
@@ -4151,11 +4079,6 @@ PrefabInstance:
       propertyPath: m_player
       value: 
       objectReference: {fileID: 1626809294}
-    - target: {fileID: 3858907132955411110, guid: be6508697b9e7074e90c2e8edf9441ce,
-        type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be6508697b9e7074e90c2e8edf9441ce, type: 3}
 --- !u!4 &1785803361 stripped
