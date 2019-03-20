@@ -59,7 +59,7 @@ MonoBehaviour:
     SpatialBlend: 0.9
     source: {fileID: 0}
   - name: HorseWalking
-    clip: {fileID: 8300000, guid: 62f062c00314af24493db55ab2b9a58f, type: 3}
+    clip: {fileID: 8300000, guid: 42439d3c3c113e64f8bfd59a26c6da6a, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -78,4 +78,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: SpearStab
+    clip: {fileID: 8300000, guid: 3770ea9b4d75f4e4187436a3ac210418, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: BGM
+    clip: {fileID: 8300000, guid: b564b4ac80fa14f48828fb964feb6a7c, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    SpatialBlend: 0
     source: {fileID: 0}
