@@ -135,7 +135,7 @@ public class PlayerControl : MonoBehaviour
                 m_spear.GetComponent<SpearAttack>().SetAttacking(true); //Start attack mechanic
 
                 //m_spear.GetComponent<SpearAttack>().NormalAttack(); //Start attack mechanic
-                m_playerStamina.m_currentStamina -= 20.0f;
+                m_playerStamina.m_currentStamina -= 10.0f;
 
             }
             else if(Input.GetAxis("ChargeSpear") > 0f
@@ -187,14 +187,11 @@ public class PlayerControl : MonoBehaviour
             if (m_playerStamina.m_currentStamina >= 20.0f && !m_shield.GetComponent<PlayerShield>().GetIsBlocking())
             {
                 m_playerAnimator.SetTrigger("Block"); //Start attack anim
+                m_playerStamina.m_currentStamina -= 10.0f;
 
-                m_shield.GetComponent<PlayerShield>().PlayerBlock();
+                //m_shield.GetComponent<PlayerShield>().Block();
                 //Debug.Log(m_shield.GetComponent<ShieldBlock>().GetIsColliding()); 
-                if (m_shield.GetComponent<PlayerShield>().CheckCol())
-                {
-                    Debug.Log("PUSHED");
-                    StartCoroutine(PushBackPlayer());
-                }
+
             }
         }
       
@@ -282,7 +279,19 @@ public class PlayerControl : MonoBehaviour
 
     public void TakeDamage(GameObject _attackedFrom)
     {
-        if (m_playerHealth.m_currentHealth > 0 && !m_isHit)
+        if(m_shield.GetComponent<PlayerShield>().GetIsBlocking())
+        {
+            m_shield.GetComponent<PlayerShield>().Block();
+            m_shield.GetComponent<PlayerShield>().PlayParticles(true);
+
+            //if (m_shield.GetComponent<PlayerShield>().CheckCol())
+            //{
+            Debug.Log("PUSHED");
+                StartCoroutine(PushBackPlayer());
+            //}
+
+        }
+        else if (m_playerHealth.m_currentHealth > 0 && !m_isHit)
         {
             m_isHit = true;
 
@@ -371,5 +380,10 @@ public class PlayerControl : MonoBehaviour
     public GameObject GetWeapon()
     {
         return m_spear;
+    }
+
+    public GameObject GetShield()
+    {
+        return m_shield;
     }
 }

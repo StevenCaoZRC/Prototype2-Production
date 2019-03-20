@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class PlayerShield : Shield
 {
-   
+
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
         m_shieldType = ShieldType.PLAYERSHIELD;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        //Debug.Log("blocking?: " + m_isBlocking + " colliding: " + m_colliding);
+
+
     }
 
     // Update is called once per frame
@@ -18,43 +27,30 @@ public class PlayerShield : Shield
        
     }
 
-    public void PlayerBlock()
-    {
-        m_isBlocking = true;
-        StartCoroutine(PlayerBlockAttack());
-    }
 
     private void OnCollisionEnter(Collision other)
     {
-       // Debug.Log(other.gameObject.transform.GetChild(1).tag);
+        Debug.Log("acttivated collision ?");
+
+        // Debug.Log(other.gameObject.transform.GetChild(1).tag);
         if (m_isBlocking)
         {
-            if (other.gameObject.transform.GetChild(1).tag == "GuardSword")
+            Debug.Log("other layer : " + other.gameObject.layer);
+            if (other.gameObject.layer == LayerMask.NameToLayer("EnemyWeapon"))
             {
                 m_blockedAttack = true;
-                m_isBlocking = false;
+                //m_isBlocking = false;
                 m_colliding = true;
                 Debug.Log("Player Blocking");
             }
-            else
-            {
-                m_colliding = false;
-                m_isBlocking = false;
-                m_blockedAttack = false;
-            }
-        }
-        else
-        {
-            m_colliding = false;
-            m_isBlocking = false;
         }
     }
 
-    IEnumerator PlayerBlockAttack()
-    {
-        Debug.Log("Attack Blocked By Player");
-        m_blockedAttack = false;
-        m_isBlocking = false;
-        yield return null;
-    }
+    //IEnumerator PlayerBlockAttack()
+    //{
+    //    Debug.Log("Attack Blocked By Player");
+    //    m_blockedAttack = false;
+    //    m_isBlocking = false;
+    //    yield return null;
+    //}
 }

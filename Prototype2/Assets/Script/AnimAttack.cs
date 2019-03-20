@@ -33,6 +33,11 @@ public class AnimAttack : MonoBehaviour
         m_playerControl.GetWeapon().GetComponent<SpearAttack>().NormalAttack();
     }
 
+    public void PStartBlock()
+    {
+        m_playerControl.GetShield().GetComponent<PlayerShield>().Block();
+    }
+
     public void PChargeAttack()
     {
         m_playerControl.GetWeapon().GetComponent<SpearAttack>().ChargeAttack();

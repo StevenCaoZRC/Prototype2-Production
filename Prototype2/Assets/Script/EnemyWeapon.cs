@@ -20,7 +20,6 @@ public class EnemyWeapon : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Attack: " + m_isAttacking + " Hit: " + m_hitSomething);
         if ((m_isAttacking || m_hitSomething) && this.GetComponent<Collider>().enabled)
         {
             m_attackEndTimer += Time.deltaTime;
