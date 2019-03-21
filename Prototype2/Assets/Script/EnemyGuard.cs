@@ -71,7 +71,7 @@ public class EnemyGuard : Enemy
 
     public override void TakeDamage(GameObject _attackedFrom)
     {
-        if (!m_isHit && !m_isDead)
+        if(!m_isHit && !m_isDead && m_health > 0)
         {
             base.TakeDamage(_attackedFrom);
 

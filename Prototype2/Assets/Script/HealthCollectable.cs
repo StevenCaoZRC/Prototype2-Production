@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class HealthCollectable : MonoBehaviour
 {
-    public GameObject Player;
+    public Health m_Health;
     void Start()
     {
-        
+        gameObject.SetActive(true);
+        StartCoroutine(Despawn());
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         
     }
 
@@ -20,8 +22,19 @@ public class HealthCollectable : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
-            Destroy(gameObject);
+            if (FindObjectOfType<Health>().m_currentHealth < FindObjectOfType<Health>().m_maxHealth)
+            {
+                FindObjectOfType<Health>().m_currentHealth += 10;
+                Destroy(gameObject);
+            }
+              
         }
+    }
+    IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
+        yield return null;
+
     }
 }

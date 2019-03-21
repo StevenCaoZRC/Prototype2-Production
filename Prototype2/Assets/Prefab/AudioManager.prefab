@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4609169974582921528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4609169974582921526}
+  - component: {fileID: 4609169974582921529}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4609169974582921526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609169974582921528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.250967, y: 0.6916647, z: 8.571128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4609169974582921529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609169974582921528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044c75040a0e62b4faa228691a68907b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: HealthPickUp
+    clip: {fileID: 8300000, guid: 3f34f1f20d9631c428fc488697547372, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: HorseRunning
+    clip: {fileID: 8300000, guid: 74b7a24f3cff12c42b78f02e5107e314, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: HorseWalking
+    clip: {fileID: 8300000, guid: 42439d3c3c113e64f8bfd59a26c6da6a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: ShieldBlock
+    clip: {fileID: 8300000, guid: 57962b04b8206234682208f0325fdc64, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: SwordSwing
+    clip: {fileID: 8300000, guid: c40d7b67579f9f7419cb63a5268a01c9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: SpearStab
+    clip: {fileID: 8300000, guid: 3770ea9b4d75f4e4187436a3ac210418, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0.9
+    source: {fileID: 0}
+  - name: BGM
+    clip: {fileID: 8300000, guid: b564b4ac80fa14f48828fb964feb6a7c, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    SpatialBlend: 0
+    source: {fileID: 0}
+  - name: MonsterHurt
+    clip: {fileID: 8300000, guid: 3da1aacac10336443bca0a20c7997a76, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0
+    source: {fileID: 0}
+  - name: PlayerHurt
+    clip: {fileID: 8300000, guid: 241ae17db99b6ee4f9de9e223134b65c, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0
+    source: {fileID: 0}

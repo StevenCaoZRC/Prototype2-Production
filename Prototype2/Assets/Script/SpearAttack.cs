@@ -33,6 +33,7 @@ public class SpearAttack : MonoBehaviour
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
         this.GetComponent<Collider>().enabled = false;
+   
         m_windStreakParticles.SetActive(false);
 
     }
@@ -57,6 +58,7 @@ public class SpearAttack : MonoBehaviour
         m_spearAttack = SpearAttackType.NORMAL;
         this.GetComponent<Collider>().enabled = true;
         m_windStreakParticles.SetActive(true);
+        FindObjectOfType<AudioManager>().PlayOnce("SpearStab");
         //StartCoroutine(TempMoveSpear());
         m_isAttacking = true;
     }
