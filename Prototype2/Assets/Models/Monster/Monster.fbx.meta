@@ -63,6 +63,7 @@ ModelImporter:
     100114: IzzySpine3
     100116: IzzySpine4
     100118: //RootNode
+    100120: GrandpaMonsterBackup2
     400000: GrandpaMonster1
     400002: IzzyHead
     400004: IzzyL_Index1
@@ -123,11 +124,15 @@ ModelImporter:
     400114: IzzySpine3
     400116: IzzySpine4
     400118: //RootNode
+    400120: GrandpaMonsterBackup2
     2100000: lambert6
+    2100002: lambert7
     4300000: GrandpaMonster1
+    4300002: GrandpaMonsterBackup2
     7400000: Take 001
     9500000: //RootNode
     13700000: GrandpaMonster1
+    13700002: GrandpaMonsterBackup2
   externalObjects:
   - first:
       type: UnityEngine:Material

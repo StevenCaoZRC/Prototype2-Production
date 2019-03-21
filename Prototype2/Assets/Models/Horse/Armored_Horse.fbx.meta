@@ -45,6 +45,7 @@ ModelImporter:
     100078: HorseTail1
     100080: HorseTail2
     100082: HorseTail3
+    100084: HorseThatNeedToSKin
     400000: //RootNode
     400002: HArmor1
     400004: HArmor2
@@ -87,8 +88,15 @@ ModelImporter:
     400078: HorseTail1
     400080: HorseTail2
     400082: HorseTail3
+    400084: HorseThatNeedToSKin
     2100000: lambert1
     2100002: lambert4
+    2100004: Face
+    2100006: Front_Back
+    2100008: Body_Right
+    2100010: Body_Left
+    2100012: Neck_Left1
+    2100014: Neck_Right1
     4300000: HArmor1
     4300002: HArmor2
     4300004: HArmor3
@@ -97,6 +105,7 @@ ModelImporter:
     4300010: HArmor6
     4300012: HArmor7
     4300014: Horse_Low2
+    4300016: HorseThatNeedToSKin
     7400000: Take 001
     9500000: //RootNode
     13700000: HArmor1
@@ -107,7 +116,18 @@ ModelImporter:
     13700010: HArmor6
     13700012: HArmor7
     13700014: Horse_Low2
-  externalObjects: {}
+    13700016: HorseThatNeedToSKin
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 493c2128e20e5c84d9f95f886d5bfca9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: 493c2128e20e5c84d9f95f886d5bfca9, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
