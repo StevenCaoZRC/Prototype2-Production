@@ -1,0 +1,226 @@
+fileFormatVersion: 2
+guid: 3d6361170e0e39048870d865144093a5
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: AltEnemy
+    100002: //RootNode
+    100004: IzzyHead
+    100006: IzzyL_Index1
+    100008: IzzyL_Index2
+    100010: IzzyL_Index3
+    100012: IzzyL_Middle1
+    100014: IzzyL_Middle2
+    100016: IzzyL_Middle3
+    100018: IzzyL_Pinky1
+    100020: IzzyL_Pinky2
+    100022: IzzyL_Pinky3
+    100024: IzzyL_Ring1
+    100026: IzzyL_Ring2
+    100028: IzzyL_Ring3
+    100030: IzzyL_Thumb1
+    100032: IzzyL_Thumb2
+    100034: IzzyL_Thumb3
+    100036: IzzyLCalf
+    100038: IzzyLCollarbone
+    100040: IzzyLFoot
+    100042: IzzyLForearm
+    100044: IzzyLPalm
+    100046: IzzyLThigh
+    100048: IzzyLUpperarm
+    100050: IzzyNeck1
+    100052: IzzyNeck2
+    100054: IzzyPelvis
+    100056: IzzyRCalf
+    100058: IzzyRCollarbone
+    100060: IzzyRDigit11
+    100062: IzzyRDigit12
+    100064: IzzyRDigit13
+    100066: IzzyRDigit21
+    100068: IzzyRDigit22
+    100070: IzzyRDigit23
+    100072: IzzyRDigit31
+    100074: IzzyRDigit32
+    100076: IzzyRDigit33
+    100078: IzzyRDigit41
+    100080: IzzyRDigit42
+    100082: IzzyRDigit43
+    100084: IzzyRDigit51
+    100086: IzzyRDigit52
+    100088: IzzyRDigit53
+    100090: IzzyRFoot
+    100092: IzzyRForearm
+    100094: IzzyRibcage
+    100096: IzzyRoot
+    100098: IzzyRPalm
+    100100: IzzyRThigh
+    100102: IzzyRUpperarm
+    100104: IzzySpine1
+    100106: IzzySpine2
+    100108: IzzySpine3
+    100110: IzzySpine4
+    400000: AltEnemy
+    400002: //RootNode
+    400004: IzzyHead
+    400006: IzzyL_Index1
+    400008: IzzyL_Index2
+    400010: IzzyL_Index3
+    400012: IzzyL_Middle1
+    400014: IzzyL_Middle2
+    400016: IzzyL_Middle3
+    400018: IzzyL_Pinky1
+    400020: IzzyL_Pinky2
+    400022: IzzyL_Pinky3
+    400024: IzzyL_Ring1
+    400026: IzzyL_Ring2
+    400028: IzzyL_Ring3
+    400030: IzzyL_Thumb1
+    400032: IzzyL_Thumb2
+    400034: IzzyL_Thumb3
+    400036: IzzyLCalf
+    400038: IzzyLCollarbone
+    400040: IzzyLFoot
+    400042: IzzyLForearm
+    400044: IzzyLPalm
+    400046: IzzyLThigh
+    400048: IzzyLUpperarm
+    400050: IzzyNeck1
+    400052: IzzyNeck2
+    400054: IzzyPelvis
+    400056: IzzyRCalf
+    400058: IzzyRCollarbone
+    400060: IzzyRDigit11
+    400062: IzzyRDigit12
+    400064: IzzyRDigit13
+    400066: IzzyRDigit21
+    400068: IzzyRDigit22
+    400070: IzzyRDigit23
+    400072: IzzyRDigit31
+    400074: IzzyRDigit32
+    400076: IzzyRDigit33
+    400078: IzzyRDigit41
+    400080: IzzyRDigit42
+    400082: IzzyRDigit43
+    400084: IzzyRDigit51
+    400086: IzzyRDigit52
+    400088: IzzyRDigit53
+    400090: IzzyRFoot
+    400092: IzzyRForearm
+    400094: IzzyRibcage
+    400096: IzzyRoot
+    400098: IzzyRPalm
+    400100: IzzyRThigh
+    400102: IzzyRUpperarm
+    400104: IzzySpine1
+    400106: IzzySpine2
+    400108: IzzySpine3
+    400110: IzzySpine4
+    2100000: lambert8
+    2100002: lambert9
+    2100004: lambert10
+    4300000: AltEnemy
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: AltEnemy
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert10
+    second: {fileID: 2100000, guid: 1ae7e4e3c07bdf045a14948963c4be84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert8
+    second: {fileID: 2100000, guid: 7e6d851b9e36ab44db95cb8dbc46b317, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert9
+    second: {fileID: 2100000, guid: 2547d44267ecad847b136f676b1a490c, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
