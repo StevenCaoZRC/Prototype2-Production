@@ -187,7 +187,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.37271395
+      - time: 0.45100987
         functionName: EnemyAttackEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 4094d58f877bf0b46b33aeb8f1d9c06f,

@@ -99,6 +99,7 @@ public class PlayerControl : MonoBehaviour
         {
             m_playerHealth.m_currentHealth = m_playerHealth.m_maxHealth;
         }
+        
     }
     void FindPlayerController()
     {
@@ -286,10 +287,9 @@ public class PlayerControl : MonoBehaviour
 
             //if (m_shield.GetComponent<PlayerShield>().CheckCol())
             //{
-            Debug.Log("PUSHED");
-                StartCoroutine(PushBackPlayer());
-            //}
-
+            Debug.Log("PUSHED via attack");
+            StartCoroutine(PushBackPlayer());
+            StartCoroutine(ResetHit());
         }
         else if (m_playerHealth.m_currentHealth > 0 && !m_isHit)
         {
@@ -314,7 +314,7 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator ResetHit()
     {
-        GamePad.SetVibration(playerIndex,0.5f, 0.5f);
+        GamePad.SetVibration(playerIndex,0.25f, 0.25f);
         yield return new WaitForSeconds(0.5f);
         GamePad.SetVibration(playerIndex, 0.0f, 0.0f);
         m_isHit = false;
@@ -385,5 +385,28 @@ public class PlayerControl : MonoBehaviour
     public GameObject GetShield()
     {
         return m_shield;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        //if (other.tag == "EnemyBack")
+        //{
+        //    GetWeapon().GetComponent<SpearAttack>().SetPlayerInFront(false);
+        //}
+        //else 
+        if (other.tag == "EnemyFront")
+        {
+            GetWeapon().GetComponent<SpearAttack>().SetPlayerInFront(true);
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "EnemyFront")
+        {
+            GetWeapon().GetComponent<SpearAttack>().SetPlayerInFront(false);
+
+        }
     }
 }

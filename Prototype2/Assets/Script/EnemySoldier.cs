@@ -33,22 +33,13 @@ public class EnemySoldier : Enemy
     {
         base.EnemyAttack();
     }
-
-    public override void EnemyBlock()
-    {
-        //if ()
-        //{
-
-        //}
-    }
-
-
+    
     public override void TakeDamage(GameObject _attackedFrom)
     {
         if (!m_isHit && m_health > 0)
         {
             base.TakeDamage(_attackedFrom);
-            GetWeapon().GetComponent<EnemyWeapon>().EndAttack();
+            GetWeapon().EndAttack();
             m_enemyAnim.SetTrigger("IsHit");
             m_isHit = true;
             m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();

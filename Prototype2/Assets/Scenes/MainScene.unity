@@ -1610,6 +1610,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1194643592253476436, guid: 4f1fbd72c2ced394098886651f219500,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f1fbd72c2ced394098886651f219500, type: 3}
 --- !u!4 &902917177 stripped
@@ -3078,11 +3083,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyGuardHolder 17319
       objectReference: {fileID: 0}
-    - target: {fileID: 623693081479323007, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 623693081479323004, guid: fb66269965b114a40a2724ba812e1c9e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3138,6 +3138,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 623693083146807641, guid: fb66269965b114a40a2724ba812e1c9e,
+        type: 3}
+      propertyPath: m_playerRigidBody
+      value: 
+      objectReference: {fileID: 1401985981}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb66269965b114a40a2724ba812e1c9e, type: 3}
 --- !u!1 &1948094893

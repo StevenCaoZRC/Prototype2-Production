@@ -17,7 +17,15 @@ public class PlayerShield : Shield
         base.Update();
 
         //Debug.Log("blocking?: " + m_isBlocking + " colliding: " + m_colliding);
-
+        if (m_isBlocking)
+        {
+            m_blockEndTimer += Time.deltaTime;
+            if (m_blockEndTimer > m_blockTotalTimer)
+            {
+                EndBlock();
+                Debug.Log("end block");
+            }
+        }
 
     }
 

@@ -15,8 +15,8 @@ public class Shield : MonoBehaviour
     public bool m_knockedBack = false;
     protected ShieldType m_shieldType;
 
-    float m_blockEndTimer = 0.0f;
-    float m_blockTotalTimer = 0.75f;
+    protected float m_blockEndTimer = 0.0f;
+    protected float m_blockTotalTimer = 0.75f;
 
     public GameObject m_shieldHitParticles;
 
@@ -35,25 +35,12 @@ public class Shield : MonoBehaviour
 
     public virtual void Update()
     {
-        if (m_isBlocking)
-        {
-            Debug.Log("blocktime: " + m_blockEndTimer);
-
-            m_blockEndTimer += Time.deltaTime;
-            if (m_blockEndTimer > m_blockTotalTimer)
-            {
-                EndBlock();
-                Debug.Log("end block");
-            }
-        }
+        
     }
 
-    public void Block()
+    public virtual void Block()
     {
         m_isBlocking = true;
-        //StartCoroutine(PlayerBlockAttack());
-        Debug.Log("blocking");
-
     }
 
     public void EndBlock()

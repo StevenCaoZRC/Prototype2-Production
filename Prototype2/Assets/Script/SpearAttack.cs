@@ -13,6 +13,9 @@ public class SpearAttack : MonoBehaviour
     //float m_spearSpeed = 0.2f;
     bool m_hitSomething = false;
     bool m_isAttacking = false;
+    bool m_triggerEntered = false;
+    bool m_playerIsInfront = false;
+
     public GameObject m_windStreakParticles;
 
     //float m_normalAttackAmount = 20.0f;
@@ -26,6 +29,7 @@ public class SpearAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_playerIsInfront = false;
         m_spearAttack = SpearAttackType.NORMAL;
         m_isAttacking = false;
         this.GetComponent<Collider>().enabled = false;
@@ -36,10 +40,11 @@ public class SpearAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((m_isAttacking || m_hitSomething) && this.GetComponent<Collider>().enabled)
+        Debug.Log("-----------------front?: " + m_playerIsInfront);
+        if ((m_isAttacking || m_hitSomething) && this.GetComponent<Collider>().enabled)
         {
             m_attackEndTimer += Time.deltaTime;
-            if(m_attackEndTimer > m_attackTotalTimer)
+            if (m_attackEndTimer > m_attackTotalTimer)
             {
                 EndAttack();
             }
@@ -62,9 +67,10 @@ public class SpearAttack : MonoBehaviour
         m_isAttacking = false;
         m_hitSomething = false;
         m_attackEndTimer = 0.0f;
-        Debug.Log("Player finish attack");
+        //Debug.Log("Player finish attack");
         this.GetComponent<Collider>().enabled = false;
         m_windStreakParticles.SetActive(false);
+        m_triggerEntered = false;
     }
 
     public void ChargeAttack()
@@ -89,12 +95,76 @@ public class SpearAttack : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "EnemyCollider" && !m_hitSomething)
+        //if collider == enemy
+
+        if (other.tag == "Enemy" && !m_hitSomething && !m_triggerEntered)
         {
+
+            m_triggerEntered = true;
             m_hitSomething = true;
-            Debug.Log("Player attacking");
+
+            //Debug.Log("Guard hit");
+
+            if(m_playerIsInfront && other.gameObject.GetComponent<Enemy>().GetWeapon().GetAttacking())
+            {
+                other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            }
+            else if(m_playerIsInfront && !other.gameObject.GetComponent<Enemy>().GetWeapon().GetAttacking())
+            {
+                other.gameObject.GetComponent<EnemyGuard>().BlockPlayer(gameObject);
+
+            }
+            else if(!m_playerIsInfront)
+            {
+                other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            }
+        }
+        else if (other.tag == "EnemyCollider" && !m_hitSomething && !m_triggerEntered)
+        {
+            m_triggerEntered = true;
+            m_hitSomething = true;
+        
+            Debug.Log("Soldier attacked");
             other.transform.parent.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
         }
+
+        /*
+        else if (other.tag == "EnemyDefCollider" && !m_hitSomething && !m_triggerEntered)
+        {
+            if (other.transform.parent.gameObject.GetComponent<Enemy>().GetWeapon().GetAttacking())
+            {
+                m_triggerEntered = true;
+                m_hitSomething = true;
+                Debug.Log("P attacked enemy front");
+                other.transform.parent.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            }
+            else if (other.transform.parent.gameObject.GetComponent<EnemyGuard>().GetShield().GetIsBlocking())
+            {
+                m_triggerEntered = true;
+                m_hitSomething = true;
+                Debug.Log("P attacked enemy front while attacking");
+                other.transform.parent.gameObject.GetComponent<EnemyGuard>().BlockPlayer(gameObject);
+            }
+        }
+        */
+        //else if (other.tag == "EnemyDefCollider" && !m_hitSomething && !m_triggerEntered)
+        //{
+        //    if(other.transform.parent.gameObject.GetComponent<Enemy>().GetWeapon().GetAttacking())
+        //    {
+        //        m_triggerEntered = true;
+        //        m_hitSomething = true;
+        //        Debug.Log("P attacked enemy front");
+        //        other.transform.parent.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+        //    }
+        //    else
+        //    {
+        //        m_triggerEntered = true;
+        //        m_hitSomething = true;
+        //        Debug.Log("P attacked enemy front while attacking");
+        //        other.transform.parent.gameObject.GetComponent<EnemyGuard>().BlockPlayer(gameObject);
+        //    }
+
+        //}
     }
 
     //IEnumerator TempMoveSpear()
@@ -143,5 +213,10 @@ public class SpearAttack : MonoBehaviour
     public void SetAttackType(SpearAttackType _attackType)
     {
         m_spearAttack = _attackType;
+    }
+
+    public void SetPlayerInFront(bool _infront)
+    {
+        m_playerIsInfront = _infront;
     }
 }
