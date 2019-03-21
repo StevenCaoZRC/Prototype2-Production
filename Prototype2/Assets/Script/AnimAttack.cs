@@ -7,6 +7,7 @@ public class AnimAttack : MonoBehaviour
     public GameObject _character;
     private Enemy m_enemyScript;
     private PlayerControl m_playerControl;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class AnimAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void EnemyAttackEvent()

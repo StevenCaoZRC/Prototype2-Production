@@ -15,7 +15,8 @@ public class Enemy : MonoBehaviour
     public Animator m_enemyAnim;
     public GameObject m_enemyWeapon;
     public GameObject m_hitParticle;
-
+    public GameObject m_heathCollectable;
+    public Transform m_enemyPosition;
     protected bool m_isHit = false;
     protected bool m_isDead = false;
 
@@ -136,8 +137,11 @@ public class Enemy : MonoBehaviour
             {
                 m_hitParticle.SetActive(false);
             }
+          
+
             m_enemyAnim.SetTrigger("IsDead");
             m_isDead = true;
+            Instantiate(m_heathCollectable, new Vector3(m_enemyPosition.position.x, m_enemyPosition.position.y + 2.5f, m_enemyPosition.position.z), m_enemyPosition.rotation);
         }
     }
 
