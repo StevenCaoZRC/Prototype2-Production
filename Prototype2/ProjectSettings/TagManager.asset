@@ -11,6 +11,9 @@ TagManager:
   - WindParticles
   - EnemyCollider
   - EnemyShield
+  - Fire
+  - EnemyFront
+  - EnemyBack
   layers:
   - Default
   - TransparentFX

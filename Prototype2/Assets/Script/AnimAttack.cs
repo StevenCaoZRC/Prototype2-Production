@@ -25,12 +25,21 @@ public class AnimAttack : MonoBehaviour
 
     public void EnemyAttackEvent()
     {
-        m_enemyScript.GetWeapon().GetComponent<EnemyWeapon>().NormalAttack();
+        if(m_enemyScript.GetShield() != null)
+        {
+            m_enemyScript.GetShield().EndBlock();
+        }
+        m_enemyScript.GetWeapon().NormalAttack();
     }
 
     public void PNormalAttack()
     {
         m_playerControl.GetWeapon().GetComponent<SpearAttack>().NormalAttack();
+    }
+
+    public void PStartBlock()
+    {
+        m_playerControl.GetShield().GetComponent<PlayerShield>().Block();
     }
 
     public void PChargeAttack()

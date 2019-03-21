@@ -15,13 +15,44 @@ public class Shield : MonoBehaviour
     public bool m_knockedBack = false;
     protected ShieldType m_shieldType;
 
+    protected float m_blockEndTimer = 0.0f;
+    protected float m_blockTotalTimer = 0.75f;
+
+    public GameObject m_shieldHitParticles;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
         m_isBlocking = false;
         m_blockedAttack = false;
         m_colliding = false;
+        m_blockEndTimer = 0.0f;
+        if (m_shieldHitParticles != null)
+        {
+            m_shieldHitParticles.SetActive(false);
+        }
+    }
 
+    public virtual void Update()
+    {
+        
+    }
+
+    public virtual void Block()
+    {
+        m_isBlocking = true;
+    }
+
+    public void EndBlock()
+    {
+        m_isBlocking = false;
+        m_blockedAttack = false;
+        m_colliding = false;
+        m_blockEndTimer = 0.0f;
+        if (m_shieldHitParticles != null)
+        {
+            m_shieldHitParticles.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -57,5 +88,13 @@ public class Shield : MonoBehaviour
     public void SetCol(bool _colliding)
     {
         m_colliding = _colliding;
+    }
+
+    public void PlayParticles(bool _on)
+    {
+        if(m_shieldHitParticles != null)
+        {
+            m_shieldHitParticles.SetActive(_on);
+        }
     }
 }

@@ -259,7 +259,7 @@ public class Patrol : MonoBehaviour
             if (m_enemy.GetIsHit())
             {
                 StartCoroutine(m_enemy.ResetHit());
-                Debug.Log("AYEEEEEE");
+
                 m_targetPos = m_fov.GetTarget().transform;
                 m_waitTimer = 0.0f;
                 m_targetingPlayer = true;

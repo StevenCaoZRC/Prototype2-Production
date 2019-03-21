@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public Animator m_enemyAnim;
     public GameObject m_enemyWeapon;
     public GameObject m_hitParticle;
+    public EnemyShield m_enemyShield;
 
     protected bool m_isHit = false;
     protected bool m_isDead = false;
@@ -50,7 +51,6 @@ public class Enemy : MonoBehaviour
         {
             Destroy(transform.parent.gameObject);
         }
-
     }
 
     public IEnumerator ResetHit()
@@ -60,6 +60,11 @@ public class Enemy : MonoBehaviour
         {
             m_hitParticle.SetActive(false);
         }
+        if(GetShield() != null)
+        {
+            GetShield().Block();
+        }
+
         m_isHit = false;
     }
 
@@ -143,8 +148,20 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyBlock() { }
 
-    public GameObject GetWeapon()
+    public EnemyWeapon GetWeapon()
     {
-        return m_enemyWeapon;
+        return m_enemyWeapon.GetComponent<EnemyWeapon>();
+    }
+
+    public EnemyShield GetShield()
+    {
+        if(m_enemyShield != null)
+        {
+            return m_enemyShield.GetComponent<EnemyShield>();
+        }
+        else
+        {
+            return null;
+        }
     }
 }
