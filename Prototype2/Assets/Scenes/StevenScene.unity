@@ -1628,6 +1628,11 @@ PrefabInstance:
       propertyPath: m_player
       value: 
       objectReference: {fileID: 1682873043}
+    - target: {fileID: 3858907132955411096, guid: be6508697b9e7074e90c2e8edf9441ce,
+        type: 3}
+      propertyPath: m_ResetLoc
+      value: 
+      objectReference: {fileID: 1856058736}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be6508697b9e7074e90c2e8edf9441ce, type: 3}
 --- !u!1001 &4609169974267552910
