@@ -3455,7 +3455,7 @@ Transform:
   m_LocalScale: {x: 199.7062, y: 199.70612, z: 202.18253}
   m_Children: []
   m_Father: {fileID: 1315989611}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 82.407005, y: -134.735, z: -81.11}
 --- !u!64 &1541320598
 MeshCollider:
@@ -5358,16 +5358,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4115439013845929026, guid: 0ef740477765a6f49abacd45cbc87c1d,
-        type: 3}
-      propertyPath: m_Name
-      value: FireParticlesTower
-      objectReference: {fileID: 0}
-    - target: {fileID: 4115439013845929026, guid: 0ef740477765a6f49abacd45cbc87c1d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4113658881401740042, guid: 0ef740477765a6f49abacd45cbc87c1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5421,6 +5411,16 @@ PrefabInstance:
     - target: {fileID: 4113658881401740042, guid: 0ef740477765a6f49abacd45cbc87c1d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115439013845929026, guid: 0ef740477765a6f49abacd45cbc87c1d,
+        type: 3}
+      propertyPath: m_Name
+      value: FireParticlesTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115439013845929026, guid: 0ef740477765a6f49abacd45cbc87c1d,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
