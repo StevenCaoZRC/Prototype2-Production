@@ -44,7 +44,8 @@ public class EnemySoldier : Enemy
             GetWeapon().EndAttack();
             m_enemyAnim.SetTrigger("IsHit");
             m_isHit = true;
-            m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
+            m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());
+            //_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Soldier health: " + m_health);
 
             //var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
