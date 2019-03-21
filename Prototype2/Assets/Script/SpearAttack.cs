@@ -124,8 +124,8 @@ public class SpearAttack : MonoBehaviour
             m_triggerEntered = true;
             m_hitSomething = true;
         
-            Debug.Log("Soldier attacked");
-            other.transform.parent.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            Debug.Log("Soldier attacked: " + other.gameObject.name);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
         }
 
         /*

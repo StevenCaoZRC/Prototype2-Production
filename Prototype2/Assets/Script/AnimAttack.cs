@@ -29,7 +29,8 @@ public class AnimAttack : MonoBehaviour
         {
             m_enemyScript.GetShield().EndBlock();
         }
-        m_enemyScript.GetWeapon().NormalAttack();
+        if(m_enemyScript.GetWeapon() != null)
+            m_enemyScript.GetWeapon().NormalAttack();
     }
 
     public void PNormalAttack()
