@@ -137,7 +137,22 @@ ModelImporter:
     13700000: body_armor_low_low
     13700002: low_armor_low
     13700004: low_body_low
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron_pagoda_armor_lowSG
+    second: {fileID: 2100000, guid: aaa1013109199d742bca4aeecacdcbd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron_pagoda_body_lowSG
+    second: {fileID: 2100000, guid: 765e85d9f41317d4797ba62bd2c2f61e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron_pagoda_initialShadingGroup
+    second: {fileID: 2100000, guid: f720237c00e7c604b80c28b536ba119f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
