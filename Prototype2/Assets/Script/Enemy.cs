@@ -10,6 +10,7 @@ public enum EnemyType
 
 public class Enemy : MonoBehaviour
 {
+  
     protected Transform m_target;
     protected EnemyType m_enemyType;
     public Animator m_enemyAnim;
@@ -17,6 +18,8 @@ public class Enemy : MonoBehaviour
     public GameObject m_hitParticle;
     public GameObject m_heathCollectable;
     public Transform m_enemyPosition;
+    public AreaScript currentArea;
+
     protected bool m_isHit = false;
     protected bool m_isDead = false;
 
@@ -39,6 +42,7 @@ public class Enemy : MonoBehaviour
         {
             m_hitParticle.SetActive(false);
         }
+        //currentArea = FindObjectOfType<AreaScript>();
     }
 
     // Update is called once per frame
@@ -137,7 +141,8 @@ public class Enemy : MonoBehaviour
             {
                 m_hitParticle.SetActive(false);
             }
-          
+              
+            FindObjectOfType<AreaScript>().m_currentCounter -= 1;
 
             m_enemyAnim.SetTrigger("IsDead");
             m_isDead = true;

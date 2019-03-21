@@ -24,7 +24,11 @@ public class GameManager : MonoBehaviour
     {
         return instance;
     }
+    private void Update()
+    {
+   
 
+    }
 
     static public bool GetAxisOnce(ref bool _pressedAlready, string _name)
     {
