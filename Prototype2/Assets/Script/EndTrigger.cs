@@ -5,13 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class EndTrigger : MonoBehaviour
 {
-    public GameObject WinParticles;
     public GameObject Player;
     // Start is called before the first frame update
     void Start()
     {
-        WinParticles.SetActive(false);
-        Player.GetComponent<PlayerControl>().m_LevelCleared = false;
+        //Player.GetComponent<PlayerControl>().m_LevelCleared = false;
     }
 
     // Update is called once per frame
@@ -31,12 +29,9 @@ public class EndTrigger : MonoBehaviour
     IEnumerator EndLevel()
     {
 
-        //Spawn particles
-        WinParticles.SetActive(true);
         //Load menu screen
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("MainMenu");
-        WinParticles.SetActive(false);
 
         yield return null;
     }

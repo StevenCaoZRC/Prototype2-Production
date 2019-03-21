@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelEndVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 484963543779104809, guid: 6bc1bb39fda51f844b5cc68993316d25,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 15519925663892843, guid: 6bc1bb39fda51f844b5cc68993316d25,
         type: 3}
       propertyPath: m_LocalPosition.x

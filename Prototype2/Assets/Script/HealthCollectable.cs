@@ -18,13 +18,14 @@ public class HealthCollectable : MonoBehaviour
         
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            if (FindObjectOfType<Health>().m_currentHealth < FindObjectOfType<Health>().m_maxHealth)
+            Debug.Log("SPAWNED");
+            if (FindObjectOfType<Health>().m_currentHealth <= FindObjectOfType<Health>().m_maxHealth)
             {
-                FindObjectOfType<Health>().m_currentHealth += 10;
+                FindObjectOfType<Health>().m_currentHealth += 20;
                 Destroy(gameObject);
             }
               

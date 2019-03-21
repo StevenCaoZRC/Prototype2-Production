@@ -73,7 +73,7 @@ public class PlayerControl : MonoBehaviour
         m_isDead = false;
         m_isHit = false;
         m_playerMove = GetComponent<TempCharaMove>();
-
+        m_LevelCleared = false;
     }
 
     // Update is called once per frame

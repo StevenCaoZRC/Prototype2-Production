@@ -43,26 +43,21 @@ public class AreaScript : MonoBehaviour
         }
         else if (m_currentArea == m_Area2 && m_areaCleared)
         {
-            //m_currentArea = m_Area2p5;
-            m_areaCleared = false;
+            m_currentArea.SetActive(false);
+            m_currentArea = m_Area3;
+
             m_currentCounter = m_Area3Counter;
+            m_areaCleared = false;
+
             m_currentArea.SetActive(true);
 
         }
-        //else if (m_currentArea == m_Area2p5 && m_areaCleared)
-        //{
-        //    m_currentArea = m_Area3;
-        //    m_areaCleared = false;
-        //    m_currentCounter = m_Area3Counter;
-        //    m_currentArea.SetActive(true);
-
-        //}
         else if (m_currentArea == m_Area3 && m_areaCleared)
         {
             //m_currentArea = m_Area3;
-            m_areaCleared = false;
+            m_areaCleared = true;
             m_currentCounter = 0;
-            //m_currentArea.SetActive(true);
+            m_currentArea.SetActive(false);
 
         }
 
