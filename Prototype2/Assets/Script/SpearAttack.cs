@@ -54,6 +54,8 @@ public class SpearAttack : MonoBehaviour
 
     public void NormalAttack()
     {
+        FindObjectOfType<AudioManager>().PlayOnce("SpearStab");
+
         m_attackEndTimer = 0.0f;
         m_spearAttack = SpearAttackType.NORMAL;
         this.GetComponent<Collider>().enabled = true;

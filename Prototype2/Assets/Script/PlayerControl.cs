@@ -90,6 +90,7 @@ public class PlayerControl : MonoBehaviour
         PlayerMove();
         FindPlayerController();
         KnockbackListener();
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             m_playerHealth.m_currentHealth -= 10.0f;
@@ -98,12 +99,26 @@ public class PlayerControl : MonoBehaviour
         {
             m_playerHealth.m_currentHealth += 10.0f;
         }
+
         if (m_playerHealth.m_currentHealth > m_playerHealth.m_maxHealth)
         {
             m_playerHealth.m_currentHealth = m_playerHealth.m_maxHealth;
         }
-        
+        else if (m_playerHealth.m_currentHealth < 0.0f)
+        {
+            m_playerHealth.m_currentHealth = 0.0f;
+        }
+
+        if(m_playerStamina.m_currentStamina > m_playerStamina.m_maxStamina)
+        {
+            m_playerStamina.m_currentStamina = m_playerStamina.m_maxStamina;
+        }
+        else if(m_playerStamina.m_currentStamina < 0.0f)
+        {
+            m_playerStamina.m_currentStamina = 0.0f;
+        }
     }
+
     void FindPlayerController()
     {
         // Find a PlayerIndex, for a single player game
@@ -231,7 +246,12 @@ public class PlayerControl : MonoBehaviour
                 {
                     m_playerAnimator.SetBool("Walking", true);
                     m_horseAnimator.SetBool("Walking", true);
-                   
+                    if (!FindObjectOfType<AudioManager>().IsPlaying("HorseWalking"))
+                    {
+                        FindObjectOfType<AudioManager>().Play("HorseWalking");
+
+                    }
+
                     //FindObjectOfType<AudioManager>().Stop("HorseWalking");
                 }
             }
@@ -241,6 +261,9 @@ public class PlayerControl : MonoBehaviour
                 m_playerAnimator.SetBool("Running", false);
                 m_horseAnimator.SetBool("Walking", false);
                 m_horseAnimator.SetBool("Running", false);
+                FindObjectOfType<AudioManager>().Stop("HorseWalking");
+
+                FindObjectOfType<AudioManager>().Stop("HorseRunning");
 
             }
 
@@ -257,7 +280,14 @@ public class PlayerControl : MonoBehaviour
                     m_playerAnimator.SetBool("Walking", false);
                     m_horseAnimator.SetBool("Running", true);
                     m_horseAnimator.SetBool("Walking", false);
-                    m_playerStamina.m_currentStamina -= 0.2f;
+                    if (!FindObjectOfType<AudioManager>().IsPlaying("HorseRunning"))
+                    {
+                        FindObjectOfType<AudioManager>().Play("HorseRunning");
+
+                    }
+
+                    if (m_playerStamina.m_currentStamina > 0.0f)
+                        m_playerStamina.m_currentStamina -= 0.2f;
                 }
             }
             else
@@ -267,7 +297,7 @@ public class PlayerControl : MonoBehaviour
                 m_velocity = (_moveX + _moveZ).normalized * m_normalSpeed;
                 m_playerAnimator.SetBool("Running", false);
                 m_horseAnimator.SetBool("Running", false);
-             
+                
             }
 
             if (_z <= -0.1f) //if going backwards
@@ -305,6 +335,9 @@ public class PlayerControl : MonoBehaviour
     {
         if(m_shield.GetComponent<PlayerShield>().GetIsBlocking())
         {
+            if (!FindObjectOfType<AudioManager>().IsPlaying("ShieldBlock"))
+                FindObjectOfType<AudioManager>().PlayOnce("ShieldBlock");
+
             m_shield.GetComponent<PlayerShield>().Block();
             m_shield.GetComponent<PlayerShield>().PlayParticles(true);
 
@@ -316,6 +349,8 @@ public class PlayerControl : MonoBehaviour
         }
         else if (m_playerHealth.m_currentHealth > 0 && !m_isHit)
         {
+            if (!FindObjectOfType<AudioManager>().IsPlaying("PlayerHurt"))
+                FindObjectOfType<AudioManager>().PlayOnce("PlayerHurt");
             m_isHit = true;
 
             m_spear.GetComponent<SpearAttack>().EndAttack(); //Start attack mechanic

@@ -39,6 +39,8 @@ public class EnemySoldier : Enemy
         if (!m_isHit && m_health > 0)
         {
             base.TakeDamage(_attackedFrom);
+            FindObjectOfType<AudioManager>().PlayOnce("MonsterHurt");
+
             GetWeapon().EndAttack();
             m_enemyAnim.SetTrigger("IsHit");
             m_isHit = true;

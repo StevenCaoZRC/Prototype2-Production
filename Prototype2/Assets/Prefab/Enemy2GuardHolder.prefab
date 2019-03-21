@@ -32,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5224271813362376653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4995964081026776638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4094d58f877bf0b46b33aeb8f1d9c06f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _character: {fileID: 4995964081026776638}
 --- !u!1 &7728046114125974839
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,16 +569,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 506914063463065366, guid: d2e8af129661d174982927225be78753,
-        type: 3}
-      propertyPath: m_enemyAnim
-      value: 
-      objectReference: {fileID: 6559437427220918946}
-    - target: {fileID: 5859567241950598494, guid: d2e8af129661d174982927225be78753,
-        type: 3}
-      propertyPath: m_patrolPoints.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 5859567241950598494, guid: d2e8af129661d174982927225be78753,
         type: 3}
       propertyPath: m_patrolPoints.Array.data[0]
@@ -619,21 +596,9 @@ PrefabInstance:
       objectReference: {fileID: 7765918933976360227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2e8af129661d174982927225be78753, type: 3}
---- !u!1 &4995964081026776638 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 506914063463065363, guid: d2e8af129661d174982927225be78753,
-    type: 3}
-  m_PrefabInstance: {fileID: 4782208705622677805}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4995964081026776634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 506914063463065367, guid: d2e8af129661d174982927225be78753,
-    type: 3}
-  m_PrefabInstance: {fileID: 4782208705622677805}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &6559437427220918946 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1826804403815590799, guid: d2e8af129661d174982927225be78753,
     type: 3}
   m_PrefabInstance: {fileID: 4782208705622677805}
   m_PrefabAsset: {fileID: 0}

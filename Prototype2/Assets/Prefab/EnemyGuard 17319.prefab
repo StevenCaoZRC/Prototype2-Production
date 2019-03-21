@@ -367,6 +367,10 @@ MonoBehaviour:
   m_enemyWeapon: {fileID: 2148550955734813516}
   m_hitParticle: {fileID: 1200391777161326790}
   m_enemyShield: {fileID: 7558127610632317516}
+  m_heathCollectable: {fileID: 5735875126933328924, guid: bf22197db7a2bbe4090fd4ad0ee109fe,
+    type: 3}
+  m_enemyPosition: {fileID: 5427844675086019542}
+  currentArea: {fileID: 0}
   m_playerRigidBody: {fileID: 0}
 --- !u!114 &2092525670009658578
 MonoBehaviour:
@@ -563,17 +567,17 @@ PrefabInstance:
     - target: {fileID: 7367297350419834075, guid: 333374efd568edf47b96c372987aa7ba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.015
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 7367297350419834075, guid: 333374efd568edf47b96c372987aa7ba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.056
+      value: -0.066
       objectReference: {fileID: 0}
     - target: {fileID: 7367297350419834075, guid: 333374efd568edf47b96c372987aa7ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.235
+      value: 0.262
       objectReference: {fileID: 0}
     - target: {fileID: 7367297350419834075, guid: 333374efd568edf47b96c372987aa7ba,
         type: 3}

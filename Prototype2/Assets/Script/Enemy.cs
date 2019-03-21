@@ -131,6 +131,8 @@ public class Enemy : MonoBehaviour
     {
         if (m_hitParticle != null)
         {
+            FindObjectOfType<AudioManager>().PlayOnce("ShieldBlock");
+
             m_hitParticle.SetActive(true);
         }
 

@@ -41,6 +41,8 @@ public class EnemyGuard : Enemy
     public override void EnemyAttack()
     {
         base.EnemyAttack();
+        FindObjectOfType<AudioManager>().PlayOnce("SwordSwing");
+
         GetShield().EndBlock();
     }
     
@@ -74,12 +76,14 @@ public class EnemyGuard : Enemy
         if(!m_isHit && !m_isDead && m_health > 0)
         {
             base.TakeDamage(_attackedFrom);
-
+            //if (!FindObjectOfType<AudioManager>().IsPlaying("MonsterHurt"))
+            //    FindObjectOfType<AudioManager>().PlayOnce("MonsterHurt");
             GetWeapon().EndAttack();
+
             m_enemyAnim.SetTrigger("IsHit");
             //m_enemyAnim.
             m_isHit = true;
-            m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
+            //m_health -= GetDamage(_attackedFrom.GetComponent<SpearAttack>().GetAttackType());//_attackedFrom.GetComponent<SpearAttack>().GetDamage();
             Debug.Log("Guard health: " + m_health);
 
             var moveDirection = m_rigidBody.transform.position - _attackedFrom.transform.position;
