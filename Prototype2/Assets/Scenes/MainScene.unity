@@ -4105,11 +4105,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyGuardHolder 17319
       objectReference: {fileID: 0}
-    - target: {fileID: 623693081479323007, guid: fb66269965b114a40a2724ba812e1c9e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 623693081479323004, guid: fb66269965b114a40a2724ba812e1c9e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -10,7 +10,7 @@ public class EnemyWeapon : MonoBehaviour
 
     float m_attackEndTimer = 0.0f;
     float m_attackTotalTimer = 0.2f;
-
+    public Enemy _enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +42,10 @@ public class EnemyWeapon : MonoBehaviour
     public void EndAttack()
     {
         m_attackEndTimer = 0.0f;
-
-        this.GetComponent<Collider>().enabled = false;
         m_hitSomething = false;
         m_isAttacking = false;
+        this.GetComponent<Collider>().enabled = false;
+        
         //StartCoroutine(EnemyAttacking());
     }
 
@@ -87,7 +87,14 @@ public class EnemyWeapon : MonoBehaviour
         if (other.tag == "Player" && !m_hitSomething && m_isAttacking)
         {
             m_hitSomething = true;
-            other.gameObject.GetComponent<PlayerControl>().TakeDamage(gameObject);
+            if(other.gameObject.GetComponent<PlayerControl>().GetShield().GetComponent<PlayerShield>().GetIsBlocking())
+            {
+                other.gameObject.GetComponent<PlayerControl>().TakeDamage(gameObject);
+            }
+            else
+            {
+                other.gameObject.GetComponent<PlayerControl>().TakeDamage(gameObject);
+            }
         }
     }
 }

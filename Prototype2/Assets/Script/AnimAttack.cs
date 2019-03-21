@@ -13,6 +13,8 @@ public class AnimAttack : MonoBehaviour
     {
         if(_character.tag == "Enemy")
             m_enemyScript = _character.GetComponent<Enemy>();
+        if (_character.tag == "EnemyCollider")
+            m_enemyScript = _character.GetComponent<Enemy>();
         if (_character.tag == "Player")
             m_playerControl = _character.GetComponent<PlayerControl>();
     }

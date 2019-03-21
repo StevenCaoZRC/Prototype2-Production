@@ -78,6 +78,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        GetWeapon().GetComponent<SpearAttack>().SetPlayerInFront(false);
+
         PlayerAttack();
         PlayerBlock();
     }
@@ -177,6 +179,14 @@ public class PlayerControl : MonoBehaviour
                 ChargeAttack();
             }
         }
+        else
+        {
+            m_chargeHoldTimer = 0.0f;
+            m_isCharging = false;
+            m_chargingParticles.SetActive(false);
+            m_chargeReachedParticles.SetActive(false);
+            m_playerAnimator.SetBool("ChargeSpear", false);
+        }
     }
 
     public void PlayerBlock()
@@ -238,6 +248,7 @@ public class PlayerControl : MonoBehaviour
                     m_playerAnimator.SetBool("Walking", false);
                     m_horseAnimator.SetBool("Running", true);
                     m_horseAnimator.SetBool("Walking", false);
+                    m_playerStamina.m_currentStamina -= 0.2f;
                 }
             }
             else
@@ -394,19 +405,9 @@ public class PlayerControl : MonoBehaviour
         //    GetWeapon().GetComponent<SpearAttack>().SetPlayerInFront(false);
         //}
         //else 
-        if (other.tag == "EnemyFront")
+        if (other.tag == "EnemyFront" && this.gameObject.tag == "Player")
         {
             GetWeapon().GetComponent<SpearAttack>().SetPlayerInFront(true);
-
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "EnemyFront")
-        {
-            GetWeapon().GetComponent<SpearAttack>().SetPlayerInFront(false);
-
         }
     }
 }

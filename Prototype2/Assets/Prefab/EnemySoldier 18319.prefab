@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_attackDamage: 10
+  _enemy: {fileID: 0}
 --- !u!1001 &1081575463186546397
 PrefabInstance:
   m_ObjectHideFlags: 0

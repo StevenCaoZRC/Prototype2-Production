@@ -17,6 +17,7 @@ public class EnemyGuard : Enemy
         m_attackOneDamage = 20.0f;
         m_attackTwoDamage = 50.0f;
         GetShield().Block();
+
     }
 
     // Update is called once per frame
@@ -99,8 +100,8 @@ public class EnemyGuard : Enemy
     public float GetDamage(SpearAttackType _type)
     {
         if (_type == SpearAttackType.SPECIAL)
-            return 50.0f;
+            return 100.0f;
         else
-            return 20.0f;
+            return 50.0f;
     }
 }

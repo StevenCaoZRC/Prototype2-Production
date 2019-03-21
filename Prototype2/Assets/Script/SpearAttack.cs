@@ -75,6 +75,8 @@ public class SpearAttack : MonoBehaviour
 
     public void ChargeAttack()
     {
+        m_attackEndTimer = 0.0f;
+
         m_spearAttack = SpearAttackType.SPECIAL;
         m_isAttacking = true;
 
@@ -105,17 +107,21 @@ public class SpearAttack : MonoBehaviour
 
             //Debug.Log("Guard hit");
 
-            if(m_playerIsInfront && other.gameObject.GetComponent<Enemy>().GetWeapon().GetAttacking())
+            if (!m_playerIsInfront)
+            {
+                other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
+            }
+            else if (m_playerIsInfront && other.gameObject.GetComponent<Enemy>().GetWeapon().GetAttacking())
             {
                 other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
             }
             else if(m_playerIsInfront && !other.gameObject.GetComponent<Enemy>().GetWeapon().GetAttacking())
             {
                 other.gameObject.GetComponent<EnemyGuard>().BlockPlayer(gameObject);
-
             }
-            else if(!m_playerIsInfront)
+            else if(m_playerIsInfront && !other.gameObject.GetComponent<Enemy>().GetShield().GetIsBlocking())
             {
+
                 other.gameObject.GetComponent<Enemy>().TakeDamage(gameObject);
             }
         }

@@ -120,7 +120,7 @@ public class Patrol : MonoBehaviour
                         //Begin attack
                         if (m_attackWaitTimer >= m_totalAttackWaitTime)
                         {
-                            if (!m_enemy.GetIsHit())
+                            if (!m_enemy.GetIsHit() && !m_enemy.GetWeapon().GetAttacking())
                             {
                                 m_enemy.EnemyAttack();
                                 m_attackWaitTimer = 0;

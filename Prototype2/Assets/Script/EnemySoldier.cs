@@ -60,7 +60,7 @@ public class EnemySoldier : Enemy
         if (_type == SpearAttackType.SPECIAL)
             return 80.0f;
         else
-            return 30.0f;
+            return 40.0f;
     }
 
 }

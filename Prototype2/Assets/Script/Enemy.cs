@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
         {
             m_hitParticle.SetActive(false);
         }
+        
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator ResetHit()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         if (m_hitParticle != null)
         {
             m_hitParticle.SetActive(false);
@@ -64,7 +65,6 @@ public class Enemy : MonoBehaviour
         {
             GetShield().Block();
         }
-
         m_isHit = false;
     }
 
