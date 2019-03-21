@@ -93,3 +93,17 @@ MonoBehaviour:
     loop: 1
     SpatialBlend: 0
     source: {fileID: 0}
+  - name: MonsterHurt
+    clip: {fileID: 8300000, guid: 3da1aacac10336443bca0a20c7997a76, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0
+    source: {fileID: 0}
+  - name: PlayerHurt
+    clip: {fileID: 8300000, guid: 241ae17db99b6ee4f9de9e223134b65c, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    SpatialBlend: 0
+    source: {fileID: 0}
