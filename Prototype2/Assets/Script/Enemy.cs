@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
     {
         if (m_hitParticle != null)
         {
-            FindObjectOfType<AudioManager>().PlayOnce("ShieldBlock");
+            FindObjectOfType<AudioManager>().PlayOnce("SwordSwing");
 
             m_hitParticle.SetActive(true);
         }

@@ -61,6 +61,8 @@ public class EnemyGuard : Enemy
     {
         if(!m_isDead)
         {
+            FindObjectOfType<AudioManager>().PlayOnce("ShieldBlock");
+
             m_enemyShield.GetComponent<EnemyShield>().Block();
             m_enemyShield.GetComponent<EnemyShield>().PlayParticles(true);
 
@@ -76,6 +78,7 @@ public class EnemyGuard : Enemy
         if(!m_isHit && !m_isDead && m_health > 0)
         {
             base.TakeDamage(_attackedFrom);
+
             //if (!FindObjectOfType<AudioManager>().IsPlaying("MonsterHurt"))
             //    FindObjectOfType<AudioManager>().PlayOnce("MonsterHurt");
             GetWeapon().EndAttack();
